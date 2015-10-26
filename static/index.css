@@ -1,0 +1,133 @@
+#menu{
+	position: fixed;
+	top:0;
+	width: 100%;
+	left:0;
+	height:74px;
+	background: linear-gradient(rgba(44,104,138,1) 0%, rgba(5,91,142,1) 12%, rgba(5,91,142,1) 26%, rgba(11,131,202,1) 100%);
+	color:white;
+	font-size: 24px;
+	font-family: Microsoft JhengHei;
+}
+#footer{
+	width: 100%;
+	height:60px;
+	background: linear-gradient(rgba(11,111,182,1) 0%, rgba(5,91,142,1) 74%, rgba(5,91,142,1) 88%,rgba(44,104,138,1) 0%);
+	color:white;
+	font-size: 20px;
+	font-family: Microsoft JhengHei;
+}
+#topmenu{
+	float:left;
+  	margin-top: 8px;
+  	width: 100%;
+}
+#menulogo{
+  	float:left;
+  	font-size: 40px;
+  	margin-left: 40px;
+  	font-weight: bold;
+  }
+#searchbar{
+	float:left;
+	margin-top: 11.5px;
+  	margin-left: auto;
+  	margin-right: auto;
+}
+#searchbar input{
+	float:left;
+	width: 600px;
+	font-size: 20px;
+}
+#searchbutton{
+	float:left;
+	border-radius: 5px;
+}
+#searchbutton:hover{
+	cursor: pointer;
+}
+#downmenu{
+	float:left;
+  	margin-top: 15px;
+  	height:70px;
+  	width: 100%;
+}
+#menulogo:hover{
+	cursor: pointer;
+}
+#loginbutton:hover{
+	cursor: pointer;
+}
+#registerbutton:hover{
+	cursor: pointer;
+}
+#homebutton:hover{
+	cursor: pointer;
+}
+#aboutusbutton:hover{
+	cursor: pointer;
+}
+#loginmodal{
+	width:400px;
+}
+#registrationmodal{
+	width:400px;
+}
+#registrationbody{
+	height:320px;
+}
+#loginbody{
+	height:280px;
+}
+#loading1{
+	float:right;
+	margin-right:12px;
+	margin-top:5px;
+	width:10px;
+	height:25px;
+	background-color:#84A8BD;
+	border-radius:3px;
+}
+#loading2{
+	float:right;
+	margin-top:5px;
+	margin-right:5px;
+	width:10px;
+	height:25px;
+	background-color:#84A8BD;
+	border-radius:3px;
+}
+#loading3{
+	float:right;
+	margin-top:5px;
+	margin-right:5px;
+	width:10px;
+	height:25px;
+	background-color:#84A8BD;
+	border-radius:3px;
+}
+#loading4{
+	float:right;
+	margin-top:5px;
+	margin-right:5px;
+	width:10px;
+	height:25px;
+	background-color:#84A8BD;
+	border-radius:3px;
+}
+#loading5{
+	float:right;
+	margin-top:5px;
+	margin-right:5px;
+	width:10px;
+	height:25px;
+	background-color:#84A8BD;
+	border-radius:3px;
+}
+#mainscreen{
+	margin-left:auto;
+	margin-right:auto;
+	margin-top: 74px;
+	width: 1300px;
+	height: 1400px;
+}

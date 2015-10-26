@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+
+{% load staticfiles %}
+<html>
+<head>
+	<meta charset="utf8"/>
+	<title>吃~吃~吃~</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'index.css' %}"/>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	<script src="{% static 'js.cookie.js' %}"></script>
+  <script src="{% static 'index.js' %}"></script>
+</head>
+<body style="background-color:#F0FFFF">
+  <iframe scrolling="no" frameborder="0" id="mainscreen" src="{% static 'aboutus.html' %}"></iframe>
+  <div id="footer"></div>
+	<div id="menu">
+		<div id="topmenu">
+			<div id="menulogo" width="250" height="34">吃~吃~吃~~~</div>
+			<div id="searchbar">
+				<input type="text" class="form-control" placeholder="搜索美食,某個人的美食清單"></input>
+        <img id="searchbutton" onclick="processResponse()" src="{% static 'search.png' %}" height="34"></img>
+			</div>
+      <div id="loginmenu" style="float:right;margin-right:30px;margin-top: 10px;">
+      </div>
+		</div>
+		<div id="downmenu" style="visibility: hidden;">
+			<div id="homebutton" style="position:relative;float:left;margin-left:50px;width:51px">
+				<img src="{% static 'homebutton.png' %}" style="float:left;"></img>
+				<div style="float:left;margin-left:1.5px">首頁</div>
+			</div>
+			<div id="aboutusbutton" style="float:left;margin-left:80px;width:96px">
+				<img src="{% static 'aboutusbutton.png' %}" style="float:left;margin-left:26.5px"></img>
+				<div style="float:left;">關於我們</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="myloginmodal" role="dialog">
+	    <div class="modal-dialog modal-sm" id="loginmodal">
+   		   	<div class="modal-content">
+        	<div class="modal-header" style="background-color:#0B83AA;font-size: 24px;font-weight: bold;color:white;font-family: Microsoft JhengHei;">
+          		<button type="button" class="close" data-dismiss="modal">&times;</button>
+          		<h4 class="modal-title" style="text-align:center;font-size: 30px;">登入</h4>
+        	</div>
+        	<div class="modal-body" id="loginbody">
+         		<form role="form">{% csrf_token %}
+            		<div class="form-group">
+            	  		<label for="usrname"><span class="glyphicon glyphicon-user"></span> 帳號</label>
+            	  		<input type="text" class="form-control" id="loginusrname" placeholder="請輸入帳號">
+            		</div>
+            		<div class="form-group">
+            	  		<label for="psw"><span class="glyphicon glyphicon-eye-open"></span> 密碼</label>
+            	  		<input type="text" class="form-control" id="loginpsw" placeholder="請輸入密碼">
+            		</div>
+            		<div class="checkbox">
+              			<label><input type="checkbox" value="" checked>請記得我</label>
+            		</div>
+                <br>
+              		<div class="btn btn-success btn-block" id="loginsubmitbutton" style="width:150px;margin:auto"><span class="glyphicon glyphicon-off"></span> 登入</div>
+          		</form>
+        	</div>
+      		</div>   
+    	</div>
+  	</div>
+  	<div class="modal fade" id="myregistrationmodel" role="dialog">
+	    <div class="modal-dialog"  id="registrationmodal">
+   		   	<div class="modal-content">
+        	<div class="modal-header" style="background-color:#0B83AA;font-size: 24px;font-weight: bold;color:white;font-family: Microsoft JhengHei;">
+          		<button type="button" class="close" data-dismiss="modal">&times;</button>
+          		<h4 class="modal-title" style="text-align:center;font-size: 30px;">註冊</h4>
+        	</div>
+        	<div class="modal-body" id="registrationbody">
+         		<form role="form">
+            		<div class="form-group">
+            	  		<label for="usrname"><span class="glyphicon glyphicon-user"></span> 帳號</label>
+            	  		<input type="text" class="form-control" id="registerusrname" placeholder="請輸入帳號">
+            		</div>
+            		<div class="form-group">
+            	  		<label for="psw"><span class="glyphicon glyphicon-eye-open"></span> 密碼</label>
+            	  		<input type="text" class="form-control" id="registerpsw" placeholder="請輸入密碼">
+            		</div>
+            		<div class="form-group">
+            	  		<label for="psw"><span class="glyphicon glyphicon-envelope"></span> 電子郵件</label>
+            	  		<input type="text" class="form-control" id="registeremail" placeholder="請輸入你的電子郵件">
+            		</div>
+                <br>
+              		<div class="btn btn-success btn-block" id="registersubmitbutton" style="width:150px;margin:auto"> 註冊</div>
+          		</form>
+        	</div>
+      		</div>   
+    	</div>
+  	</div>
+    <div class="modal fade" id="myerrormessagemodal" role="dialog" style="border-radius:10px">
+      <div class="modal-dialog"  id="errormessagemodal">
+        <div class="modal-content">
+          <div class="modal-header" style="background-color:red;font-size: 24px;border-radius:5px 5px 0px 0px;font-weight:bold;color:white;font-family: Microsoft JhengHei;">
+              <h4 class="modal-title" style="text-align:center;font-size: 30px;">警告</h4>
+          </div>
+          <div class="modal-body">
+            <div class="form-group" id="errormessagecontent" style="font-family: Microsoft JhengHei;font-size:20px;text-align:center;line-height:50px">
+            </div>
+            <button type="submit" class="btn btn-danger btn-block" style="width:50px;margin:auto" data-dismiss="modal">關閉</button>
+          </div>
+      </div>
+      </div>
+    </div>
+    <div class="modal fade" id="mymessagemodal" role="dialog" style="border-radius:10px">
+      <div class="modal-dialog"  id="messagemodal">
+        <div class="modal-content">
+          <div class="modal-header" style="background-color:#1E4673;font-size: 24px;border-radius:5px 5px 0px 0px;font-weight:bold;color:white;font-family: Microsoft JhengHei;">
+              <h4 class="modal-title" style="text-align:center;font-size: 30px;">提示</h4>
+          </div>
+          <div class="modal-body">
+            <div class="form-group" id="messagecontent" style="font-family: Microsoft JhengHei;font-size:20px;text-align:center;line-height:50px">
+            </div>
+            <button type="submit" class="btn btn-danger btn-block" style="width:50px;margin:auto" data-dismiss="modal">關閉</button>
+          </div>
+      </div>
+    </div>
+    </div>
+</body>
+</html>
