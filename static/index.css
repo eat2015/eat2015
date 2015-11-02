@@ -23,20 +23,14 @@
   	width: 100%;
 }
 #menulogo{
-  	float:left;
-  	font-size: 40px;
-  	margin-left: 40px;
+  	font-size: 28px;
   	font-weight: bold;
   }
 #searchbar{
-	float:left;
-	margin-top: 11.5px;
-  	margin-left: auto;
-  	margin-right: auto;
 }
 #searchbar input{
 	float:left;
-	width: 600px;
+	width: 80%;
 	font-size: 20px;
 }
 #searchbutton{
@@ -47,10 +41,7 @@
 	cursor: pointer;
 }
 #downmenu{
-	float:left;
   	margin-top: 15px;
-  	height:70px;
-  	width: 100%;
 }
 #menulogo:hover{
 	cursor: pointer;
@@ -125,9 +116,67 @@
 	border-radius:3px;
 }
 #mainscreen{
-	margin-left:auto;
-	margin-right:auto;
-	margin-top: 74px;
-	width: 1300px;
-	height: 1400px;
+	width:100%;
+}
+#loginmenu{
+	line-height: 100%;
+	text-align: center;
+}
+#menucontroller{
+	padding-left: 3rem;
+}
+@media screen and (min-width: 861px) {
+	#loginmenu{
+        display: inline-block;
+    }
+    #searchbar{
+    	width:75%;
+    }
+    #menulogo{
+    	display: inline-block;
+    }
+    #menucontroller{
+    	display:none;
+    }
+}
+@media screen and (min-width: 471px) and (max-width: 860px) {
+    #loginmenu{
+        display: none;
+    }
+    #searchbar{
+    	width:75%!important;
+    }
+    #menulogo{
+    	display:none;
+    }
+    #menucontroller{
+    	display: inline-block;
+    }
+}
+@media screen and (max-width: 470px) {
+    #searchbar{
+    	width:75%!important;
+    }
+    #loginmenu{
+        display: none;
+    }
+    #menulogo{
+    	display:none;
+    }
+    #menucontroller{
+    	display: inline-block;
+    	padding-left: 2rem;
+    }
+    #searchbar input {
+    	font-size: 15px;
+    }
+    #loginmodal{
+    	width: 300px
+    }
+    #registrationmodal{
+    	width: 300px
+    }
+}
+.itemfont{
+	font-size: 2rem!important;
 }

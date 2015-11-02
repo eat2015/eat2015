@@ -1,19 +1,38 @@
 $(document).ready(function(){
 	var logined;
-	$("#mainscreen").css("margin-left",$(window).width()/2-650);
 	$("#homebutton").click(function(){
-		$("#mainscreen").attr("src","main");
+		$.ajax({
+        	url : "main",
+        	type : "POST",
+        	data : {},
+        	success : function(data) {
+    			$("#mainscreen").html(data);
+       		},
+        	error : function(xhr,errmsg,err) {
+            	console.log(xhr.status + ": " + xhr.responseText);
+        	}
+    	});
 	});
 	$("#aboutusbutton").click(function(){
-		$("#mainscreen").css("margin-left",$(window).width()/2-650);
-		$("#mainscreen").attr("src","aboutus");
+		$.ajax({
+        	url : "aboutus",
+        	type : "POST",
+        	data : {},
+        	success : function(data) {
+    			$("#mainscreen").html(data);
+       		},
+        	error : function(xhr,errmsg,err) {
+            	console.log(xhr.status + ": " + xhr.responseText);
+        	}
+    	});
 	});
+	
 	function checklogined(){
 		var user = Cookies.get('account');
 		if(user){
 		logined = true;
-		$("#loginmenu").html(
-			'<button id="userbutton" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="true" style="float:right;font-size:18px">'+
+		$("#loginmenu div").html(
+			'<button id="userbutton" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="true">'+
 	    		user+
 	        '</button>'+
 	        '<ul class="dropdown-menu" id="dropdown" role="menu" style="">'+
@@ -22,7 +41,6 @@ $(document).ready(function(){
 	          '<li id="logout"><a href="#">登出</a></li>'+
 	        '</ul>');
 			$("#dropdown").css("top",$("#loginmenu").height()+20);
-			$("#dropdown").css("left",$("#userbutton").position().left-$("#dropdown").width()+$("#loginmenu").width());
 			$("#logout").click(function(){
 				Cookies.remove('account');
 				checklogined();
@@ -30,9 +48,9 @@ $(document).ready(function(){
 		}else{
 			logined = false;
 			$("#loginmenu").html(
-	    	'<div id="loginbutton" data-toggle="modal" data-target="#myloginmodal" style="float:left">登入</div>'+
-	        '<div style="float:left">|</div>'+
-	        '<div id="registerbutton"data-toggle="modal" data-target="#myregistrationmodel" style="float:left">註冊</div>');
+	    	'<span id="loginbutton" data-toggle="modal" data-target="#myloginmodal">登入</span>'+
+	        '<span >|</span>'+
+	        '<span id="registerbutton" data-toggle="modal" data-target="#myregistrationmodel">註冊</span>');
 		}
 	}
 	checklogined();
@@ -62,27 +80,39 @@ $(document).ready(function(){
 	}
 	$("#errormessagemodal").css("width",300);
 	$("#messagemodal").css("width",300);
-	$("#searchbar").css("margin-left",$(window).width()/2-250-250-20-50);
 	$("#loginmodal").css("margin-top",$(window).height()/2-240);
 	$("#registrationmodal").css("margin-top",$(window).height()/2-250);
 	$("#errormessagemodal").css("margin-top",$(window).height()/2-170);
 	$("#messagemodal").css("margin-top",$(window).height()/2-170);
-	$("#menu").mouseenter(function(){
-		$("#downmenu").css("visibility","visible");
-		if($(this).is(':animated')){
-			$(this).stop();
+	function checkwindow(){
+		if($(window).width() <= 860){
+			$("#menu").unbind();
+		}else if($(window).width() > 860){
+			if($._data(document.getElementById('menu'), "events")){
+			}else{
+				$("#menu").mouseenter(function(){
+					$("#downmenu").css("visibility","visible");
+					if($(this).is(':animated')){
+						$(this).stop();
+					}
+					$(this).animate({
+							height: 165
+						},150);
+				}).mouseleave(function(){
+					$("#downmenu").css("visibility","hidden");
+					if($(this).is(':animated')){
+						$(this).stop();
+					}
+					$(this).animate({
+							height: 74
+						},150);
+				});
+			}
 		}
-		$(this).animate({
-				height: 165
-			},150);
-	}).mouseleave(function(){
-		$("#downmenu").css("visibility","hidden");
-		if($(this).is(':animated')){
-			$(this).stop();
-		}
-		$(this).animate({
-				height: 74
-			},150);
+	}
+	checkwindow();
+	$(window).resize(function() {
+		checkwindow();
 	});
 	var csrftoken = Cookies.get('csrftoken');
 	function csrfSafeMethod(method) {
@@ -96,7 +126,7 @@ $(document).ready(function(){
         	}
     	}
 	});
-	$("#loginsubmitbutton").click(function(){
+	/*$("#loginsubmitbutton").click(function(){
 		if($("#loginusrname").val().length == 0){
 			$('#myerrormessagemodal').modal('toggle');
 			$("#errormessagecontent").html("帳號不可以為空");
@@ -105,7 +135,7 @@ $(document).ready(function(){
 			$("#errormessagecontent").html("密碼不可以為空");
 		}else{
 			$('#myloginmodal').modal('toggle');
-			$("#loginmenu").html('<div id="loading1"></div><div id="loading2"></div><div id="loading3"></div><div id="loading4"></div><div id="loading5"></div>');
+			$("#loginmenu div").html('<div id="loading1"></div><div id="loading2"></div><div id="loading3"></div><div id="loading4"></div><div id="loading5"></div>');
 			loading();
     		$.ajax({
         		url : "login/",
@@ -115,10 +145,10 @@ $(document).ready(function(){
     				if(json.exist){
     					checklogined();
     				}else{
-    					$("#loginmenu").html(
-    					'<div id="loginbutton" data-toggle="modal" data-target="#myloginmodal" style="float:left">登入</div>'+
-        				'<div style="float:left">|</div>'+
-         				'<div id="registerbutton"data-toggle="modal" data-target="#myregistrationmodel" style="float:left">註冊</div>');
+    					$("#loginmenu div").html(
+    					'<span id="loginbutton" data-toggle="modal" data-target="#myloginmodal">登入</span>'+
+	        			'<span >|</span>'+
+	        			'<span id="registerbutton" data-toggle="modal" data-target="#myregistrationmodel">註冊</span>');
          				$('#myerrormessagemodal').modal('toggle');
 						$("#errormessagecontent").html('帳號或密碼輸入錯誤');
     				}
@@ -141,7 +171,7 @@ $(document).ready(function(){
 			$('#myerrormessagemodal').modal('toggle');
 			$("#errormessagecontent").html("電子郵件不可以為空");
 		}else{
-			$("#loginmenu").html('<div id="loading1"></div><div id="loading2"></div><div id="loading3"></div><div id="loading4"></div><div id="loading5"></div>');
+			$("#loginmenu div").html('<div id="loading1"></div><div id="loading2"></div><div id="loading3"></div><div id="loading4"></div><div id="loading5"></div>');
 			loading();
     		$.ajax({
         		url : "register/",
@@ -149,10 +179,10 @@ $(document).ready(function(){
         		data : { accountnumber : $('#registerusrname').val() , password : $("#registerpsw").val() , email : $("#registeremail").val()},
         		success : function(json) {
     				if(json.exist){
-    					$("#loginmenu").html(
-    					'<div id="loginbutton" data-toggle="modal" data-target="#myloginmodal" style="float:left">登入</div>'+
-        				'<div style="float:left">|</div>'+
-         				'<div id="registerbutton"data-toggle="modal" data-target="#myregistrationmodel" style="float:left">註冊</div>');
+    					$("#loginmenu div").html(
+		    				'<span id="loginbutton" data-toggle="modal" data-target="#myloginmodal">登入</span>'+
+					        '<span >|</span>'+
+					        '<span id="registerbutton" data-toggle="modal" data-target="#myregistrationmodel">註冊</span>');
     					$('#myerrormessagemodal').modal('toggle');
 						$("#errormessagecontent").html("該帳號已經被註冊！");
     				}else{
@@ -167,5 +197,16 @@ $(document).ready(function(){
         		}
     		});
 		}
-	});
+	});*/
+	$.ajax({
+        url : "aboutus",
+        type : "POST",
+        data : {},
+        success : function(data) {
+    		$("#mainscreen").html(data);
+       	},
+        error : function(xhr,errmsg,err) {
+           	console.log(xhr.status + ": " + xhr.responseText);
+        } 
+    });
 });
