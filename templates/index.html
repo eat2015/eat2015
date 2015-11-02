@@ -7,11 +7,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>吃~吃~吃~</title>
 	<link rel="stylesheet" type="text/css" href="{% static 'index.css' %}"/>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	<script src="{% static 'jquery-2.1.4.min.js' %}"></script>
   <script src="{% static 'semantic/dist/semantic.min.js' %}"></script>
   <link rel="stylesheet" type="text/css" class="ui" href="{% static 'semantic/dist/semantic.min.css' %}">
+	<link rel="stylesheet" href="{% static 'bootstrap.min.css' %}">
+	<script src="{% static 'bootstrap.min.js' %}"></script>
+  <script src="{% static 'dropdown.min.js' %}"></script>
 	<script src="{% static 'js.cookie.js' %}"></script>
   <script src="{% static 'index.js' %}"></script>
 </head>
@@ -112,6 +113,20 @@
       		</div>   
     	</div>
   	</div>
+    <div class="modal fade" id="myerrormessagemodal" role="dialog" style="border-radius:5px">
+      <div class="modal-dialog"  id="errormessagemodal">
+        <div class="modal-content">
+          <div class="modal-header" style="background-color:red;font-size: 24px;border-radius:5px 5px 0px 0px;font-weight:bold;color:white;font-family: Microsoft JhengHei;">
+              <h4 class="modal-title" style="text-align:center;font-size: 30px;">警告</h4>
+          </div>
+          <div class="modal-body">
+            <div class="form-group" id="errormessagecontent" style="font-family: Microsoft JhengHei;font-size:20px;text-align:center;line-height:50px">
+            </div>
+            <button type="submit" class="btn btn-danger btn-block" style="width:50px;margin:auto" data-dismiss="modal">關閉</button>
+          </div>
+        </div>
+      </div>
+    </div>
 </div>
     <div class="modal fade" id="mymessagemodal" role="dialog" style="border-radius:10px">
       <div class="modal-dialog"  id="messagemodal">

@@ -152,6 +152,18 @@
     #menucontroller{
     	display: inline-block;
     }
+    #loginmodal{
+    	margin:auto;
+    }
+    #registrationmodal{
+    	margin:auto;
+    }
+    #errormessagemodal{
+    	margin:auto;
+    }
+    #mymessagemodal{
+    	margin:auto;
+    }
 }
 @media screen and (max-width: 470px) {
     #searchbar{
@@ -175,6 +187,14 @@
     }
     #registrationmodal{
     	width: 98%
+    }
+    #errormessagemodal{
+    	width: 80%!important;
+    	margin:auto;
+    }
+    #mymessagemodal{
+    	width: 80%!important;
+    	margin:auto;
     }
 }
 .itemfont{

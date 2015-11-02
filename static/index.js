@@ -129,7 +129,7 @@ $(document).ready(function(){
 	});
 	$("#loginsubmitbutton").click(function(){
 		if($("#loginusrname").val().length == 0){
-			$('#myregistrationmodel').modal('toggle');
+			$('#myerrormessagemodal').modal('toggle');
 			$("#errormessagecontent").html("帳號不可以為空");
 		}else if($("#loginpsw").val().length == 0){
 			$('#myerrormessagemodal').modal('toggle');
