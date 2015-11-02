@@ -1,4 +1,5 @@
 $(document).ready(function(){
+	$('.ui.dropdown').dropdown();
 	var logined;
 	$("#homebutton").click(function(){
 		$.ajax({
