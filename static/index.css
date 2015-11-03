@@ -188,18 +188,22 @@
     	font-size: 15px;
     }
     #loginmodal{
-    	width: 98%
+    	width: 98%;
+    	margin-top:80px;
     }
     #registrationmodal{
-    	width: 98%
+    	width: 98%;
+    	margin-top:80px;
     }
     #errormessagemodal{
     	width: 80%!important;
     	margin:auto;
+    	margin-top:140px;
     }
     #mymessagemodal{
     	width: 80%!important;
     	margin:auto;
+    	margin-top:140px;
     }
 }
 .itemfont{
