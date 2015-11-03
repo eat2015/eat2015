@@ -253,6 +253,8 @@ $(document).ready(function(){
     				if(json.exist){
     					checklogined();
     					$('#myloginmodal').modal('toggle');
+    					$('#mymessagemodal').modal('toggle');
+						$("#messagecontent").html("登入成功");
     				}else{
     					$("#loginmenu").html(
     					'<span id="loginbutton" data-toggle="modal" data-target="#myloginmodal">登入</span>'+
