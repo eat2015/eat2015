@@ -166,7 +166,7 @@
     #errormessagemodal{
     	margin:auto;
     }
-    #mymessagemodal{
+    #messagemodal{
     	margin:auto;
     }
 }
@@ -200,7 +200,7 @@
     	margin:auto;
     	margin-top:140px!important;
     }
-    #mymessagemodal{
+    #messagemodal{
     	width: 80%!important;
     	margin:auto;
     	margin-top:140px!important;
