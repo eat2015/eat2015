@@ -112,7 +112,7 @@ $(document).ready(function(){
 					checklogined();
 				});
 				$("#smallscalemenu").html(
-				'<div class="itemfont item" style="color:white;background-color:#84A8BD;font-size:18px!important;line-height:38px"><img src="static/user.png"></img>'+user+'</div>'+
+				'<div class="itemfont item" style="color:white;background-color:#84A8BD;font-size:18px!important;line-height:38px"><img src="static/user.png" style="width:15px"></img>'+user+'</div>'+
 				'<div class="ui divider" style="margin-top:0px"></div>'+
 	        	'<div class="itemfont item" id="smallhomebutton">吃~吃~吃~~~</div>'+
 	            '<div class="itemfont item">搜索美食</div>'+
