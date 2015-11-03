@@ -1,57 +1,165 @@
 $(document).ready(function(){
 	$('.ui.dropdown').dropdown();
 	var logined;
-	$("#homebutton").click(function(){
-		$.ajax({
-        	url : "main",
-        	type : "POST",
-        	data : {},
-        	success : function(data) {
-    			$("#mainscreen").html(data);
-       		},
-        	error : function(xhr,errmsg,err) {
-            	console.log(xhr.status + ": " + xhr.responseText);
-        	}
-    	});
-	});
-	$("#aboutusbutton").click(function(){
-		$.ajax({
-        	url : "aboutus",
-        	type : "POST",
-        	data : {},
-        	success : function(data) {
-    			$("#mainscreen").html(data);
-       		},
-        	error : function(xhr,errmsg,err) {
-            	console.log(xhr.status + ": " + xhr.responseText);
-        	}
-    	});
-	});
-	
+	function outputaboutus(){
+		$("#mainscreen").html('<div class="ui active centered large inline loader" style="margin-top:200px;"></div>');
+			$.ajax({
+	        	url : "aboutus",
+	        	type : "POST",
+	        	data : {},
+	        	success : function(data) {
+	    			$("#mainscreen").html(data);
+	       		},
+	        	error : function(xhr,errmsg,err) {
+	            	console.log(xhr.status + ": " + xhr.responseText);
+	        	}
+	    	});
+	}
+	function setnormalbutton(){
+		$("#homebutton").click(function(){
+			$("#mainscreen").html('<div class="ui active centered large inline loader" style="margin-top:200px;"></div>');
+			$.ajax({
+	        	url : "main",
+	        	type : "POST",
+	        	data : {},
+	        	success : function(data) {
+	    			$("#mainscreen").html(data);
+	       		},
+	        	error : function(xhr,errmsg,err) {
+	            	console.log(xhr.status + ": " + xhr.responseText);
+	        	}
+	    	});
+		});
+		$("#smallhomebutton").click(function(){
+			$("#mainscreen").html('<div class="ui active centered inline loader" style="margin-top:200px;"></div>');
+			$.ajax({
+	        	url : "main",
+	        	type : "POST",
+	        	data : {},
+	        	success : function(data) {
+	    			$("#mainscreen").html(data);
+	       		},
+	        	error : function(xhr,errmsg,err) {
+	            	console.log(xhr.status + ": " + xhr.responseText);
+	        	}
+	    	});
+		});
+		$("#aboutusbutton").click(function(){
+			$("#mainscreen").html('<div class="ui active centered large inline loader" style="margin-top:200px;"></div>');
+			$.ajax({
+	        	url : "aboutus",
+	        	type : "POST",
+	        	data : {},
+	        	success : function(data) {
+	    			$("#mainscreen").html(data);
+	       		},
+	        	error : function(xhr,errmsg,err) {
+	            	console.log(xhr.status + ": " + xhr.responseText);
+	        	}
+	    	});
+		});
+		$("#smallaboutusbutton").click(function(){
+			$("#mainscreen").html('<div class="ui active centered inline loader" style="margin-top:200px;"></div>');
+			$.ajax({
+	        	url : "aboutus",
+	        	type : "POST",
+	        	data : {},
+	        	success : function(data) {
+	    			$("#mainscreen").html(data);
+	       		},
+	        	error : function(xhr,errmsg,err) {
+	            	console.log(xhr.status + ": " + xhr.responseText);
+	        	}
+	    	});
+		});
+	}
+		
 	function checklogined(){
 		var user = Cookies.get('account');
 		if(user){
 		logined = true;
-		$("#loginmenu div").html(
-			'<button id="userbutton" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="true">'+
-	    		user+
-	        '</button>'+
-	        '<ul class="dropdown-menu" id="dropdown" role="menu" style="">'+
-	          '<li><a href="#">編輯個人資訊</a></li>'+
-	          '<li class="divider"></li>'+
-	          '<li id="logout"><a href="#">登出</a></li>'+
-	        '</ul>');
-			$("#dropdown").css("top",$("#loginmenu").height()+20);
-			$("#logout").click(function(){
-				Cookies.remove('account');
-				checklogined();
-			});
+			$("#loginmenu").html(
+				'<button type="button" class="ui primary button" style="font-size:15px;margin:auto">'+
+		    		user+
+		        '</button>');
+			$("#downmenu").html(
+				'<div id="homebutton" class="center aligned column">'+
+					'<img src="static/homebutton.png"></img>'+
+					'<div style="margin-top:5px">首頁</div>'+
+				'</div>'+
+			    '<div id="searchpagebutton" class="center aligned column">'+
+			        '<img src="static/searchpage.png"></img>'+
+			        '<div style="margin-top:5px">搜尋頁面</div>'+
+			    '</div>'+
+			    '<div id="givestorebutton" class="center aligned column">'+
+			        '<img src="static/givestore.png"></img>'+
+			        '<div style="margin-top:5px">提供店家</div>'+
+			    '</div>'+
+				'<div id="aboutusbutton" class="center aligned column">'+
+					'<img src="static/aboutusbutton.png"></img>'+
+					'<div style="margin-top:5px">關於我們</div>'+
+				'</div>'+
+			    '<div id="listpagebutton" class="center aligned column">'+
+			        '<img src="static/list.png"></img>'+
+			        '<div style="margin-top:5px">管理清單</div>'+
+			    '</div>'+
+				'<div id="logoutbutton" class="center aligned column">'+
+		        	'<img src="static/logout.png"></img>'+
+		        	'<div style="margin-top:5px">登出</div>'+
+		      	'</div>');
+				$("#logoutbutton").click(function(){
+					Cookies.remove('account');
+					checklogined();
+				});
+				$("#smallscalemenu").html(
+				'<div class="itemfont item" style="color:white;background-color:#84A8BD;font-size:18px!important;line-height:38px"><img src="static/user.png"></img>'+user+'</div>'+
+				'<div class="ui divider" style="margin-top:0px"></div>'+
+	        	'<div class="itemfont item" id="smallhomebutton">吃~吃~吃~~~</div>'+
+	            '<div class="itemfont item">搜索美食</div>'+
+	            '<div class="itemfont item">提供店家</div>'+
+	            '<div class="itemfont item" id="smallaboutusbutton">關於我們</div>'+
+	            '<div class="ui divider"></div>'+
+	            '<div class="itemfont item">管理美食清單</div>'+
+	            '<div class="itemfont item" id="smalllogoutbutton">登出</div>');
+					setnormalbutton();
+				$("#smalllogoutbutton").click(function(){
+					Cookies.remove('account');
+					checklogined();
+				});
+				$('.ui.dropdown').dropdown();
 		}else{
 			logined = false;
 			$("#loginmenu").html(
 	    	'<span id="loginbutton" data-toggle="modal" data-target="#myloginmodal">登入</span>'+
 	        '<span >|</span>'+
 	        '<span id="registerbutton" data-toggle="modal" data-target="#myregistrationmodel">註冊</span>');
+	        $("#downmenu").html(
+	        	'<div id="homebutton" class="center aligned column">'+
+					'<img src="static/homebutton.png"></img>'+
+					'<div style="margin-top:5px">首頁</div>'+
+				'</div>'+
+			    '<div id="searchpagebutton" class="center aligned column">'+
+			        '<img src="static/searchpage.png"></img>'+
+			        '<div style="margin-top:5px">搜尋頁面</div>'+
+			    '</div>'+
+			    '<div id="givestorebutton" class="center aligned column">'+
+			        '<img src="static/givestore.png"></img>'+
+			        '<div style="margin-top:5px">提供店家</div>'+
+			    '</div>'+
+				'<div id="aboutusbutton" class="center aligned column">'+
+					'<img src="static/aboutusbutton.png"></img>'+
+					'<div style="margin-top:5px">關於我們</div>'+
+				'</div>');
+	        $("#smallscalemenu").html(
+	        	'<div class="itemfont item" id="smallhomebutton">吃~吃~吃~~~</div>'+
+	            '<div class="itemfont item">搜索美食</div>'+
+	            '<div class="itemfont item">提供店家</div>'+
+	            '<div class="itemfont item" id="smallaboutusbutton">關於我們</div>'+
+	            '<div class="ui divider"></div>'+
+	            '<div class="itemfont item" data-toggle="modal" data-target="#myloginmodal">登入</div>'+
+	            '<div class="itemfont item" data-toggle="modal" data-target="#myregistrationmodel">註冊</div>');
+	        setnormalbutton();
+	        $('.ui.dropdown').dropdown();
 		}
 	}
 	checklogined();
@@ -135,8 +243,7 @@ $(document).ready(function(){
 			$('#myerrormessagemodal').modal('toggle');
 			$("#errormessagecontent").html("密碼不可以為空");
 		}else{
-			$('#myloginmodal').modal('toggle');
-			$("#loginmenu div").html('<div id="loading1"></div><div id="loading2"></div><div id="loading3"></div><div id="loading4"></div><div id="loading5"></div>');
+			$("#loginmenu").html('<div id="loading1"></div><div id="loading2"></div><div id="loading3"></div><div id="loading4"></div><div id="loading5"></div>');
 			loading();
     		$.ajax({
         		url : "login/",
@@ -145,8 +252,9 @@ $(document).ready(function(){
         		success : function(json) {
     				if(json.exist){
     					checklogined();
+    					$('#myloginmodal').modal('toggle');
     				}else{
-    					$("#loginmenu div").html(
+    					$("#loginmenu").html(
     					'<span id="loginbutton" data-toggle="modal" data-target="#myloginmodal">登入</span>'+
 	        			'<span >|</span>'+
 	        			'<span id="registerbutton" data-toggle="modal" data-target="#myregistrationmodel">註冊</span>');
@@ -172,7 +280,7 @@ $(document).ready(function(){
 			$('#myerrormessagemodal').modal('toggle');
 			$("#errormessagecontent").html("電子郵件不可以為空");
 		}else{
-			$("#loginmenu div").html('<div id="loading1"></div><div id="loading2"></div><div id="loading3"></div><div id="loading4"></div><div id="loading5"></div>');
+			$("#loginmenu").html('<div id="loading1"></div><div id="loading2"></div><div id="loading3"></div><div id="loading4"></div><div id="loading5"></div>');
 			loading();
     		$.ajax({
         		url : "register/",
@@ -180,7 +288,7 @@ $(document).ready(function(){
         		data : { accountnumber : $('#registerusrname').val() , password : $("#registerpsw").val() , email : $("#registeremail").val()},
         		success : function(json) {
     				if(json.exist){
-    					$("#loginmenu div").html(
+    					$("#loginmenu").html(
 		    				'<span id="loginbutton" data-toggle="modal" data-target="#myloginmodal">登入</span>'+
 					        '<span >|</span>'+
 					        '<span id="registerbutton" data-toggle="modal" data-target="#myregistrationmodel">註冊</span>');

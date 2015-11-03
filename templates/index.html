@@ -24,18 +24,11 @@
     </div>
 	<div id="menu">
     <div class="ui grid" style="margin-top:3px;">
-			<div id="menulogo" class="center aligned four wide column" style="line-height:32px">吃~吃~吃~~~</div>
+			<div id="menulogo" class="center aligned four wide column">吃~吃~吃~~~</div>
       <div id="menucontroller" class="center aligned three wide column">
         <div class="ui icon top left pointing dropdown" style="font-size:20px">
           <i class="sidebar icon" style="line-height:32px"></i>
-          <div class="menu">
-            <div class="itemfont item">吃~吃~吃~~~</div>
-            <div class="itemfont item">搜索美食</div>
-            <div class="itemfont item">提供店家</div>
-            <div class="itemfont item">關於我們</div>
-            <div class="ui divider"></div>
-            <div class="itemfont item" data-toggle="modal" data-target="#myloginmodal">登入</div>
-            <div class="itemfont item" data-toggle="modal" data-target="#myregistrationmodel">註冊</div>
+          <div class="menu" id="smallscalemenu">
           </div>
         </div>
       </div>
@@ -46,15 +39,7 @@
       <div class="center aligned three wide column" id="loginmenu" style="line-height:35px">
         
       </div>
-		<div class="six column row" id="downmenu" style="margin-top:0px;visibility:hidden">
-			<div id="homebutton" class="center aligned column">
-				<img src="{% static 'homebutton.png' %}"></img>
-				<div style="margin-top:5px">首頁</div>
-			</div>
-			<div id="aboutusbutton" class="center aligned column">
-				<img src="{% static 'aboutusbutton.png' %}"></img>
-				<div style="margin-top:5px">關於我們</div>
-			</div>
+		<div class="seven column row" id="downmenu" style="margin-top:0px;visibility:hidden">
 		</div>
     </div>
 	</div>
