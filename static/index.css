@@ -189,21 +189,21 @@
     }
     #loginmodal{
     	width: 98%;
-    	margin-top:80px;
+    	margin-top:80px!important;
     }
     #registrationmodal{
     	width: 98%;
-    	margin-top:80px;
+    	margin-top:80px!important;
     }
     #errormessagemodal{
     	width: 80%!important;
     	margin:auto;
-    	margin-top:140px;
+    	margin-top:140px!important;
     }
     #mymessagemodal{
     	width: 80%!important;
     	margin:auto;
-    	margin-top:140px;
+    	margin-top:140px!important;
     }
 }
 .itemfont{
