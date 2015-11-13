@@ -1,5 +1,7 @@
 $(document).ready(function(){
 	$('.ui.dropdown').dropdown();
+	$('.item').popup();
+	$('.ui.label.transition.visible').popup();
 	var logined;
 	function outputaboutus(){
 		$("#mainscreen").html('<div class="ui active centered large inline loader" style="margin-top:200px;"></div>');
@@ -58,6 +60,20 @@ $(document).ready(function(){
 	        	}
 	    	});
 		});
+		$("#searchpagebutton").click(function(){
+			$("#mainscreen").html('<div class="ui active centered large inline loader" style="margin-top:200px;"></div>');
+			$.ajax({
+		        url : "search",
+		        type : "POST",
+		        data : {},
+		        success : function(data) {
+		    		$("#mainscreen").html(data);
+		       	},
+		        error : function(xhr,errmsg,err) {
+		           	console.log(xhr.status + ": " + xhr.responseText);
+		        } 
+		    });
+		});
 		$("#smallaboutusbutton").click(function(){
 			$("#mainscreen").html('<div class="ui active centered inline loader" style="margin-top:200px;"></div>');
 			$.ajax({
@@ -73,7 +89,6 @@ $(document).ready(function(){
 	    	});
 		});
 	}
-		
 	function checklogined(){
 		var user = Cookies.get('account');
 		if(user){
@@ -199,27 +214,32 @@ $(document).ready(function(){
 		}else if($(window).width() > 860){
 			if($._data(document.getElementById('menu'), "events")){
 			}else{
-				$("#menu").mouseenter(function(){
-					$("#downmenu").css("visibility","visible");
-					if($(this).is(':animated')){
-						$(this).stop();
-					}
-					$(this).animate({
+				$("#menu").mouseenter(function(e){
+						$("#downmenu").css("visibility","visible");
+						if($("#menu").is(':animated')){
+							$("#menu").stop();
+						}
+						$("#menu").animate({
 							height: 165
 						},150);
 				}).mouseleave(function(){
-					$("#downmenu").css("visibility","hidden");
-					if($(this).is(':animated')){
-						$(this).stop();
-					}
-					$(this).animate({
-							height: 74
-						},150);
+						$("#downmenu").css("visibility","hidden");
+						if($(this).is(':animated')){
+							$(this).stop();
+						}
+						$("#menu").animate({
+								height: 74
+							},150);
 				});
 			}
 		}
 	}
-	checkwindow();
+
+	$("#searchbar").resize(function(){
+		menubeginheight = 74 + 60 - $("#searchbar").height();
+		menuafterheight = 165  + 60 - $("#searchbar").height();
+		console.log("1");
+	});
 	$(window).resize(function() {
 		checkwindow();
 	});
@@ -309,15 +329,40 @@ $(document).ready(function(){
     		});
 		}
 	});
-	$.ajax({
-        url : "aboutus",
+    /*$.ajax({
+        url : "alltag",
         type : "POST",
         data : {},
         success : function(data) {
-    		$("#mainscreen").html(data);
+    		$("#searchdropdownmenu").html(data);
        	},
         error : function(xhr,errmsg,err) {
            	console.log(xhr.status + ": " + xhr.responseText);
         } 
-    });
+    });*/
+	$("#searchdropdownmenu").append('<div class="item" data-value="早餐" data-title="早餐" data-content="適合作為早餐的食物">早餐</div>');
+	$("#searchdropdownmenu").append('<div class="item" data-value="中餐" data-title="中餐" data-content="適合作為中午的食物">中餐</div>');
+	$("#searchdropdownmenu").append('<div class="item" data-value="晚餐" data-title="晚餐" data-content="適合作為晚餐的食物">晚餐</div>');
+	$('.item').popup({
+		exclusive:true,
+    	hoverable: true, 
+    	position: 'bottom center'
+	});
+	$('#searchdropdown').popup({
+		exclusive:true,
+    	hoverable: true, 
+    	position: 'bottom center'
+	});
+	$.ajax({
+	        	url : "search2",
+	        	type : "POST",
+	        	data : {},
+	        	success : function(data) {
+	    			$("#mainscreen").html(data);
+	       		},
+	        	error : function(xhr,errmsg,err) {
+	            	console.log(xhr.status + ": " + xhr.responseText);
+	        	}
+	    	});
+	checkwindow();
 });

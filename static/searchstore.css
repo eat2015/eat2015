@@ -1,0 +1,14 @@
+.likebutton{
+	transition:color 0.2s;
+}
+.likebutton:hover{
+	color:red;
+	cursor: pointer;
+}
+.dislikebutton{
+	transition:color 0.2s;
+}
+.dislikebutton:hover{
+	color:black;
+	cursor: pointer;
+}

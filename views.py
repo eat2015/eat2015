@@ -8,6 +8,16 @@ from django.template.loader import render_to_string
 from mysite.models import Users
 from django.template.context_processors import csrf
 
+def search2(request):
+	c = {}
+	c.update(csrf(request))
+	return render_to_response("searchstore.html", c)
+
+def search(request):
+	c = {}
+	c.update(csrf(request))
+	return render_to_response("search.html", c)
+
 def eat(request):
 	c = {}
 	c.update(csrf(request))

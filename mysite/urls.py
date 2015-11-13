@@ -24,4 +24,6 @@ urlpatterns = [
     url(r'^register/$',register),
     url(r'^main$',main),
     url(r'^aboutus$',aboutus),
+    url(r'^search$',search),
+    url(r'^search2$',search2),
 ]

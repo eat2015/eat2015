@@ -1,0 +1,14 @@
+.good{
+	color:rgba(0,255,0,0.5);
+	transition: color 0.2s;
+}
+.bad{
+	color:rgba(255,0,0,0.5);
+	transition: color 0.2s;
+}
+.good.after{
+	color:rgb(0,255,0);
+}
+.bad.after{
+	color:rgb(255,0,0);
+}
