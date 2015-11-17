@@ -9,42 +9,42 @@
 		<div class="column">
 			<div class="ui card" style="margin:auto;width:90%">
 			  <div class="content">
-			  	<i class="facebook icon" style="float:right"></i>
-			    <div class="header" style="float:left;width:51%">{{ store_name }}</div>
-			    <div class="meta" style="float:left;width:51%">{{ store_location }}</div>
+			  	{% if store.has_fans_page %}<a href="{{ store.fanspage }}" target="_blank"> <i class="facebook icon" style="float:right"></i> </a>{% else %} {% endif %}
+			    <div class="header" style="float:left;width:51%">{{ store.name }}</div>
+			    <div class="meta" style="float:left;width:51%">{{ store.location }}</div>
 			    <div class="description">
-			      {{ store_description }}
+			      {{ store.description }}
 			    </div>
 			  </div>
 			  <div class="extra content">
 			  	<div class="likebutton">
 				    <span class="left floated like">
 				      &#10084;
-				      300 喜歡
+				      {{ store.good }} 喜歡
 				    </span>
 				</div>
 				<div class="dislikebutton">
 				    <span class="right floated star">
 				      &#128148;
-				      5 不喜歡
+				      {{ store.bad }} 不喜歡
 				    </span>
 				</div>
 			  </div>
 			</div>
 		</div>
 		<div class="column">
-			{% for food in  %}
+			{% for comment in comments %}
 				<div class="ui card" style="width:95%">
 				  <div class="content">
 						<div class="ui comments">
 						  <div class="comment">
 						    <div class="content">
-						      <a class="author">閃電俠</a>
+						      <a class="author">{{ comment.membername }}</a>
 						      <div class="metadata">
-						        <div class="date">2 days ago</div>
+						        <div class="date">{{ comment.fromcreatetime }}</div>
 						      </div>
 						      <div class="text" style="margin: 0.5em 0 0.5em;">
-						        我好快
+						        {{ comment.description }}
 						      </div>
 						    </div>
 						  </div>
@@ -54,13 +54,13 @@
 						<div class="dislikebutton">
 						    <span class="right floated star" style="width:80px;text-align:center">
 						      &#128148;
-						      不喜歡
+						      {{ comment.bad }} 不喜歡
 						    </span>
 						</div>
 					  	<div class="likebutton">
 						    <span class="right floated like">
 						      &#10084;
-						      喜歡
+						      {{ comment.good }} 喜歡
 						    </span>
 						</div>
 				  </div>
