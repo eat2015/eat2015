@@ -14,9 +14,9 @@ def search2(request):
 	return render_to_response("searchstore.html", c)
 
 def search(request):
-	c = {}
-	c.update(csrf(request))
-	return render_to_response("search.html", c)
+    c = {}
+    c.update(csrf(request))
+    return render_to_response("search.html", c)
 
 def eat(request):
 	c = {}
@@ -78,6 +78,7 @@ def checkcookie(request):
 
 
 
+
 def alltag(request):
     tags = Tags.objects.all()
     
@@ -90,3 +91,32 @@ def alltag(request):
         result.append(tag_info)
     
     return HttpResponse(json.dumps(result))
+
+
+def get_store_details(store):
+    store_info = dict()
+    store_info['name'] = store.name
+    store_info['description'] = store.description
+    store_info['like'] = store.good
+    store_info['dislike'] = store.bad
+    store_info['address'] = store.location
+    store_info['fans_page'] = store.fan_page
+    store_info['website'] = store.website
+    return store_info
+
+
+def tag_search_store(request):
+    if request.method == 'POST':
+        taglist = dict(request.POST)['undefined']
+        taglist = [2]
+    
+        stores = Stores.objects
+        for tag_id in taglist:
+            stores = stores.filter(tags=tag_id)
+        
+        stores_details = []
+        for store in stores:
+            store_info = get_store_details(store)
+            stores_details.append(store_info)
+
+        return HttpResponse(json.dumps(stores_details))
