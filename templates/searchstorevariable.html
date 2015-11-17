@@ -1,0 +1,72 @@
+{% load staticfiles %}
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="{% static 'searchstore.css' %}"/>
+	<script src="{% static 'searchstore.js' %}"></script>
+</head>
+<body>
+	<div class="ui equal width stackable grid">
+		<div class="column">
+			<div class="ui card" style="margin:auto;width:90%">
+			  <div class="content">
+			  	<i class="facebook icon" style="float:right"></i>
+			    <div class="header" style="float:left;width:51%">{{ store_name }}</div>
+			    <div class="meta" style="float:left;width:51%">{{ store_location }}</div>
+			    <div class="description">
+			      {{ store_description }}
+			    </div>
+			  </div>
+			  <div class="extra content">
+			  	<div class="likebutton">
+				    <span class="left floated like">
+				      &#10084;
+				      300 喜歡
+				    </span>
+				</div>
+				<div class="dislikebutton">
+				    <span class="right floated star">
+				      &#128148;
+				      5 不喜歡
+				    </span>
+				</div>
+			  </div>
+			</div>
+		</div>
+		<div class="column">
+			{% for food in  %}
+				<div class="ui card" style="width:95%">
+				  <div class="content">
+						<div class="ui comments">
+						  <div class="comment">
+						    <div class="content">
+						      <a class="author">閃電俠</a>
+						      <div class="metadata">
+						        <div class="date">2 days ago</div>
+						      </div>
+						      <div class="text" style="margin: 0.5em 0 0.5em;">
+						        我好快
+						      </div>
+						    </div>
+						  </div>
+						</div>
+					</div>
+					<div class="extra content">
+						<div class="dislikebutton">
+						    <span class="right floated star" style="width:80px;text-align:center">
+						      &#128148;
+						      不喜歡
+						    </span>
+						</div>
+					  	<div class="likebutton">
+						    <span class="right floated like">
+						      &#10084;
+						      喜歡
+						    </span>
+						</div>
+				  </div>
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+</body>
+</html>
