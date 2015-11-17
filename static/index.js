@@ -68,11 +68,49 @@ $(document).ready(function(){
 		        data : {},
 		        success : function(data) {
 		    		$("#mainscreen").html(data);
-		       	},
-		        error : function(xhr,errmsg,err) {
-		           	console.log(xhr.status + ": " + xhr.responseText);
-		        } 
-		    });
+		    		var taglist;
+					if($("#searchdropdown").dropdown('get value') == ""){
+						taglist = [];
+					}else{
+						taglist = $("#searchdropdown").dropdown('get value').split(',');
+					}
+		    		$.ajax({
+				        url : "tagsearchstore",
+				        type : "POST",
+				        data : taglist,
+				        success : function(data) {
+				        	$.each(JSON.parse(data), function(key,value) {
+			  					$("#storelist").append(
+			  						'<div class="title" style="padding:0;height:42px">'+
+									  	'<div style="width:10%;text-align:center;line-height:42px;float:left">'+
+									    	(key+1)+
+									    '</div>'+
+									    '<div style="width:50%;text-align:center;line-height:42px;float:left">'+
+									    	value.name+
+									    '</div>'+
+									    '<div class="bad" style="width:20%;text-align:center;line-height:42px;float:right">'+
+									   		value.bad+
+									   	'</div>'+
+									   	'<div class="good" style="width:20%;text-align:center;line-height:42px;float:right">'+
+									   		value.good+
+									   	'</div>'+
+									'</div>'+
+									'<div class="content">'+
+									    '<p>'+value.description+'</p>'+
+									    '<p style="text-align:right">.....<a href="#">店家完整資訊</a></p>'+
+									'</div>'
+			  					);
+							});
+						},
+						error : function(xhr,errmsg,err) {
+								console.log(xhr.status + ": " + xhr.responseText);
+							} 
+						});
+					},
+				error : function(xhr,errmsg,err) {
+					console.log(xhr.status + ": " + xhr.responseText);
+				} 
+			});
 		});
 		$("#smallaboutusbutton").click(function(){
 			$("#mainscreen").html('<div class="ui active centered inline loader" style="margin-top:200px;"></div>');
@@ -335,7 +373,7 @@ $(document).ready(function(){
         data : {},
         success : function(data) {
     		$("#searchdropdownmenu").html("");
-    		$.each(data, function(key,value) {
+    		$.each(JSON.parse(data), function(key,value) {
 			  	$("#searchdropdownmenu").append('<div class="item" data-value="'+value.id+'" data-title="'+value.name+'" data-content="'+value.description+'">'+value.name+'</div>');
 			});
 			$('.item').popup({
@@ -365,4 +403,56 @@ $(document).ready(function(){
 	        	}
 	    	});
 	checkwindow();
+	$("#searchbutton").click(function(){
+			$("#mainscreen").html('<div class="ui active centered large inline loader" style="margin-top:200px;"></div>');
+			$.ajax({
+		        url : "search",
+		        type : "POST",
+		        data : {},
+		        success : function(data) {
+		    		$("#mainscreen").html(data);
+		    		var taglist;
+					if($("#searchdropdown").dropdown('get value') == ""){
+						taglist = [];
+					}else{
+						taglist = $("#searchdropdown").dropdown('get value').split(',');
+					}
+		    		$.ajax({
+				        url : "tagsearchstore",
+				        type : "POST",
+				        data : taglist,
+				        success : function(data) {
+				        	$.each(JSON.parse(data), function(key,value) {
+			  					$("#storelist").append(
+			  						'<div class="title" style="padding:0;height:42px">'+
+									  	'<div style="width:10%;text-align:center;line-height:42px;float:left">'+
+									    	(key+1)+
+									    '</div>'+
+									    '<div style="width:50%;text-align:center;line-height:42px;float:left">'+
+									    	value.name+
+									    '</div>'+
+									    '<div class="bad" style="width:20%;text-align:center;line-height:42px;float:right">'+
+									   		value.bad+
+									   	'</div>'+
+									   	'<div class="good" style="width:20%;text-align:center;line-height:42px;float:right">'+
+									   		value.good+
+									   	'</div>'+
+									'</div>'+
+									'<div class="content">'+
+									    '<p>'+value.description+'</p>'+
+									    '<p style="text-align:right">.....<a href="#">店家完整資訊</a></p>'+
+									'</div>'
+			  					);
+							});
+						},
+						error : function(xhr,errmsg,err) {
+								console.log(xhr.status + ": " + xhr.responseText);
+							} 
+						});
+					},
+				error : function(xhr,errmsg,err) {
+					console.log(xhr.status + ": " + xhr.responseText);
+				} 
+			});
+		});
 });
