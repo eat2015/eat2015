@@ -40,22 +40,31 @@ class StoreComment(models.Model):
     create_time = models.DateTimeField(auto_now_add=True)
 
     store = models.ForeignKey(Stores)
-    user = models.OneToOneField(Users)
+    user = models.ForeignKey(Users)
     
     def __str__(self):
         return self.description
 
 
 
-class Tag(models.Model):
+class Tags(models.Model):
     name = models.CharField(max_length=32)
     description = models.TextField()
-
-    stores = models.ManyToManyField(Stores)
-    # lists = models.ManyToManyField(Lists)
+    store = models.ManyToManyField(Stores)
 
     def __str__(self):
         return self.name
+
+
+class StoreLike(models.Model):
+    store = models.ForeignKey(Stores)
+    user = models.OneToOneField(Users)
+
+
+class StoreDislike(models.Model):
+    store = models.ForeignKey(Stores)
+    user = models.OneToOneField(Users)
+
 
 
 
