@@ -26,4 +26,6 @@ urlpatterns = [
     url(r'^aboutus$',aboutus),
     url(r'^search$',search),
     url(r'^search2$',search2),
-]
+    url(r'^alltag$', alltag),
+    ]
+
