@@ -79,7 +79,7 @@ def checkcookie(request):
 
 
 def alltag(request):
-    tags = Tag.objects.all()
+    tags = Tags.objects.all()
     
     result = []
     for tag in tags:
