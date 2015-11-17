@@ -329,25 +329,25 @@ $(document).ready(function(){
     		});
 		}
 	});
-    /*$.ajax({
+    $.ajax({
         url : "alltag",
         type : "POST",
         data : {},
         success : function(data) {
-    		$("#searchdropdownmenu").html(data);
+    		$("#searchdropdownmenu").html("");
+    		$.each(data, function(key,value) {
+			  	$("#searchdropdownmenu").append('<div class="item" data-value="'+value.id+'" data-title="'+value.name+'" data-content="'+value.description+'">'+value.name+'</div>');
+			});
+			$('.item').popup({
+				exclusive:true,
+		    	hoverable: true, 
+		    	position: 'bottom center'
+			});
        	},
         error : function(xhr,errmsg,err) {
            	console.log(xhr.status + ": " + xhr.responseText);
         } 
-    });*/
-	$("#searchdropdownmenu").append('<div class="item" data-value="早餐" data-title="早餐" data-content="適合作為早餐的食物">早餐</div>');
-	$("#searchdropdownmenu").append('<div class="item" data-value="中餐" data-title="中餐" data-content="適合作為中午的食物">中餐</div>');
-	$("#searchdropdownmenu").append('<div class="item" data-value="晚餐" data-title="晚餐" data-content="適合作為晚餐的食物">晚餐</div>');
-	$('.item').popup({
-		exclusive:true,
-    	hoverable: true, 
-    	position: 'bottom center'
-	});
+    });
 	$('#searchdropdown').popup({
 		exclusive:true,
     	hoverable: true, 
