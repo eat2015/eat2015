@@ -97,8 +97,8 @@ def get_store_details(store):
     store_info = dict()
     store_info['name'] = store.name
     store_info['description'] = store.description
-    store_info['like'] = store.good
-    store_info['dislike'] = store.bad
+    store_info['good'] = len(store.storelike_set.all())
+    store_info['bad'] = len(store.storedislike_set.all())
     store_info['address'] = store.location
     store_info['fans_page'] = store.fan_page
     store_info['website'] = store.website
@@ -108,8 +108,9 @@ def get_store_details(store):
 def tag_search_store(request):
     if request.method == 'POST':
         taglist = dict(request.POST)['undefined']
+        print (taglist)
         taglist = [2]
-    
+     
         stores = Stores.objects
         for tag_id in taglist:
             stores = stores.filter(tags=tag_id)
