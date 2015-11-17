@@ -1,12 +1,12 @@
-
 from django.http import HttpResponse
 from django.http import JsonResponse
 from django import template
 from django.template.loader import get_template
 from django.shortcuts import render_to_response
 from django.template.loader import render_to_string
-from mysite.models import Users
+from mysite.models import *
 from django.template.context_processors import csrf
+import json
 
 def search2(request):
 	c = {}
@@ -75,3 +75,18 @@ def checkcookie(request):
 	else:
 		response_data['exist'] = False;
 	return JsonResponse(response_data)
+
+
+
+def alltag(request):
+    tags = Tag.objects.all()
+    
+    result = []
+    for tag in tags:
+        tag_info = dict()
+        tag_info['id'] = tag.id
+        tag_info['name'] = tag.name
+        tag_info['description'] = tag.description
+        result.append(tag_info)
+    
+    return HttpResponse(json.dumps(result))
