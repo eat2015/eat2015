@@ -68,17 +68,11 @@ $(document).ready(function(){
 		        data : {},
 		        success : function(data) {
 		    		$("#mainscreen").html(data);
-		    		var taglist;
-					if($("#searchdropdown").dropdown('get value') == ""){
-						taglist = [];
-					}else{
-						taglist = $("#searchdropdown").dropdown('get value').split(',');
-					}
-                    console.log(taglist);
 		    		$.ajax({
 				        url : "tagsearchstore",
 				        type : "POST",
-				        data : taglist,
+				        data : {taglist:$("#searchdropdown").dropdown('get value')},
+				        datatype:'json',
 				        success : function(data) {
 				        	$.each(JSON.parse(data), function(key,value) {
 			  					$("#storelist").append(
@@ -421,7 +415,7 @@ $(document).ready(function(){
 		    		$.ajax({
 				        url : "tagsearchstore",
 				        type : "POST",
-				        data : {tag : '123'},
+				        data : {taglist:$("#searchdropdown").dropdown('get value')},
 				        success : function(data) {
 				        	$.each(JSON.parse(data), function(key,value) {
 			  					$("#storelist").append(
