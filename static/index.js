@@ -74,6 +74,7 @@ $(document).ready(function(){
 					}else{
 						taglist = $("#searchdropdown").dropdown('get value').split(',');
 					}
+                    console.log(taglist);
 		    		$.ajax({
 				        url : "tagsearchstore",
 				        type : "POST",
@@ -420,7 +421,7 @@ $(document).ready(function(){
 		    		$.ajax({
 				        url : "tagsearchstore",
 				        type : "POST",
-				        data : taglist,
+				        data : {tag : '123'},
 				        success : function(data) {
 				        	$.each(JSON.parse(data), function(key,value) {
 			  					$("#storelist").append(
