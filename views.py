@@ -106,11 +106,16 @@ def get_store_details(store):
 
 
 def tag_search_store(request):
+    username = request.COOKIES['account']
+    user = Users.objects.get(username=username)
+    if user:
+        print ("User id: " + str(user.id))
+
     if request.method == 'POST':
-        taglist = dict(request.POST)['undefined']
+        taglist = request.POST.get('tag')
         print (taglist)
         taglist = [2]
-     
+        
         stores = Stores.objects
         for tag_id in taglist:
             stores = stores.filter(tags=tag_id)
