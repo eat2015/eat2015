@@ -46,11 +46,19 @@ class StoreComment(models.Model):
         return self.description
 
 
+class Lists(models.Model):
+    name = models.CharField(max_length=32)
+    description = models.TextField(null=True, blank=True)
+    store = models.ManyToManyField(Stores)
+    user = models.OneToOneField(Users)
+
 
 class Tags(models.Model):
     name = models.CharField(max_length=32)
     description = models.TextField()
+    
     store = models.ManyToManyField(Stores)
+    list = models.ManyToManyField(Lists)
 
     def __str__(self):
         return self.name
@@ -66,5 +74,11 @@ class StoreDislike(models.Model):
     user = models.OneToOneField(Users)
 
 
+class ListLike(models.Model):
+    list = models.ForeignKey(Lists)
+    user = models.OneToOneField(Users)
 
 
+class ListDislike(models.Model):
+    list = models.ForeignKey(Lists)
+    user = models.OneToOneField(Users)
