@@ -135,11 +135,11 @@ $(document).ready(function(){
 					'<img src="static/homebutton.png"></img>'+
 					'<div style="margin-top:5px">首頁</div>'+
 				'</div>'+
-			    '<div id="searchpagebutton" class="center aligned column">'+
+			    '<div id="searchpagebutton" data-content="可以進入由標籤搜索店家與清單的頁面" class="center aligned column">'+
 			        '<img src="static/searchpage.png"></img>'+
 			        '<div style="margin-top:5px">搜尋頁面</div>'+
 			    '</div>'+
-			    '<div id="givestorebutton" class="center aligned column">'+
+			    '<div id="givestorebutton" data-content="新增店家的資訊到我們的資料庫，這將會讓其他使用者可以搜尋到你提供的店家" class="center aligned column">'+
 			        '<img src="static/givestore.png"></img>'+
 			        '<div style="margin-top:5px">提供店家</div>'+
 			    '</div>'+
@@ -147,7 +147,7 @@ $(document).ready(function(){
 					'<img src="static/aboutusbutton.png"></img>'+
 					'<div style="margin-top:5px">關於我們</div>'+
 				'</div>'+
-			    '<div id="listpagebutton" class="center aligned column">'+
+			    '<div id="listpagebutton" data-content="管理你的店家清單，清單內容可以是最常吃的幾個店家、覺得好吃的幾個店家或者是想要推薦別人來吃的店家、都可以附上自己對店家的描述" class="center aligned column">'+
 			        '<img src="static/list.png"></img>'+
 			        '<div style="margin-top:5px">管理清單</div>'+
 			    '</div>'+
@@ -158,6 +158,21 @@ $(document).ready(function(){
 				$("#logoutbutton").click(function(){
 					Cookies.remove('account');
 					checklogined();
+				});
+				$("#listpagebutton").popup({
+					exclusive:true,
+			    	hoverable: true, 
+			    	position: 'bottom center'
+				});
+				$("#searchpagebutton").popup({
+					exclusive:true,
+			    	hoverable: true, 
+			    	position: 'bottom center'
+				});
+		        $("#givestorebutton").popup({
+					exclusive:true,
+			    	hoverable: true, 
+			    	position: 'bottom center'
 				});
 				$("#smallscalemenu").html(
 				'<div class="itemfont item" style="color:white;background-color:#84A8BD;font-size:18px!important;line-height:38px"><img src="static/user.png" style="width:15px"></img>'+user+'</div>'+
@@ -186,11 +201,11 @@ $(document).ready(function(){
 					'<img src="static/homebutton.png"></img>'+
 					'<div style="margin-top:5px">首頁</div>'+
 				'</div>'+
-			    '<div id="searchpagebutton" class="center aligned column">'+
+			    '<div id="searchpagebutton" data-content="可以進入由標籤搜索店家與清單的頁面" class="center aligned column">'+
 			        '<img src="static/searchpage.png"></img>'+
 			        '<div style="margin-top:5px">搜尋頁面</div>'+
 			    '</div>'+
-			    '<div id="givestorebutton" class="center aligned column">'+
+			    '<div id="givestorebutton" data-content="新增店家的資訊到我們的資料庫，這將會讓其他使用者可以搜尋到你提供的店家" class="center aligned column">'+
 			        '<img src="static/givestore.png"></img>'+
 			        '<div style="margin-top:5px">提供店家</div>'+
 			    '</div>'+
@@ -198,6 +213,16 @@ $(document).ready(function(){
 					'<img src="static/aboutusbutton.png"></img>'+
 					'<div style="margin-top:5px">關於我們</div>'+
 				'</div>');
+	        $("#searchpagebutton").popup({
+				exclusive:true,
+		    	hoverable: true, 
+		    	position: 'bottom center'
+			});
+	        $("#givestorebutton").popup({
+				exclusive:true,
+		    	hoverable: true, 
+		    	position: 'bottom center'
+			});
 	        $("#smallscalemenu").html(
 	        	'<div class="itemfont item" id="smallhomebutton">吃~吃~吃~~~</div>'+
 	            '<div class="itemfont item">搜索美食</div>'+
@@ -387,9 +412,9 @@ $(document).ready(function(){
     	position: 'bottom center'
 	});
 	$.ajax({
-	        	url : "search2",
-	        	type : "POST",
-	        	data : {},
+	        	url : "searchstoreajax",
+	        	type : "GET",
+	        	data : {store:1},
 	        	success : function(data) {
 	    			$("#mainscreen").html(data);
 	       		},
