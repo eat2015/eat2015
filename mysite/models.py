@@ -38,6 +38,7 @@ class StoreComment(models.Model):
     good = models.IntegerField(null=True, blank=True)
     bad = models.IntegerField(null=True, blank=True)
     create_time = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
 
     store = models.ForeignKey(Stores)
     user = models.ForeignKey(Users)
@@ -50,7 +51,7 @@ class Lists(models.Model):
     name = models.CharField(max_length=32)
     description = models.TextField(null=True, blank=True)
     store = models.ManyToManyField(Stores)
-    user = models.OneToOneField(Users)
+    user = models.ForeignKey(Users)
 
 
 class Tags(models.Model):
