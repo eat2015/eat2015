@@ -84,9 +84,11 @@ def checkcookie(request):
 
 
 
+
 def alltag(request):
     tags = Tags.objects.all()
     
+    # TODO: define a get_tag_details function, if needed.
     result = []
     for tag in tags:
         tag_info = dict()
@@ -102,6 +104,11 @@ def get_store_details(store):
     store_info = dict()
     store_info['name'] = store.name
     store_info['description'] = store.description
+    
+    # TODO: store_info['good'] = store.good 
+    # TODO: store_info['bad'] = store.bad
+    # When like, dislike is updated, we need to update store.good, store.bad
+    # in database. With this method, it reduces times of computation. 
     store_info['good'] = len(store.storelike_set.all())
     store_info['bad'] = len(store.storedislike_set.all())
     store_info['address'] = store.location
@@ -111,20 +118,37 @@ def get_store_details(store):
 
 
 def tag_search_store(request):
+<<<<<<< HEAD
     if request.method == 'POST':
 
         taglist = request.POST.get('taglist')
 
         print (len(taglist))
         print (taglist)
+=======
+    
+    if request.method == 'POST':
+        taglist = request.POST.get('taglist')
+>>>>>>> 5a477d026fc5667ca99d8d55fa48ecfd46793363
         
+        # If there is no any tag in search list
+        # return all stores
         stores = Stores.objects
-        for tag_id in taglist:
-            stores = stores.filter(tags=tag_id)
+        if len(taglist) == 0:
+            stores = stores.all()
+        else:
+            taglist = taglist.split(',')
+            for tag_id in taglist:
+                stores = stores.filter(tags=int(tag_id))
         
+        # If there is no any store left, after filtering.
+        # return response '' , which represent ZERO LENGTH data.
+        if (len(stores)) == 0:
+            return HttpResponse('')
+
         stores_details = []
         for store in stores:
             store_info = get_store_details(store)
             stores_details.append(store_info)
-
+        
         return HttpResponse(json.dumps(stores_details))
