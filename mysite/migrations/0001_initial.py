@@ -11,9 +11,29 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
+            name='ListDislike',
+            fields=[
+                ('id', models.AutoField(auto_created=True, verbose_name='ID', serialize=False, primary_key=True)),
+            ],
+        ),
+        migrations.CreateModel(
+            name='ListLike',
+            fields=[
+                ('id', models.AutoField(auto_created=True, verbose_name='ID', serialize=False, primary_key=True)),
+            ],
+        ),
+        migrations.CreateModel(
+            name='Lists',
+            fields=[
+                ('id', models.AutoField(auto_created=True, verbose_name='ID', serialize=False, primary_key=True)),
+                ('name', models.CharField(max_length=32)),
+                ('description', models.TextField(null=True, blank=True)),
+            ],
+        ),
+        migrations.CreateModel(
             name='StoreComment',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, verbose_name='ID', serialize=False)),
+                ('id', models.AutoField(auto_created=True, verbose_name='ID', serialize=False, primary_key=True)),
                 ('description', models.TextField()),
                 ('good', models.IntegerField(null=True, blank=True)),
                 ('bad', models.IntegerField(null=True, blank=True)),
@@ -23,19 +43,19 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='StoreDislike',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, verbose_name='ID', serialize=False)),
+                ('id', models.AutoField(auto_created=True, verbose_name='ID', serialize=False, primary_key=True)),
             ],
         ),
         migrations.CreateModel(
             name='StoreLike',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, verbose_name='ID', serialize=False)),
+                ('id', models.AutoField(auto_created=True, verbose_name='ID', serialize=False, primary_key=True)),
             ],
         ),
         migrations.CreateModel(
             name='Stores',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, verbose_name='ID', serialize=False)),
+                ('id', models.AutoField(auto_created=True, verbose_name='ID', serialize=False, primary_key=True)),
                 ('name', models.CharField(max_length=32)),
                 ('good', models.IntegerField(null=True, blank=True)),
                 ('bad', models.IntegerField(null=True, blank=True)),
@@ -51,16 +71,17 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Tags',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, verbose_name='ID', serialize=False)),
+                ('id', models.AutoField(auto_created=True, verbose_name='ID', serialize=False, primary_key=True)),
                 ('name', models.CharField(max_length=32)),
                 ('description', models.TextField()),
+                ('list', models.ManyToManyField(to='mysite.Lists')),
                 ('store', models.ManyToManyField(to='mysite.Stores')),
             ],
         ),
         migrations.CreateModel(
             name='Users',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, verbose_name='ID', serialize=False)),
+                ('id', models.AutoField(auto_created=True, verbose_name='ID', serialize=False, primary_key=True)),
                 ('username', models.CharField(max_length=32)),
                 ('password', models.CharField(max_length=32)),
                 ('email', models.EmailField(max_length=254)),
@@ -100,5 +121,35 @@ class Migration(migrations.Migration):
             model_name='storecomment',
             name='user',
             field=models.ForeignKey(to='mysite.Users'),
+        ),
+        migrations.AddField(
+            model_name='lists',
+            name='store',
+            field=models.ManyToManyField(to='mysite.Stores'),
+        ),
+        migrations.AddField(
+            model_name='lists',
+            name='user',
+            field=models.OneToOneField(to='mysite.Users'),
+        ),
+        migrations.AddField(
+            model_name='listlike',
+            name='list',
+            field=models.ForeignKey(to='mysite.Lists'),
+        ),
+        migrations.AddField(
+            model_name='listlike',
+            name='user',
+            field=models.OneToOneField(to='mysite.Users'),
+        ),
+        migrations.AddField(
+            model_name='listdislike',
+            name='list',
+            field=models.ForeignKey(to='mysite.Lists'),
+        ),
+        migrations.AddField(
+            model_name='listdislike',
+            name='user',
+            field=models.OneToOneField(to='mysite.Users'),
         ),
     ]
