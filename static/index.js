@@ -412,7 +412,7 @@ $(document).ready(function(){
     	position: 'bottom center'
 	});
 	$.ajax({
-	        	url : "search",
+	        	url : "searchstoreajax",
 	        	type : "GET",
 	        	data : {store:1},
 	        	success : function(data) {
@@ -474,6 +474,7 @@ $(document).ready(function(){
 				        type : "POST",
 				        data : {taglist:$("#searchdropdown").dropdown('get value')},
 				        success : function(data) {
+                            console.log(data);
 				        	$.each(JSON.parse(data), function(key,value) {
 			  					$("#listlist").append(
 			  						'<div class="title" style="padding:0;height:42px">'+
