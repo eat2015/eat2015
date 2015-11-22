@@ -119,7 +119,6 @@ def get_store_details(store):
 
 def tag_search_store(request):
 
-    
     if request.method == 'POST':
         taglist = request.POST.get('taglist')
 
@@ -154,8 +153,10 @@ def get_list_info(food_list):
     food_list_info['bad'] = food_list.dislike
     return food_list_info        
 
+
 def tag_search_list(request):
-    if request.method = 'POST':
+
+    if request.method == 'POST':
         taglist = request.POST.get('taglist')
 
     lists = Lists.objects
@@ -165,7 +166,7 @@ def tag_search_list(request):
         taglist = taglist.split(',')
         for tag_id in taglist:
             lists = lists.filter(tags=int(tag_id))
-    
+   
     if (len(lists)) == 0:
         return HttpResponse('')
 
@@ -175,6 +176,4 @@ def tag_search_list(request):
         list_info = get_list_info(food_list)
         lists_details.append(list_info)
 
-    return HttpResponse(json.dump(lists_details))
-
-
+    return HttpResponse(json.dumps(lists_details))
