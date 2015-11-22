@@ -118,19 +118,11 @@ def get_store_details(store):
 
 
 def tag_search_store(request):
-<<<<<<< HEAD
-    if request.method == 'POST':
 
-        taglist = request.POST.get('taglist')
-
-        print (len(taglist))
-        print (taglist)
-=======
     
     if request.method == 'POST':
         taglist = request.POST.get('taglist')
->>>>>>> 5a477d026fc5667ca99d8d55fa48ecfd46793363
-        
+
         # If there is no any tag in search list
         # return all stores
         stores = Stores.objects
