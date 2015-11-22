@@ -54,8 +54,8 @@ class Lists(models.Model):
     user = models.ForeignKey(Users)
     
     # good or bad 
-    like = models.IntegerField()
-    dislike = models.IntegerField()
+    like = models.IntegerField(null=True, blank=True)
+    dislike = models.IntegerField(null=True, blank=True)
 
     def __str__(self):
         return self.name
