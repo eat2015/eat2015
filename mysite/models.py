@@ -52,7 +52,14 @@ class Lists(models.Model):
     description = models.TextField(null=True, blank=True)
     store = models.ManyToManyField(Stores)
     user = models.ForeignKey(Users)
+    
+    # good or bad 
+    like = models.IntegerField()
+    dislike = models.IntegerField()
 
+    def __str__(self):
+        return self.name
+    
 
 class Tags(models.Model):
     name = models.CharField(max_length=32)
@@ -75,6 +82,15 @@ class StoreDislike(models.Model):
     user = models.OneToOneField(Users)
 
 
+class StoreCommentLike(models.Model):
+    storecomment = models.ForeignKey(StoreComment)
+    user = models.OneToOneField(Users)
+
+class StoreCommentDislike(models.Model):
+    storecomment = models.ForeignKey(StoreComment)
+    user = models.OneToOneField(Users)
+
+
 class ListLike(models.Model):
     list = models.ForeignKey(Lists)
     user = models.OneToOneField(Users)
@@ -83,3 +99,6 @@ class ListLike(models.Model):
 class ListDislike(models.Model):
     list = models.ForeignKey(Lists)
     user = models.OneToOneField(Users)
+
+
+
