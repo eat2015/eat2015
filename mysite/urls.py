@@ -28,6 +28,7 @@ urlpatterns = [
     url(r'^search2$',search2),
     url(r'^alltag$', alltag),
     url(r'^tagsearchstore$', tag_search_store),
+    url(r'^tagsearchlist$', tag_search_list), 
     url(r'^managelist$', managelist),
-    ]
+]
 
