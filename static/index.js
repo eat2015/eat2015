@@ -412,7 +412,7 @@ $(document).ready(function(){
     	position: 'bottom center'
 	});
 	$.ajax({
-	        	url : "searchstoreajax",
+	        	url : "search",
 	        	type : "GET",
 	        	data : {store:1},
 	        	success : function(data) {
@@ -469,7 +469,39 @@ $(document).ready(function(){
 								console.log(xhr.status + ": " + xhr.responseText);
 							} 
 						});
-					},
+					$.ajax({
+				        url : "tagsearchlist",
+				        type : "POST",
+				        data : {taglist:$("#searchdropdown").dropdown('get value')},
+				        success : function(data) {
+				        	$.each(JSON.parse(data), function(key,value) {
+			  					$("#listlist").append(
+			  						'<div class="title" style="padding:0;height:42px">'+
+									  	'<div style="width:10%;text-align:center;line-height:42px;float:left">'+
+									    	(key+1)+
+									    '</div>'+
+									    '<div style="width:50%;text-align:center;line-height:42px;float:left">'+
+									    	value.name+
+									    '</div>'+
+									    '<div class="bad" style="width:20%;text-align:center;line-height:42px;float:right">'+
+									   		value.bad+
+									   	'</div>'+
+									   	'<div class="good" style="width:20%;text-align:center;line-height:42px;float:right">'+
+									   		value.good+
+									   	'</div>'+
+									'</div>'+
+									'<div class="content">'+
+									    '<p>'+value.description+'</p>'+
+									    '<p style="text-align:right">.....<a href="#">清單完整資訊</a></p>'+
+									'</div>'
+			  					);
+							});
+						},
+						error : function(xhr,errmsg,err) {
+								console.log(xhr.status + ": " + xhr.responseText);
+							} 
+						});
+				},
 				error : function(xhr,errmsg,err) {
 					console.log(xhr.status + ": " + xhr.responseText);
 				} 
