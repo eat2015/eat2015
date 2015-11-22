@@ -144,3 +144,37 @@ def tag_search_store(request):
             stores_details.append(store_info)
         
         return HttpResponse(json.dumps(stores_details))
+
+
+def get_list_info(food_list):
+    food_list_info = dict()
+    food_list_info['name'] = food_list.name
+    food_list_info['description'] = food_list.description
+    food_list_info['good'] = food_list.like
+    food_list_info['bad'] = food_list.dislike
+    return food_list_info        
+
+def tag_search_list(request):
+    if request.method = 'POST':
+        taglist = request.POST.get('taglist')
+
+    lists = Lists.objects
+    if len(taglist) == 0:
+        lists = lists.all()
+    else:
+        taglist = taglist.split(',')
+        for tag_id in taglist:
+            lists = lists.filter(tags=int(tag_id))
+    
+    if (len(lists)) == 0:
+        return HttpResponse('')
+
+    
+    lists_details = []
+    for food_list in lists:
+        list_info = get_list_info(food_list)
+        lists_details.append(list_info)
+
+    return HttpResponse(json.dump(lists_details))
+
+
