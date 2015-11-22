@@ -8,6 +8,11 @@ from mysite.models import *
 from django.template.context_processors import csrf
 import json
 
+def managelist(request):
+	c = {}
+	c.update(csrf(request))
+	return render_to_response("managelist.html", c)
+
 def search2(request):
 	c = {}
 	c.update(csrf(request))
@@ -106,15 +111,12 @@ def get_store_details(store):
 
 
 def tag_search_store(request):
-    username = request.COOKIES['account']
-    user = Users.objects.get(username=username)
-    if user:
-        print ("User id: " + str(user.id))
-
     if request.method == 'POST':
-        taglist = request.POST.get('tag')
+
+        taglist = request.POST.get('taglist')
+
+        print (len(taglist))
         print (taglist)
-        taglist = [2]
         
         stores = Stores.objects
         for tag_id in taglist:
