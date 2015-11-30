@@ -30,5 +30,6 @@ urlpatterns = [
     url(r'^tagsearchstore$', tag_search_store),
     url(r'^tagsearchlist$', tag_search_list), 
     url(r'^managelist$', managelist),
+    url(r'^searchstoreajax$', search_store_ajax),
 ]
 

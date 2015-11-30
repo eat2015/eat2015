@@ -414,7 +414,7 @@ $(document).ready(function(){
 	$.ajax({
 	        	url : "searchstoreajax",
 	        	type : "GET",
-	        	data : {store:1},
+	        	data : {store},
 	        	success : function(data) {
 	    			$("#mainscreen").html(data);
 	       		},

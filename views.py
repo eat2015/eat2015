@@ -177,3 +177,16 @@ def tag_search_list(request):
         lists_details.append(list_info)
 
     return HttpResponse(json.dumps(lists_details))
+
+def search_store_ajax(request):
+    if request.method == 'GET':
+        storeID = request.GET.get('store')
+    stores = Stores.objects
+    stores = stores.filter(id=int(storeID))
+    
+    stores_details = []
+    for store in stores:
+        store_info = get_store_details(store)
+        stores_details.append(store_info)
+        
+    return HttpResponse(json.dumps(stores_details))
