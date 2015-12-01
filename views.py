@@ -193,12 +193,12 @@ def search_store(request):
     if request.method == 'GET':
         store_id = request.GET.get('store')
     
-    raw_store = Stores.objects.get(id=int(store_id))
-    store = get_store_details(raw_store)
-    store['has_fans_page'] = True if store['fans_page'] else False
-    comments = raw_store.storecomment_set.all()
-    
-    return render_to_response('searchstore.html', locals())
+        raw_store = Stores.objects.get(id=int(store_id))
+        store = get_store_details(raw_store)
+        store['has_fans_page'] = True if store['fans_page'] else False
+        comments = raw_store.storecomment_set.all()
+        
+        return render_to_response('searchstore.html', locals())
 
 
 
@@ -206,14 +206,14 @@ def search_list_ajax(request):
     if request.method == 'GET':
         list_id = request.GET.get('list')
     
-    raw_list = Lists.objects.get(id=int(list_id))
-    
-    list = get_list_info(raw_list)
-    listtags = Tags.objects.filter(list=int(list_id))
-    comments = raw_list.listcomment_set.all()
-    stores = Stores.objects.filter(lists=int(list_id))
-    
-    return render_to_response('searchlistvariable.html', locals())
+        raw_list = Lists.objects.get(id=int(list_id))
+        
+        list = get_list_info(raw_list)
+        listtags = Tags.objects.filter(list=int(list_id))
+        comments = raw_list.listcomment_set.all()
+        stores = Stores.objects.filter(lists=int(list_id))
+        
+        return render_to_response('searchlistvariable.html', locals())
 
 
 def create_food_list(request):
