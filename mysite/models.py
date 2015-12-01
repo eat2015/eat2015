@@ -60,6 +60,19 @@ class Lists(models.Model):
     def __str__(self):
         return self.name
 
+
+class ListComment(models.Model):
+    description = models.TextField(null=True, blank=True)
+    create_time = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    list = models.ForeignKey(Lists)
+    user = models.ForeignKey(Users)
+
+    def __str__(self):
+        return self.description
+
+
 class ListsStoreComment(models.Model):
     list = models.ForeignKey(Lists)
     store = models.ForeignKey(Stores)
