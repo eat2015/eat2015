@@ -102,6 +102,7 @@ def alltag(request):
 
 def get_store_details(store):
     store_info = dict()
+    store_info['id'] = store.id
     store_info['name'] = store.name
     store_info['description'] = store.description
     
@@ -180,24 +181,17 @@ def tag_search_list(request):
 
 def search_store_ajax(request):
     if request.method == 'GET':
-        storeID = request.GET.get('store')
-    stores = Stores.objects
-    stores = stores.filter(id=int(storeID))
-  
-    stores_details = []
-    for store in stores:
-        store_info = get_store_details(store)
-        stores_details.append(store_info)
+        store_id = request.GET.get('store')
     
- 
-    store = stores_details[0]
+    raw_store = Stores.objects.get(id=int(store_id))
+    store = get_store_details(raw_store)
     
     if store['fans_page'] != None:
         store['has_fans_page'] = True
     else:
         store['has_fans_page'] = False
     
-    comments = stores[0].storecomment_set.all()
+    comments = raw_store.storecomment_set.all()
     
     return render_to_response('searchstorevariable.html', locals())
 
