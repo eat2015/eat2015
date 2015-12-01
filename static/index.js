@@ -196,9 +196,9 @@ $(document).ready(function(){
 					'<img src="static/aboutusbutton.png"></img>'+
 					'<div style="margin-top:5px">關於我們</div>'+
 				'</div>'+
-			    '<div id="listpagebutton" data-content="管理你的店家清單，清單內容可以是最常吃的幾個店家、覺得好吃的幾個店家或者是想要推薦別人來吃的店家、都可以附上自己對店家的描述" class="center aligned column">'+
+			    '<div id="createlisttemplatebutton" data-content="管理你的店家清單，清單內容可以是最常吃的幾個店家、覺得好吃的幾個店家或者是想要推薦別人來吃的店家、都可以附上自己對店家的描述" class="center aligned column">'+
 			        '<img src="static/list.png"></img>'+
-			        '<div style="margin-top:5px">管理清單</div>'+
+			        '<div style="margin-top:5px">新增清單</div>'+
 			    '</div>'+
 				'<div id="logoutbutton" class="center aligned column">'+
 		        	'<img src="static/logout.png"></img>'+
@@ -261,14 +261,6 @@ $(document).ready(function(){
 				'<div id="aboutusbutton" class="center aligned column">'+
 					'<img src="static/aboutusbutton.png"></img>'+
 					'<div style="margin-top:5px">關於我們</div>'+
-				'</div>'+
-				'<div id="listtemplatebutton" class="center aligned column">'+
-					'<img src="static/template.png"></img>'+
-					'<div style="margin-top:5px">清單前端</div>'+
-				'</div>'+
-				'<div id="createlisttemplatebutton" class="center aligned column">'+
-					'<img src="static/template.png"></img>'+
-					'<div style="margin-top:5px">建立清單</div>'+
 				'</div>');
 	        $("#searchpagebutton").popup({
 				exclusive:true,
