@@ -236,3 +236,6 @@
 #menulogo img{
     max-height: 35px;
 }
+#createlisttemplatebutton:hover{
+    cursor: pointer;
+}
