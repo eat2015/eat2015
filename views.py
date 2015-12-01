@@ -154,7 +154,7 @@ def tag_search_store(request):
 def get_list_info(food_list):
     food_list_info = dict()
     food_list_info['id'] = food_list.id
-    food_list_info['user'] = food_list.user
+    food_list_info['user'] = food_list.user.username
     food_list_info['name'] = food_list.name
     food_list_info['description'] = food_list.description
     food_list_info['good'] = food_list.like
@@ -166,6 +166,7 @@ def tag_search_list(request):
 
     if request.method == 'POST':
         taglist = request.POST.get('taglist')
+    
 
     lists = Lists.objects
     if len(taglist) == 0:
@@ -174,7 +175,7 @@ def tag_search_list(request):
         taglist = taglist.split(',')
         for tag_id in taglist:
             lists = lists.filter(tags=int(tag_id))
-   
+    
     if (len(lists)) == 0:
         return HttpResponse('')
 
@@ -184,7 +185,9 @@ def tag_search_list(request):
         list_info = get_list_info(food_list)
         lists_details.append(list_info)
 
+    print(lists_details)
     return HttpResponse(json.dumps(lists_details))
+
 
 def search_store(request):
     if request.method == 'GET':
@@ -197,14 +200,6 @@ def search_store(request):
     
     return render_to_response('searchstore.html', locals())
 
-
-def create_food_list(request):
-    if request.method == 'POST':
-        print ("1")
-        print (request.POST)
-        print ("2")
-        print (json.loads(dict(request.POST)['json'][0])['listname'])
-        print (json.loads(dict(request.POST)['json'][0])['customlist'])
 
 
 def search_list_ajax(request):
