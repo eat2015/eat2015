@@ -1,8 +1,49 @@
 {% load staticfiles %}
+
 <html>
 <head>
-	<link rel="stylesheet" type="text/css" href="{% static 'main.css' %}"/>
+<title>吃~吃~~吃首頁</title><style type="text/css">
+body{font-size:20pt;
+     font-color:black;
+     font-family:標楷體}
+</style>
 </head>
 <body>
+
+<h6>
+<strong>
+歡迎來到~~大家的美食地圖~~
+</strong>
+</h6>
+
+<img src="{% static 'logo.gif' %}"
+ width="640" height="360">
+<!--網頁的logo動態圖--><br>
+
+<div class="ui grid">
+  <div class="two column row">
+<!--<a href=連結1>-->
+<img src="{% static '特色餐點.jpg' %}"
+ width="450" height="301">
+  
+<!--<a href=連結2>正餐類的-->
+<img src="{% static '正餐.jpg' %}"
+ width="405" height="300">
+</div>
+</div>
+
+<div class="ui grid">
+<div class="two column row">
+<!--<a href=連結3>當地小吃1-->
+<>
+<img src="{% static '小吃1.jpg' %}"
+ width="360" height="300">
+
+<!--<a href=連結4>當地小吃2-->
+<img src="{% static '小吃2.jpg' %}"
+ width="450" height="300">
+</div>
+</div>
+
 </body>
 </html>

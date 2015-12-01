@@ -107,6 +107,55 @@ $(document).ready(function(){
 				} 
 			});
 		});
+		$("#listtemplatebutton").click(function(){
+			$("#mainscreen").html('<div class="ui active centered large inline loader" style="margin-top:200px;"></div>');
+			$.ajax({
+	        	url : "searchlist",
+	        	type : "GET",
+	        	data : {},
+	        	success : function(data) {
+	    			$("#mainscreen").html(data);
+	       		},
+	        	error : function(xhr,errmsg,err) {
+	            	console.log(xhr.status + ": " + xhr.responseText);
+	        	}
+	    	});
+		});
+		$("#createlisttemplatebutton").click(function(){
+			$("#mainscreen").html('<div class="ui active centered large inline loader" style="margin-top:200px;"></div>');
+			$.ajax({
+	        	url : "createlist",
+	        	type : "GET",
+	        	data : {},
+	        	success : function(data) {
+	    			$("#mainscreen").html(data);
+	    			$("#createlisttagmenu1").html($("#searchdropdownmenu").html());
+	    			$("#createlisttagmenu2").html($("#searchdropdownmenu").html());
+	    			$('.item').popup({
+						exclusive:true,
+				    	hoverable: true, 
+				    	position: 'bottom center'
+					});
+	       		},
+	        	error : function(xhr,errmsg,err) {
+	            	console.log(xhr.status + ": " + xhr.responseText);
+	        	}
+	    	});
+		});
+		$("#menulogo img").click(function(){
+			$("#mainscreen").html('<div class="ui active centered large inline loader" style="margin-top:200px;"></div>');
+			$.ajax({
+	        	url : "main",
+	        	type : "GET",
+	        	data : {},
+	        	success : function(data) {
+	    			$("#mainscreen").html(data);
+	       		},
+	        	error : function(xhr,errmsg,err) {
+	            	console.log(xhr.status + ": " + xhr.responseText);
+	        	}
+	    	});
+		});
 		$("#smallaboutusbutton").click(function(){
 			$("#mainscreen").html('<div class="ui active centered inline loader" style="margin-top:200px;"></div>');
 			$.ajax({
@@ -212,6 +261,14 @@ $(document).ready(function(){
 				'<div id="aboutusbutton" class="center aligned column">'+
 					'<img src="static/aboutusbutton.png"></img>'+
 					'<div style="margin-top:5px">關於我們</div>'+
+				'</div>'+
+				'<div id="listtemplatebutton" class="center aligned column">'+
+					'<img src="static/template.png"></img>'+
+					'<div style="margin-top:5px">清單前端</div>'+
+				'</div>'+
+				'<div id="createlisttemplatebutton" class="center aligned column">'+
+					'<img src="static/template.png"></img>'+
+					'<div style="margin-top:5px">建立清單</div>'+
 				'</div>');
 	        $("#searchpagebutton").popup({
 				exclusive:true,
@@ -412,9 +469,9 @@ $(document).ready(function(){
     	position: 'bottom center'
 	});
 	$.ajax({
-	        	url : "searchstoreajax",
+	        	url : "searchlist",
 	        	type : "GET",
-	        	data : {store},
+	        	data : {store:1},
 	        	success : function(data) {
 	    			$("#mainscreen").html(data);
 	       		},
@@ -474,7 +531,6 @@ $(document).ready(function(){
 				        type : "POST",
 				        data : {taglist:$("#searchdropdown").dropdown('get value')},
 				        success : function(data) {
-                            console.log(data);
 				        	$.each(JSON.parse(data), function(key,value) {
 			  					$("#listlist").append(
 			  						'<div class="title" style="padding:0;height:42px">'+
