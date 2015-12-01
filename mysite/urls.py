@@ -32,5 +32,6 @@ urlpatterns = [
     url(r'^searchstore$', search_store),
     url(r'^createlist$', createlist),
     url(r'^searchlist$', searchlist),
+    url(r'^createlistsubmit$', create_food_list),
 ]
 
