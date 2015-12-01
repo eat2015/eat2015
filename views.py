@@ -195,3 +195,7 @@ def search_store(request):
     
     return render_to_response('searchstore.html', locals())
 
+
+def create_food_list(request):
+    if request.method == 'POST':
+        print (request.POST)
