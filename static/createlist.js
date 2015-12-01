@@ -164,7 +164,7 @@ $('.ui.dropdown').dropdown();
 							'</div>'+
 							'<div class="content">'+
 								'<p class="transition hidden">'+value.description+'</p>'+
-								'<p><a href="#">店家完整資訊</a></p>'+
+								'<p><a target="_blank" href="searchstore?store='+value.id+'">店家完整資訊</a></p>'+
 							'</div>'+
 						'</div>'
 					);

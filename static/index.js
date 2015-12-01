@@ -468,17 +468,6 @@ $(document).ready(function(){
     	hoverable: true, 
     	position: 'bottom center'
 	});
-	$.ajax({
-	        	url : "searchlist",
-	        	type : "GET",
-	        	data : {store:1},
-	        	success : function(data) {
-	    			$("#mainscreen").html(data);
-	       		},
-	        	error : function(xhr,errmsg,err) {
-	            	console.log(xhr.status + ": " + xhr.responseText);
-	        	}
-	    	});
 	checkwindow();
 	$("#searchbutton").click(function(){
 			$("#mainscreen").html('<div class="ui active centered large inline loader" style="margin-top:200px;"></div>');
@@ -517,7 +506,7 @@ $(document).ready(function(){
 									'</div>'+
 									'<div class="content">'+
 									    '<p>'+value.description+'</p>'+
-									    '<p style="text-align:right">.....<a href="#">店家完整資訊</a></p>'+
+									    '<p style="text-align:right">.....<a target="_blank" href="searchstore?store='+value.id+'">店家完整資訊</a></p>'+
 									'</div>'
 			  					);
 							});
