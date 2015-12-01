@@ -17,6 +17,9 @@ class ListsAdmin(admin.ModelAdmin):
     list_display = ( 'user','name','description')
     search_fields = ('user',)
 
+class ListsStoreCommentAdmin(admin.ModelAdmin):
+    list_display = ( 'dish','description')
+    search_fields = ('list',)
 
 # Register your models here.
 admin.site.register(Users)
@@ -28,3 +31,4 @@ admin.site.register(StoreLike)
 admin.site.register(StoreDislike)
 admin.site.register(ListLike)
 admin.site.register(ListDislike)
+admin.site.register(ListsStoreComment, ListsStoreCommentAdmin)

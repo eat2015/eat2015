@@ -59,7 +59,13 @@ class Lists(models.Model):
 
     def __str__(self):
         return self.name
-    
+
+class ListsStoreComment(models.Model):
+    list = models.ForeignKey(Lists)
+    store = models.ForeignKey(Stores)
+    dish = models.TextField(null=True, blank=True)
+    description = models.TextField(null=True, blank=True)
+
 
 class Tags(models.Model):
     name = models.CharField(max_length=32)
