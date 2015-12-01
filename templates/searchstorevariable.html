@@ -9,9 +9,11 @@
 		<div class="column">
 			<div class="ui card" style="margin:auto;width:90%">
 			  <div class="content">
-			  	{% if store.has_fans_page %}<a href="{{ store.fanspage }}" target="_blank"> <i class="facebook icon" style="float:right"></i> </a>{% else %} {% endif %}
+                {% if store.has_fans_page %} 
+                <a href="{{ store.fans_page }}" target="_blank"> <i class="facebook icon" style="float:right"></i> </a>
+                {% endif %}
 			    <div class="header" style="float:left;width:51%">{{ store.name }}</div>
-			    <div class="meta" style="float:left;width:51%">{{ store.location }}</div>
+			    <div class="meta" style="float:left;width:51%">{{ store.address }}</div>
 			    <div class="description">
 			      {{ store.description }}
 			    </div>
@@ -39,9 +41,9 @@
 						<div class="ui comments">
 						  <div class="comment">
 						    <div class="content">
-						      <a class="author">{{ comment.membername }}</a>
+						      <a class="author">{{ comment.user }}</a>
 						      <div class="metadata">
-						        <div class="date">{{ comment.fromcreatetime }}</div>
+						        <div class="date">{{ comment.create_time }}</div>
 						      </div>
 						      <div class="text" style="margin: 0.5em 0 0.5em;">
 						        {{ comment.description }}
