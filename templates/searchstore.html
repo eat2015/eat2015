@@ -1,288 +1,215 @@
+<!DOCTYPE html>
+
 {% load staticfiles %}
 <html>
 <head>
-	<link rel="stylesheet" type="text/css" href="{% static 'searchstore.css' %}"/>
-	<script src="{% static 'searchstore.js' %}"></script>
+	<meta charset="utf8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>吃~吃~吃~</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'index.css' %}"/>
+	<script src="{% static 'jquery-2.1.4.min.js' %}"></script>
+  <script src="{% static 'semantic/dist/semantic.min.js' %}"></script>
+  <link rel="stylesheet" type="text/css" class="ui" href="{% static 'semantic/dist/semantic.min.css' %}">
+	<link rel="stylesheet" href="{% static 'bootstrap.min.css' %}">
+	<script src="{% static 'bootstrap.min.js' %}"></script>
+  <script src="{% static 'dropdown.min.js' %}"></script>
+	<script src="{% static 'js.cookie.js' %}"></script>
+  <script src="{% static 'index.js' %}"></script>
 </head>
-<body>
-	<div class="ui equal width stackable grid">
-		<div class="column">
-			<div class="ui card" style="margin:auto;width:90%">
-			  <div class="content">
-			  	<i class="facebook icon" style="float:right"></i>
-			    <div class="header" style="float:left;width:51%">南園街鍋貼</div>
-			    <div class="meta" style="float:left;width:51%">台南</div>
-			    <div class="description">
-			      <p>Cute dogs come in a variety of shapes and sizes. Some cute dogs are cute for their adorable faces, others for their tiny stature, and even others for their massive size.</p>
-			      <p>Many people also have their own barometers for what makes a cute dog.</p>
-			    </div>
-			  </div>
-			  <div class="extra content">
-			  	<div class="likebutton">
-				    <span class="left floated like">
-				      &#10084;
-				      300 喜歡
-				    </span>
-				</div>
-				<div class="dislikebutton">
-				    <span class="right floated star">
-				      &#128148;
-				      5 不喜歡
-				    </span>
-				</div>
-			  </div>
-			</div>
+<body style="background-color:#F0FFFF;height:initial">
+  <div class="ui one column grid" style="margin-top:74px;">
+      <div class="column">
+        <div id="mainscreen">
+            <html>
+            <head>
+                <link rel="stylesheet" type="text/css" href="{% static 'searchstore.css' %}"/>
+                <script src="{% static 'searchstore.js' %}"></script>
+            </head>
+            <body>
+                <div class="ui equal width stackable grid">
+                    <div class="column">
+                        <div class="ui card" style="margin:auto;width:90%">
+                          <div class="content">
+                            {% if store.has_fans_page %} 
+                            <a href="{{ store.fans_page }}" target="_blank"> <i class="facebook icon" style="float:right"></i> </a>
+                            {% endif %}
+                            <div class="header" style="float:left;width:51%">{{ store.name }}</div>
+                            <div class="meta" style="float:left;width:51%">{{ store.address }}</div>
+                            <div class="description">
+                              {{ store.description }}
+                            </div>
+                          </div>
+                          <div class="extra content">
+                            <div class="likebutton">
+                                <span class="left floated like">
+                                  &#10084;
+                                  {{ store.good }} 喜歡
+                                </span>
+                            </div>
+                            <div class="dislikebutton">
+                                <span class="right floated star">
+                                  &#128148;
+                                  {{ store.bad }} 不喜歡
+                                </span>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                    <div class="column">
+                        {% for comment in comments %}
+                            <div class="ui card" style="width:95%">
+                              <div class="content">
+                                    <div class="ui comments">
+                                      <div class="comment">
+                                        <div class="content">
+                                          <a class="author">{{ comment.user }}</a>
+                                          <div class="metadata">
+                                            <div class="date">{{ comment.create_time }}</div>
+                                          </div>
+                                          <div class="text" style="margin: 0.5em 0 0.5em;">
+                                            {{ comment.description }}
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                </div>
+                                <div class="extra content">
+                                    <div class="dislikebutton">
+                                        <span class="right floated star" style="width:80px;text-align:center">
+                                          &#128148;
+                                          {{ comment.bad }} 不喜歡
+                                        </span>
+                                    </div>
+                                    <div class="likebutton">
+                                        <span class="right floated like">
+                                          &#10084;
+                                          {{ comment.good }} 喜歡
+                                        </span>
+                                    </div>
+                              </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </body>
+            </html>        
+            </div>
+      </div>
+    </div>
+	<div id="menu">
+    <div class="ui grid" style="margin-top:3px;height:74px">
+      <div class="row" id="topmenu">
+  			<div id="menulogo" class="center aligned four wide column">吃~吃~吃~~~</div>
+        <div id="menucontroller" class="center aligned four wide column">
+          <div class="ui icon top left pointing dropdown" style="font-size:20px;text-align:center;display:block;margin-top:4px">
+            <i class="sidebar icon" style="line-height:32px"></i>
+            <div class="menu" id="smallscalemenu">
+            </div>
+          </div>
+        </div>
+  			<div class="nine wide column" id="searchbar">
+          <div style="position:fixed;width:inherit;z-index:20">
+            <div class="ui fluid multiple search selection dropdown" id="searchdropdown" data-content="滑鼠移到下方的標籤項目將會顯示該標籤的敘述">
+              <input type="hidden" name="tag">
+              <div class="default text">請輸入你想要搜尋的標籤</div>
+              <div class="menu" id="searchdropdownmenu">
+              </div>
+            </div>
+            <img id="searchbutton" onclick="" src="{% static 'search.png' %}" style="margin-top:4px"></img>
+          </div>
+  			</div>
+        <div class="center aligned three wide column" id="loginmenu" style="line-height:35px;margin-top:4px">
+          
+        </div>
+      </div>
+		<div class="seven column row" id="downmenu" style="margin-top:0px;visibility:hidden">
 		</div>
-		<div class="column">
-			<div class="ui card" style="width:95%">
-			  <div class="content">
-					<div class="ui comments">
-					  <div class="comment">
-					    <div class="content">
-					      <a class="author">閃電俠</a>
-					      <div class="metadata">
-					        <div class="date">2 days ago</div>
-					      </div>
-					      <div class="text" style="margin: 0.5em 0 0.5em;">
-					        我好快
-					      </div>
-					    </div>
-					  </div>
-					</div>
-				</div>
-				<div class="extra content">
-					<div class="dislikebutton">
-					    <span class="right floated star" style="width:80px;text-align:center">
-					      &#128148;
-					      不喜歡
-					    </span>
-					</div>
-				  	<div class="likebutton">
-					    <span class="right floated like">
-					      &#10084;
-					      喜歡
-					    </span>
-					</div>
-			  </div>
-			</div>
-			<div class="ui card" style="width:95%">
-			  <div class="content">
-					<div class="ui comments">
-					  <div class="comment">
-					    <div class="content">
-					      <a class="author">Stevie Feliciano</a>
-					      <div class="metadata">
-					        <div class="date">2 days ago</div>
-					      </div>
-					      <div class="text" style="margin: 0.5em 0 0.5em;">
-					        Hey guys, I hope this example comment is helping you read this documentation.
-					      </div>
-					    </div>
-					  </div>
-					</div>
-				</div>
-				<div class="extra content">
-					<div class="dislikebutton">
-					    <span class="right floated star" style="width:80px;text-align:center">
-					      &#128148;
-					      不喜歡
-					    </span>
-					</div>
-				  	<div class="likebutton">
-					    <span class="right floated like">
-					      &#10084;
-					      喜歡
-					    </span>
-					</div>
-			  </div>
-			</div>
-			<div class="ui card" style="width:95%">
-			  <div class="content">
-					<div class="ui comments">
-					  <div class="comment">
-					    <div class="content">
-					      <a class="author">Stevie Feliciano</a>
-					      <div class="metadata">
-					        <div class="date">2 days ago</div>
-					      </div>
-					      <div class="text" style="margin: 0.5em 0 0.5em;">
-					        Hey guys, I hope this example comment is helping you read this documentation.
-					      </div>
-					    </div>
-					  </div>
-					</div>
-				</div>
-				<div class="extra content">
-					<div class="dislikebutton">
-					    <span class="right floated star" style="width:80px;text-align:center">
-					      &#128148;
-					      不喜歡
-					    </span>
-					</div>
-				  	<div class="likebutton">
-					    <span class="right floated like">
-					      &#10084;
-					      喜歡
-					    </span>
-					</div>
-			  </div>
-			</div>
-			<div class="ui card" style="width:95%">
-			  <div class="content">
-					<div class="ui comments">
-					  <div class="comment">
-					    <div class="content">
-					      <a class="author">Stevie Feliciano</a>
-					      <div class="metadata">
-					        <div class="date">2 days ago</div>
-					      </div>
-					      <div class="text" style="margin: 0.5em 0 0.5em;">
-					        Hey guys, I hope this example comment is helping you read this documentation.
-					      </div>
-					    </div>
-					  </div>
-					</div>
-				</div>
-				<div class="extra content">
-					<div class="dislikebutton">
-					    <span class="right floated star" style="width:80px;text-align:center">
-					      &#128148;
-					      不喜歡
-					    </span>
-					</div>
-				  	<div class="likebutton">
-					    <span class="right floated like">
-					      &#10084;
-					      喜歡
-					    </span>
-					</div>
-			  </div>
-			</div>
-			<div class="ui card" style="width:95%">
-			  <div class="content">
-					<div class="ui comments">
-					  <div class="comment">
-					    <div class="content">
-					      <a class="author">Stevie Feliciano</a>
-					      <div class="metadata">
-					        <div class="date">2 days ago</div>
-					      </div>
-					      <div class="text" style="margin: 0.5em 0 0.5em;">
-					        Hey guys, I hope this example comment is helping you read this documentation.
-					      </div>
-					    </div>
-					  </div>
-					</div>
-				</div>
-				<div class="extra content">
-					<div class="dislikebutton">
-					    <span class="right floated star" style="width:80px;text-align:center">
-					      &#128148;
-					      不喜歡
-					    </span>
-					</div>
-				  	<div class="likebutton">
-					    <span class="right floated like">
-					      &#10084;
-					      喜歡
-					    </span>
-					</div>
-			  </div>
-			</div>
-			<div class="ui card" style="width:95%">
-			  <div class="content">
-					<div class="ui comments">
-					  <div class="comment">
-					    <div class="content">
-					      <a class="author">Stevie Feliciano</a>
-					      <div class="metadata">
-					        <div class="date">2 days ago</div>
-					      </div>
-					      <div class="text" style="margin: 0.5em 0 0.5em;">
-					        Hey guys, I hope this example comment is helping you read this documentation.
-					      </div>
-					    </div>
-					  </div>
-					</div>
-				</div>
-				<div class="extra content">
-					<div class="dislikebutton">
-					    <span class="right floated star" style="width:80px;text-align:center">
-					      &#128148;
-					      不喜歡
-					    </span>
-					</div>
-				  	<div class="likebutton">
-					    <span class="right floated like">
-					      &#10084;
-					      喜歡
-					    </span>
-					</div>
-			  </div>
-			</div>
-			<div class="ui card" style="width:95%">
-			  <div class="content">
-					<div class="ui comments">
-					  <div class="comment">
-					    <div class="content">
-					      <a class="author">Stevie Feliciano</a>
-					      <div class="metadata">
-					        <div class="date">2 days ago</div>
-					      </div>
-					      <div class="text" style="margin: 0.5em 0 0.5em;">
-					        Hey guys, I hope this example comment is helping you read this documentation.
-					      </div>
-					    </div>
-					  </div>
-					</div>
-				</div>
-				<div class="extra content">
-					<div class="dislikebutton">
-					    <span class="right floated star" style="width:80px;text-align:center">
-					      &#128148;
-					      不喜歡
-					    </span>
-					</div>
-				  	<div class="likebutton">
-					    <span class="right floated like">
-					      &#10084;
-					      喜歡
-					    </span>
-					</div>
-			  </div>
-			</div>
-			<div class="ui card" style="width:95%">
-			  <div class="content">
-					<div class="ui comments">
-					  <div class="comment">
-					    <div class="content">
-					      <a class="author">Stevie Feliciano</a>
-					      <div class="metadata">
-					        <div class="date">2 days ago</div>
-					      </div>
-					      <div class="text" style="margin: 0.5em 0 0.5em;">
-					        Hey guys, I hope this example comment is helping you read this documentation.
-					      </div>
-					    </div>
-					  </div>
-					</div>
-				</div>
-				<div class="extra content">
-					<div class="dislikebutton">
-					    <span class="right floated star" style="width:80px;text-align:center">
-					      &#128148;
-					      不喜歡
-					    </span>
-					</div>
-				  	<div class="likebutton">
-					    <span class="right floated like">
-					      &#10084;
-					      喜歡
-					    </span>
-					</div>
-			  </div>
-			</div>
-		</div>
+    </div>
 	</div>
+	<div class="modal fade" id="myloginmodal" role="dialog">
+	    <div class="modal-dialog modal-sm" id="loginmodal">
+   		   	<div class="modal-content">
+        	<div class="modal-header" style="background-color:#0B83AA;font-size: 24px;font-weight: bold;color:white;font-family: Microsoft JhengHei;">
+          		<button type="button" class="close" data-dismiss="modal">&times;</button>
+          		<h4 class="modal-title" style="text-align:center;font-size: 30px;">登入</h4>
+        	</div>
+        	<div class="modal-body" id="loginbody">
+         		<form role="form">{% csrf_token %}
+            		<div class="form-group">
+            	  		<label for="usrname"><span class="glyphicon glyphicon-user"></span> 帳號</label>
+            	  		<input type="text" class="form-control" id="loginusrname" placeholder="請輸入帳號">
+            		</div>
+            		<div class="form-group">
+            	  		<label for="psw"><span class="glyphicon glyphicon-eye-open"></span> 密碼</label>
+            	  		<input type="text" class="form-control" id="loginpsw" placeholder="請輸入密碼">
+            		</div>
+            		<div class="checkbox">
+              			<label><input type="checkbox" value="" checked>請記得我</label>
+            		</div>
+                <br>
+              		<div class="btn btn-success btn-block" id="loginsubmitbutton" style="width:150px;margin:auto"><span class="glyphicon glyphicon-off"></span> 登入</div>
+          		</form>
+        	</div>
+      		</div>   
+    	</div>
+  	</div>
+  	<div class="modal fade" id="myregistrationmodel" role="dialog">
+	    <div class="modal-dialog"  id="registrationmodal">
+   		   	<div class="modal-content">
+        	<div class="modal-header" style="background-color:#0B83AA;font-size: 24px;font-weight: bold;color:white;font-family: Microsoft JhengHei;">
+          		<button type="button" class="close" data-dismiss="modal">&times;</button>
+          		<h4 class="modal-title" style="text-align:center;font-size: 30px;">註冊</h4>
+        	</div>
+        	<div class="modal-body" id="registrationbody">
+         		<form role="form">
+            		<div class="form-group">
+            	  		<label for="usrname"><span class="glyphicon glyphicon-user"></span> 帳號</label>
+            	  		<input type="text" class="form-control" id="registerusrname" placeholder="請輸入帳號">
+            		</div>
+            		<div class="form-group">
+            	  		<label for="psw"><span class="glyphicon glyphicon-eye-open"></span> 密碼</label>
+            	  		<input type="text" class="form-control" id="registerpsw" placeholder="請輸入密碼">
+            		</div>
+            		<div class="form-group">
+            	  		<label for="psw"><span class="glyphicon glyphicon-envelope"></span> 電子郵件</label>
+            	  		<input type="text" class="form-control" id="registeremail" placeholder="請輸入你的電子郵件">
+            		</div>
+                <br>
+              		<div class="btn btn-success btn-block" id="registersubmitbutton" style="width:150px;margin:auto"> 註冊</div>
+          		</form>
+        	</div>
+      		</div>   
+    	</div>
+  	</div>
+    <div class="modal fade" id="myerrormessagemodal" role="dialog" style="border-radius:5px">
+      <div class="modal-dialog"  id="errormessagemodal">
+        <div class="modal-content">
+          <div class="modal-header" style="background-color:red;font-size: 24px;border-radius:5px 5px 0px 0px;font-weight:bold;color:white;font-family: Microsoft JhengHei;">
+              <h4 class="modal-title" style="text-align:center;font-size: 30px;">警告</h4>
+          </div>
+          <div class="modal-body">
+            <div class="form-group" id="errormessagecontent" style="font-family: Microsoft JhengHei;font-size:20px;text-align:center;line-height:50px">
+            </div>
+            <button type="submit" class="btn btn-danger btn-block" style="width:50px;margin:auto" data-dismiss="modal">關閉</button>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+    <div class="modal fade" id="mymessagemodal" role="dialog" style="border-radius:10px">
+      <div class="modal-dialog"  id="messagemodal">
+        <div class="modal-content">
+          <div class="modal-header" style="background-color:#1E4673;font-size: 24px;border-radius:5px 5px 0px 0px;font-weight:bold;color:white;font-family: Microsoft JhengHei;">
+              <h4 class="modal-title" style="text-align:center;font-size: 30px;">提示</h4>
+          </div>
+          <div class="modal-body">
+            <div class="form-group" id="messagecontent" style="font-family: Microsoft JhengHei;font-size:20px;text-align:center;line-height:50px">
+            </div>
+            <button type="submit" class="btn btn-danger btn-block" style="width:50px;margin:auto" data-dismiss="modal">關閉</button>
+          </div>
+      </div>
+    </div>
+    </div>
 </body>
 </html>
+

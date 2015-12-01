@@ -8,10 +8,15 @@ from mysite.models import *
 from django.template.context_processors import csrf
 import json
 
-def managelist(request):
+def createlist(request):
 	c = {}
 	c.update(csrf(request))
-	return render_to_response("managelist.html", c)
+	return render_to_response("createlist.html", c)
+
+def searchlist(request):
+    c = {}
+    c.update(csrf(request))
+    return render_to_response("searchlist.html", c)
 
 def search2(request):
 	c = {}
@@ -179,7 +184,7 @@ def tag_search_list(request):
 
     return HttpResponse(json.dumps(lists_details))
 
-def search_store_ajax(request):
+def search_store(request):
     if request.method == 'GET':
         store_id = request.GET.get('store')
     
@@ -188,5 +193,5 @@ def search_store_ajax(request):
     store['has_fans_page'] = True if store['fans_page'] else False
     comments = raw_store.storecomment_set.all()
     
-    return render_to_response('searchstorevariable.html', locals())
+    return render_to_response('searchstore.html', locals())
 
