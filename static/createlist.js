@@ -34,11 +34,17 @@ $('.ui.dropdown').dropdown();
 				stores.push(store);
 			});
 			console.log(stores);
+			var data = {};
+			data.listname = $("#customlistdesription form")[0].elements[0].value;
+			data.taglist = $("#createlistdropdown2").dropdown('get value');
+			data.description = $("#customlistdesription form")[0].elements[3].value;
+			data.customlist = stores;
+			console.log(JSON.stringify(data));
 			$.ajax({
 				url : "createlistsubmit",
 				type : "POST",
-				data : {listname:$("#customlistdesription form")[0].elements[0].value,taglist:$("#createlistdropdown2").dropdown('get value'),description:$("#customlistdesription form")[0].elements[2].value,customlist:stores},
-				datatype:'json',
+				data : {json:JSON.stringify(data)},
+				dataType: "json",
 				success : function(data) {
 				},
 				error : function(xhr,errmsg,err) {

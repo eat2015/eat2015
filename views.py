@@ -198,4 +198,8 @@ def search_store(request):
 
 def create_food_list(request):
     if request.method == 'POST':
+        print ("1")
         print (request.POST)
+        print ("2")
+        print (json.loads(dict(request.POST)['json'][0])['listname'])
+        print (json.loads(dict(request.POST)['json'][0])['customlist'])
