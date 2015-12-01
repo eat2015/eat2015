@@ -185,12 +185,7 @@ def search_store_ajax(request):
     
     raw_store = Stores.objects.get(id=int(store_id))
     store = get_store_details(raw_store)
-    
-    if store['fans_page'] != None:
-        store['has_fans_page'] = True
-    else:
-        store['has_fans_page'] = False
-    
+    store['has_fans_page'] = True if store['fans_page'] else False
     comments = raw_store.storecomment_set.all()
     
     return render_to_response('searchstorevariable.html', locals())
