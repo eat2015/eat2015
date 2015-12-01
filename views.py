@@ -221,4 +221,35 @@ def search_list_ajax(request):
     return render_to_response('searchlistvariable.html', locals())
 
 
+def create_food_list(request):
+    if request.method == 'POST':
+        request_data = json.loads(dict(request.POST)['json'][0])
+        
+        user = Users.objects.get(username=request.COOKIES['account'])
+        
+        list_name = request_data['listname']
+        list_des = request_data['description']
+        list_tags = request_data['taglist'].split(',')
+        list_tags = list(map(int, list_tags))
+        
+        # create new food list
+        new_list = Lists.objects.create(name=list_name, description=list_des, like=0, dislike=0,
+            user=user)
+        
+        # connect food list and it's tags 
+        for tag_id in list_tags:
+            tag = Tags.objects.get(id=tag_id)
+            new_list.tags_set.add(tag)
+        new_list.save()
 
+               
+        stores = request_data['customlist'] 
+        for store in stores:
+            # add store onto list
+            store_obj = Stores.objects.get(id=store['id'])
+            new_list.store.add(store_obj)
+            new_list_store_recommend = ListsStoreComment.objects.create(list=new_list,
+                    store=store_obj, dish=store['recommendmeal'], 
+                    description=store['description'])
+    
+        return HttpResponse('')
