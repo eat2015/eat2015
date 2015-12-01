@@ -193,5 +193,5 @@ def search_store(request):
     store['has_fans_page'] = True if store['fans_page'] else False
     comments = raw_store.storecomment_set.all()
     
-    return render_to_response('searchstorevariable.html', locals())
+    return render_to_response('searchstore.html', locals())
 
