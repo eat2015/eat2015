@@ -50,8 +50,8 @@
                             <label for="inputPassword3" class="col-sm-2 control-label">標籤</label>
                             <div class="col-sm-10">
                               <p class="form-control-static" id="listtagcontainer">
-                                  {% for listtag in listtags %}
-                                  <a class="listtag">listtag.name</a>
+                                  {% for tag in tags %}
+                                  <a class="item listtag" data-title="{{ listtag.name }} " data-content="{{ listtag.description }}">listtag.name</a>
                                   {% endfor %}
                               </p>
                             </div>
