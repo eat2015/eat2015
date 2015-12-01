@@ -3,43 +3,49 @@
 <html>
 <head>
 <title>吃~吃~~吃首頁</title>
+<link rel="stylesheet" type="text/css" href="semantic/dist/semantic.min.css">
+<script src="semantic/dist/semantic.min.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <style type="text/css">
-body{font-size:40pt;
-     font-color:black;
-     font-family:標楷體;
-     text-align:center;}
+body{font-size:30pt;
+          position:relative;
+          font-color:black;
+          text-align:center;
+          max-width: 100%;
+          width:100%;
+          height: auto;
+          vertical-align:middle;
+          position: relative;}
 </style>
 </head>
 <body>
-
-
 <div class="ui three column divided grid">
- <div class="stretched row">
+ <div class="row">
     <div class="column">
-      <div class="ui segment">
-       <img src="{% static '特色餐點.jpg' %}"width="450" height="300">
+        
+         主餐<br>
+        <img src="{% static '正餐.jpg' %}"><br>
+        
+       
+        小吃<br>
+        <img src="{% static '小吃1.jpg' %}">
+        
       </div>
-      <div class="ui segment">
-        <img src="{% static '正餐.jpg' %}"width="450" height="300">
-      </div>
-    </div>
-    <div class="column">
-      <div class="ui segment" >
-       <img src="{% static 'logo.gif' %}" width="640" height="360" >
-       <h6>
+      <div class="column" style="margin auto;">
+       <img src="{% static 'logo.gif' %}"><br>
        <strong>
-       歡迎來到~~大家的美食地圖~~
+       歡迎來到大家的美食地圖
        </strong>
-       </h6>
       </div>
-    </div>
     <div class="column">
-      <div class="ui segment">
-        <img src="{% static '小吃1.jpg' %}"width="450" height="300">
-      </div>
-      <div class="ui segment">
-        <img src="{% static '小吃2.jpg' %}"width="450" height="300">
-      </div>
+       
+        清單<br>
+        <img src="{% static '特色餐點.jpg' %}"><br>
+       
+       
+        小吃<br>
+        <img src="{% static '小吃2.jpg' %}">
+       
     </div>
  </div>
 </div>
