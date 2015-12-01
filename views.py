@@ -153,6 +153,8 @@ def tag_search_store(request):
 
 def get_list_info(food_list):
     food_list_info = dict()
+    food_list_info['id'] = food_list.id
+    food_list_info['user'] = food_list.user
     food_list_info['name'] = food_list.name
     food_list_info['description'] = food_list.description
     food_list_info['good'] = food_list.like
@@ -203,3 +205,20 @@ def create_food_list(request):
         print ("2")
         print (json.loads(dict(request.POST)['json'][0])['listname'])
         print (json.loads(dict(request.POST)['json'][0])['customlist'])
+
+
+def search_list_ajax(request):
+    if request.method == 'GET':
+        list_id = request.GET.get('list')
+    
+    raw_list = Lists.objects.get(id=int(list_id))
+    
+    list = get_list_info(raw_list)
+    listtags = Tags.objects.filter(list=int(list_id))
+    comments = raw_list.listcomment_set.all()
+    stores = Stores.objects.filter(lists=int(list_id))
+    
+    return render_to_response('searchlistvariable.html', locals())
+
+
+
