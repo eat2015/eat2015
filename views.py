@@ -183,10 +183,21 @@ def search_store_ajax(request):
         storeID = request.GET.get('store')
     stores = Stores.objects
     stores = stores.filter(id=int(storeID))
-    
+  
     stores_details = []
     for store in stores:
         store_info = get_store_details(store)
         stores_details.append(store_info)
-        
-    return HttpResponse(json.dumps(stores_details))
+    
+ 
+    store = stores_details[0]
+    
+    if store['fans_page'] != None:
+        store['has_fans_page'] = True
+    else:
+        store['has_fans_page'] = False
+    
+    comments = stores[0].storecomment_set.all()
+    
+    return render_to_response('searchstorevariable.html', locals())
+
