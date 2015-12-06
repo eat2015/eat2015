@@ -4,7 +4,7 @@
 	width: 100%;
 	left:0;
 	height:74px;
-	background: linear-gradient(rgba(44,104,138,1) 0%, rgba(5,91,142,1) 12%, rgba(5,91,142,1) 26%, rgba(11,131,202,1) 100%);
+	background: linear-gradient(#FFF0D3 0%, #FFE0A4 12%, #FFCF74 70%, #FFBE43 100%);
 	color:white;
 	font-size: 24px;
 	font-family: Microsoft JhengHei;
@@ -234,7 +234,7 @@
 	font-size: 2rem!important;
 }
 #menulogo img{
-    max-height: 35px;
+    max-height: 40px;
 }
 #createlisttemplatebutton:hover{
     cursor: pointer;

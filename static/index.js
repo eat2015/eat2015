@@ -213,7 +213,7 @@ $(document).ready(function(){
 		if(user){
 		logined = true;
 			$("#loginmenu").html(
-				'<button type="button" class="ui primary button" style="font-size:15px;margin:auto">'+
+				'<button type="button" class="btn btn-warning" style="font-size:15px;margin:auto">'+
 		    		user+
 		        '</button>');
 			$("#downmenu").html(
