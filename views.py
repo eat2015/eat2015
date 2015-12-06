@@ -211,7 +211,8 @@ def search_list_ajax(request):
         list = get_list_info(raw_list)
         listtags = Tags.objects.filter(list=int(list_id))
         comments = raw_list.listcomment_set.all()
-        stores = Stores.objects.filter(lists=int(list_id))
+        
+        storecomments = raw_list.listsstorecomment_set.all()
         
         return render_to_response('searchlistvariable.html', locals())
 
