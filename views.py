@@ -185,9 +185,29 @@ def tag_search_list(request):
         list_info = get_list_info(food_list)
         lists_details.append(list_info)
 
-    print(lists_details)
     return HttpResponse(json.dumps(lists_details))
 
+def search_ajax(request):
+    if request.method == 'GET':
+        taglist = request.GET.get('taglist')
+    
+    lists = Lists.objects
+    stores = Stores.objects
+    if len(taglist) == 0:
+        lists = lists.all()
+        stores = stores.all()
+    else:
+        taglist = taglist.split(',')
+        for tag_id in taglist:
+            lists = lists.filter(tags=int(tag_id))
+            stores = stores.filter(tags=int(tag_id))
+    
+    lists_details = []
+    stores_details = []
+    #for food_info in lists:
+
+        
+    return render_to_response('searchvariable.html' , locals())
 
 def search_store(request):
     if request.method == 'GET':
