@@ -1,0 +1,61 @@
+{% load staticfiles %}
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="{% static 'search.css' %}"/>
+	<script src="{% static 'search.js' %}"></script>
+</head>
+<body>
+	<div class="ui equal width stackable grid">
+		<div class="row" style="margin-top:20px;">
+			<div class="column">
+				<h1 style="text-align:center">
+					以下為符合標籤的搜尋結果
+				</h1>
+			</div>
+		</div>
+		<div class="row" style="margin-top:20px;">
+			<div class="eight wide column">
+				<h2 style="text-align:center">店家讚數排行榜</h2>
+				<div id="storelist" class="ui styled accordion" style="margin:auto;width:85%;margin-top:20px">
+					  <div class="content" style="padding:0;height:42px">
+					  	<div style="width:10%;text-align:center;line-height:42px;float:left">
+					   		排行
+					   	</div>
+					   	<div style="width:50%;text-align:center;line-height:42px;float:left">
+					   		店家名稱
+					   	</div>
+					   	<div style="width:20%;text-align:center;line-height:42px;float:right">
+					   		差評
+					   	</div>
+					   	<div style="width:20%;text-align:center;line-height:42px;float:right">
+					   		讚數
+					   	</div>
+					  </div>
+				</div>
+			</div>
+			<div class="ui vertical divider">
+			    eat
+			</div>
+			<div class="eight wide column">
+				<h2 style="text-align:center">店家清單讚數排行榜</h2>
+				<div id="listlist" class="ui styled accordion" style="margin:auto;width:85%;margin-top:20px">
+					  <div class="content" style="padding:0;height:42px">
+					  	<div style="width:10%;text-align:center;line-height:42px;float:left">
+					   		排行
+					   	</div>
+					   	<div style="width:50%;text-align:center;line-height:42px;float:left">
+					   		店家清單名稱
+					   	</div>
+					   	<div style="width:20%;text-align:center;line-height:42px;float:right">
+					   		差評
+					   	</div>
+					   	<div style="width:20%;text-align:center;line-height:42px;float:right">
+					   		讚數
+					   	</div>
+					  </div>
+					</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,241 @@
+#menu{
+	position: fixed;
+	top:0;
+	width: 100%;
+	left:0;
+	height:74px;
+	background: linear-gradient(rgba(44,104,138,1) 0%, rgba(5,91,142,1) 12%, rgba(5,91,142,1) 26%, rgba(11,131,202,1) 100%);
+	color:white;
+	font-size: 24px;
+	font-family: Microsoft JhengHei;
+    z-index: 20;
+}
+#menucontroll{
+    position:fixed;
+    width:100%;
+    height:74px;
+    top: 0px;
+    left: 0px;
+}
+#footer{
+	width: 100%;
+	height:60px;
+	background: linear-gradient(rgba(11,111,182,1) 0%, rgba(5,91,142,1) 74%, rgba(5,91,142,1) 88%,rgba(44,104,138,1) 0%);
+	color:white;
+	font-size: 20px;
+	font-family: Microsoft JhengHei;
+}
+#topmenu{
+	float:left;
+  	width: 100%;
+}
+#menulogo{
+  	font-size: 28px;
+  	font-weight: bold;
+  	margin-left: auto;
+    margin-right: auto;
+  }
+#searchbar{
+	margin: auto;
+    padding: 0;
+    margin: 0;
+}
+
+#searchbutton{
+	float:left;
+	border-radius: 5px;
+    height:36px;
+}
+#searchbutton:hover{
+	cursor: pointer;
+}
+#logoutbutton:hover{
+	cursor: pointer;
+}
+#downmenu{
+  	margin-top: 15px;
+}
+#menulogo:hover{
+	cursor: pointer;
+}
+#loginbutton:hover{
+	cursor: pointer;
+}
+#registerbutton:hover{
+	cursor: pointer;
+}
+#homebutton:hover{
+	cursor: pointer;
+}
+#aboutusbutton:hover{
+	cursor: pointer;
+}
+#searchpagebutton:hover{
+    cursor: pointer;
+}
+#loginmodal{
+	width:400px;
+}
+#registrationmodal{
+	width:400px;
+}
+#registrationbody{
+	height:320px;
+}
+#loginbody{
+	height:280px;
+}
+#loading1{
+	float:right;
+	margin-right:60px;
+	margin-top:5px;
+	width:10px;
+	height:25px;
+	background-color:#84A8BD;
+	border-radius:3px;
+}
+#loading2{
+	float:right;
+	margin-top:5px;
+	margin-right:5px;
+	width:10px;
+	height:25px;
+	background-color:#84A8BD;
+	border-radius:3px;
+}
+#loading3{
+	float:right;
+	margin-top:5px;
+	margin-right:5px;
+	width:10px;
+	height:25px;
+	background-color:#84A8BD;
+	border-radius:3px;
+}
+#loading4{
+	float:right;
+	margin-top:5px;
+	margin-right:5px;
+	width:10px;
+	height:25px;
+	background-color:#84A8BD;
+	border-radius:3px;
+}
+#loading5{
+	float:right;
+	margin-top:5px;
+	margin-right:5px;
+	width:10px;
+	height:25px;
+	background-color:#84A8BD;
+	border-radius:3px;
+}
+#mainscreen{
+	width:100%;
+}
+#loginmenu{
+	line-height: 100%;
+	text-align: center;
+}
+#menucontroller{
+	padding-left: 3rem;
+}
+#searchdropdown{
+    float: left;
+    width: 80%;
+    font-size: 13px;
+    margin-top:4px;
+}
+@media screen and (min-width: 861px) {
+	#loginmenu{
+        display: inline-block;
+    }
+    #searchbar{
+    	width:75%;
+    }
+    #menulogo{
+    	display: inline-block;
+    }
+    #menucontroller{
+    	display:none;
+    }
+}
+@media screen and (min-width: 471px) and (max-width: 860px) {
+    #loginmenu{
+        display: none;
+    }
+    #searchbar{
+    	width:75%!important;
+    }
+    #menulogo{
+    	display:none;
+    }
+    #menucontroller{
+    	display: inline-block;
+    }
+    #loginmodal{
+    	margin:auto;
+    }
+    #registrationmodal{
+    	margin:auto;
+    }
+    #errormessagemodal{
+    	margin:auto;
+    }
+    #messagemodal{
+    	margin:auto;
+    }
+    #searchdropdown{
+        font-size: 10px;
+    }
+    #searchbutton{
+        height:33px;
+    }
+}
+@media screen and (max-width: 470px) {
+    #searchbar{
+    	width:75%!important;
+    }
+    #searchdropdown{
+        font-size: 10px;
+    }
+    #loginmenu{
+        display: none;
+    }
+    #menulogo{
+    	display:none;
+    }
+    #menucontroller{
+    	display: inline-block;
+    }
+    #loginmodal{
+    	width: 98%;
+    	margin-top:80px!important;
+    }
+    #registrationmodal{
+    	width: 98%;
+    	margin-top:80px!important;
+    }
+    #errormessagemodal{
+    	width: 80%!important;
+    	margin:auto;
+    	margin-top:140px!important;
+    }
+    #messagemodal{
+    	width: 80%!important;
+    	margin:auto;
+    	margin-top:140px!important;
+    }
+    #searchbutton{
+        height:33px;
+    }
+}
+.itemfont{
+	font-size: 2rem!important;
+}
+#menulogo img{
+    max-height: 35px;
+}
+#createlisttemplatebutton:hover{
+    cursor: pointer;
+}

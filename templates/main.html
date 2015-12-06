@@ -1,0 +1,54 @@
+{% load staticfiles %}
+
+<html>
+<head>
+<title>吃~吃~~吃首頁</title>
+<link rel="stylesheet" type="text/css" href="semantic/dist/semantic.min.css">
+<script src="semantic/dist/semantic.min.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+body{font-size:30pt;
+          position:relative;
+          font-color:black;
+          text-align:center;
+          max-width: 100%;
+          width:100%;
+          height: auto;
+          vertical-align:middle;
+          position: relative;}
+</style>
+</head>
+<body>
+<div class="ui three column divided grid">
+ <div class="row">
+    <div class="column">
+        
+         主餐<br>
+        <img src="{% static '正餐.jpg' %}"><br>
+        
+       
+        小吃<br>
+        <img src="{% static '小吃1.jpg' %}">
+        
+      </div>
+      <div class="column" style="margin auto;">
+       <img src="{% static 'logo.gif' %}"><br>
+       <strong>
+       歡迎來到大家的美食地圖
+       </strong>
+      </div>
+    <div class="column">
+       
+        清單<br>
+        <img src="{% static '特色餐點.jpg' %}"><br>
+       
+       
+        小吃<br>
+        <img src="{% static '小吃2.jpg' %}">
+       
+    </div>
+ </div>
+</div>
+
+</body>
+</html>
