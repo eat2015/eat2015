@@ -20,7 +20,106 @@
   <div class="ui one column grid" style="margin-top:74px;">
       <div class="column">
         <div id="mainscreen">
-          
+          <html>
+			<head>
+				<link rel="stylesheet" type="text/css" href="{% static 'search.css' %}"/>
+				<script src="{% static 'search.js' %}"></script>
+			</head>
+			<body>
+				<div class="ui equal width stackable grid">
+					<div class="row" style="margin-top:20px;">
+						<div class="column">
+							<h1 style="text-align:center">
+								以下為符合標籤的搜尋結果
+							</h1>
+						</div>
+					</div>
+					<div class="row" style="margin-top:20px;">
+						<div class="eight wide column">
+							<h2 style="text-align:center">店家讚數排行榜</h2>
+							<div id="storelist" class="ui styled accordion" style="margin:auto;width:85%;margin-top:20px">
+								  <div class="content" style="padding:0;height:42px">
+								  	<div style="width:10%;text-align:center;line-height:42px;float:left">
+								   		排行
+								   	</div>
+								   	<div style="width:50%;text-align:center;line-height:42px;float:left">
+								   		店家名稱
+								   	</div>
+								   	<div style="width:20%;text-align:center;line-height:42px;float:right">
+								   		差評
+								   	</div>
+								   	<div style="width:20%;text-align:center;line-height:42px;float:right">
+								   		讚數
+								   	</div>
+								  </div>
+								  {% for store in stores %}
+								  	<div class="title" style="padding:0;height:42px">
+								  		<div style="width:10%;text-align:center;line-height:42px;float:left">
+								  			{{ store.rank }}
+								  		</div>
+								  		<div style="width:50%;text-align:center;line-height:42px;float:left">
+								  			{{ store.name }}
+								  		</div>
+								  		<div class="bad" style="width:20%;text-align:center;line-height:42px;float:right">
+								  			{{ store.bad }}
+								  		</div>
+								  		<div class="good" style="width:20%;text-align:center;line-height:42px;float:right">
+								  			{{ store.good }}
+								  		</div>
+								  	</div>
+								  	<div class="content">
+								  		<p>{{ store.description }}</p>
+								  		<p style="text-align:right">.....<a target="_blank" href="searchstore?store={{ store.id }}">店家完整資訊</a></p>
+								  	</div>
+								  {% endfor %}
+							</div>
+						</div>
+						<div class="ui vertical divider">
+						    eat
+						</div>
+						<div class="eight wide column">
+							<h2 style="text-align:center">店家清單讚數排行榜</h2>
+							<div id="listlist" class="ui styled accordion" style="margin:auto;width:85%;margin-top:20px">
+								  <div class="content" style="padding:0;height:42px">
+								  	<div style="width:10%;text-align:center;line-height:42px;float:left">
+								   		排行
+								   	</div>
+								   	<div style="width:50%;text-align:center;line-height:42px;float:left">
+								   		店家清單名稱
+								   	</div>
+								   	<div style="width:20%;text-align:center;line-height:42px;float:right">
+								   		差評
+								   	</div>
+								   	<div style="width:20%;text-align:center;line-height:42px;float:right">
+								   		讚數
+								   	</div>
+								  </div>
+								  {% for list in lists %}
+								  	<div class="title" style="padding:0;height:42px">
+								  		<div style="width:10%;text-align:center;line-height:42px;float:left">
+								  			{{ list.rank }}
+								  		</div>
+								  		<div style="width:50%;text-align:center;line-height:42px;float:left">
+								  			{{ list.name }}
+								  		</div>
+								  		<div class="bad" style="width:20%;text-align:center;line-height:42px;float:right">
+								  			{{ list.bad }}
+								  		</div>
+								  		<div class="good" style="width:20%;text-align:center;line-height:42px;float:right">
+								  			{{ list.good }}
+								  		</div>
+								  	</div>
+								  	<div class="content">
+								  		<p>{{ list.description }}</p>
+								  		<p style="text-align:right">.....<a target="_blank" href="searchlistajax?list={{ list.id }}">店家完整資訊</a></p>
+								  	</div>
+								  {% endfor %}
+								</div>
+						</div>
+					</div>
+				</div>
+			</body>
+			</html>
         </div>
       </div>
     </div>
@@ -52,11 +151,7 @@
           
         </div>
       </div>
-<<<<<<< HEAD
 		<div class="seven column row" id="downmenu" style="margin-top:0px;visibility:hidden;padding-top:5px;">
-=======
-		<div class="seven column row" id="downmenu" style="margin-top:0px;visibility:hidden">
->>>>>>> 3d10852b719169b3c270be70272a6852ae42d9ce
 		</div>
     </div>
 	</div>
