@@ -80,10 +80,10 @@
 	width:400px;
 }
 #registrationbody{
-	height:320px;
+	
 }
 #loginbody{
-	height:280px;
+	
 }
 #loading1{
 	float:right;
@@ -238,4 +238,7 @@
 }
 #createlisttemplatebutton:hover{
     cursor: pointer;
+}
+.modal{
+    color:black;
 }
