@@ -1,8 +1,16 @@
 $(document).ready(function(){
-	$('.ui.dropdown').dropdown();
 	$('.item').popup();
 	$('.ui.label.transition.visible').popup();
 	var logined;
+	/*function changetag(){
+		setTimeout(function(){
+			$("#searchdropdown").children('.ui.label')[$("#searchdropdown").children('.ui.label').length-1].innerHTML = '店名：'+$("#searchdropdown").children('.ui.label')[$("#searchdropdown").children('.ui.label').length-1].innerHTML;
+			$("#searchdropdown").children('.ui.label')[$("#searchdropdown").children('.ui.label').length-1]
+		},1);
+	}*/
+	$('.ui.dropdown').dropdown({
+		allowAdditions:true
+	});
 	function outputaboutus(){
 		$("#mainscreen").html('<div class="ui active centered large inline loader" style="margin-top:200px;"></div>');
 			$.ajax({
@@ -275,7 +283,6 @@ $(document).ready(function(){
 					Cookies.remove('account');
 					checklogined();
 				});
-				$('.ui.dropdown').dropdown();
 		}else{
 			logined = false;
 			$("#loginmenu").html(
@@ -318,7 +325,6 @@ $(document).ready(function(){
 	            '<div class="itemfont item" data-toggle="modal" data-target="#myloginmodal">登入</div>'+
 	            '<div class="itemfont item" data-toggle="modal" data-target="#myregistrationmodel">註冊</div>');
 	        setnormalbutton();
-	        $('.ui.dropdown').dropdown();
 		}
 	}
 	checklogined();
