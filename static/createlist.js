@@ -95,6 +95,7 @@ $('.ui.dropdown').dropdown();
 	            }
 	        };
 	        request.open('post','createlistsubmit');
+	        request.setRequestHeader("X-CSRFToken", Cookies.get('csrftoken'));
 	        request.send(formData);
 		};
 	});
