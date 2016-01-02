@@ -136,7 +136,11 @@ def tag_search_store(request):
         else:
             taglist = taglist.split(',')
             for tag_id in taglist:
-                stores = stores.filter(tags=int(tag_id))
+                tag_store = tag_id.split('：')
+                if tag_store[0] == "店名": 
+                    stores = stores.filter(name__icontains=tag_store[1])
+                else:
+                    stores = stores.filter(tags=int(tag_id))
         
         # If there is no any store left, after filtering.
         # return response '' , which represent ZERO LENGTH data.
@@ -166,7 +170,6 @@ def tag_search_list(request):
 
     if request.method == 'POST':
         taglist = request.POST.get('taglist')
-    
 
     lists = Lists.objects
     if len(taglist) == 0:
@@ -174,16 +177,26 @@ def tag_search_list(request):
     else:
         taglist = taglist.split(',')
         for tag_id in taglist:
-            lists = lists.filter(tags=int(tag_id))
+            tag_store = tag_id.split('：')
+            if tag_store[0] == "店名": 
+                store_id = Stores.objects.filter(name__icontains=tag_store[1])
+                lists = lists.filter(store=store_id)
+            else:
+                lists = lists.filter(tags=int(tag_id))
     
     if (len(lists)) == 0:
         return HttpResponse('')
 
-    
     lists_details = []
+    i=0
     for food_list in lists:
-        list_info = get_list_info(food_list)
-        lists_details.append(list_info)
+        if i==0 :
+            list_info = get_list_info(food_list)
+            lists_details.append(list_info)
+        elif lists[i] != lists[i-1] :
+            list_info = get_list_info(food_list)
+            lists_details.append(list_info)
+        i=i+1
 
     return HttpResponse(json.dumps(lists_details))
 
@@ -199,14 +212,25 @@ def search_ajax(request):
     else:
         taglist = taglist.split(',')
         for tag_id in taglist:
-            lists = lists.filter(tags=int(tag_id))
-            stores = stores.filter(tags=int(tag_id))
+            tag_store = tag_id.split('：')
+            if tag_store[0] == "店名": 
+                store_id = Stores.objects.filter(name__icontains=tag_store[1])
+                lists_a = lists.filter(store=store_id)
+                stores = stores.filter(name__icontains=tag_store[1])
+            else:
+                lists_a = lists.filter(tags=int(tag_id))
+                stores = stores.filter(tags=int(tag_id))
+    lists = []
+    i=0
+    for food_list in lists_a:
+        if i==0 :
+            list_info = get_list_info(food_list)
+            lists.append(list_info)
+        elif lists_a[i] != lists_a[i-1] :
+            list_info = get_list_info(food_list)
+            lists.append(list_info)
+        i=i+1
     
-    lists_details = []
-    stores_details = []
-    #for food_info in lists:
-
-        
     return render_to_response('searchvariable.html' , locals())
 
 def search_store(request):
