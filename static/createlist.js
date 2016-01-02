@@ -43,23 +43,59 @@ $('.ui.dropdown').dropdown();
 				store.pics = pics;
 				stores.push(store);
 			});
-			var data = {};
-			data.listname = $("#customlistdesription form")[0].elements[0].value;
-			data.taglist = $("#createlistdropdown2").dropdown('get value');
-			data.description = $("#customlistdesription form")[0].elements[3].value;
-			data.customlist = stores;
-			console.log(stores);
-			$.ajax({
-				url : "createlistsubmit",
-				type : "POST",
-				data : {json:JSON.stringify(data)},
-				dataType: "json",
-				success : function(data) {
-				},
-				error : function(xhr,errmsg,err) {
-						console.log(xhr.status + ": " + xhr.responseText);
-				} 
-			});
+			var request = new XMLHttpRequest();
+	        var formData = new FormData();
+	        formData.append('listname',$("#customlistdesription form")[0].elements[0].value);
+	        formData.append('taglist',$("#createlistdropdown2").dropdown('get value'));
+	        formData.append('description',$("#customlistdesription form")[0].elements[3].value);
+	        formData.append('customlist',stores);
+	        /*$(document.forms[0].elements[now+2]).parent('.fileitem').after(
+	            '<div class="ui indicating progress active">'+
+	                '<div class="bar"></div>'+
+	                '<div class="label">檔案準備上傳</div>'+
+	            '</div>'
+	        );*/
+	        /*request.upload.onprogress=function(e){
+	            $('.progress.active').progress({
+	                percent: e.loaded/e.total*100
+	            });
+	            $('.progress.active .label').html('已完成'+Math.round(e.loaded/e.total)+'%');
+	        };*/
+	        /*request.upload.onloadend=function(e){
+	            $('.progress.active').progress({
+	                percent: e.loaded/e.total*100
+	            });
+	            $('.progress.success .label').html('檔案上傳已完成');
+	        };*/
+	        request.onreadystatechange = function() {
+	            if (request.readyState == 4) {
+	                if(request.status == 200){
+	                    if(request.responseText == 'success'){
+	                        if(document.forms[0].elements.length > now+3){
+	                            $('.progress.success').animate(
+	                                {opacity:0},1500,function(){
+	                                    $(this).remove();
+	                                }
+	                            );
+	                            $('.progress.success').removeClass('success');
+	                            fileupload(id,now+1);
+	                        }else{
+	                            $('.progress.success').animate(
+	                                {opacity:0},1500,function(){
+	                                    $(this).remove();
+	                                }
+	                            );
+	                            $('.progress.success').removeClass('success');
+	                            $("#submitbutton").html('已完成');
+	                        }
+	                    }
+	                }else{
+	                    console.log("Error", request.statusText);  
+	                }
+	            }
+	        };
+	        request.open('post','createlistsubmit');
+	        request.send(formData);
 		};
 	});
 	var formhtml = '<form class="form-horizontal" role="form">'+
@@ -124,8 +160,7 @@ $('.ui.dropdown').dropdown();
 		 		$(ui.draggable).css("top","0");
 		 		$(ui.draggable).css("left",dropleft - target.offset().left + 12 + $("#statusbuttonwrapper").width() + dropwidth/2 - target.width()/2);
 		 		$(ui.draggable).css("top",droptop - target.position().top);
-		 		setexpandpicbutton();
-		 		setremovepicbutton();
+		 		setpicbutton();
 		 		setaddpicbutton();
 	      	}else{
 	      		var target = $(ui.draggable);
@@ -137,8 +172,7 @@ $('.ui.dropdown').dropdown();
 		 		$(ui.draggable).css("top","0");
 		 		$(ui.draggable).css("left",dropleft - target.position().left + dropwidth/2 - target.width()/2);
 		 		$(ui.draggable).css("top",droptop - target.position().top);
-		 		setexpandpicbutton();
-		 		setremovepicbutton();
+		 		setpicbutton();
 		 		setaddpicbutton();
 	      	}
 	      }
@@ -187,17 +221,13 @@ $('.ui.dropdown').dropdown();
 	$("#createlistsearchstore").change(function () { 
 		setstores();
 	});
-	function setremovepicbutton(){
-		$(".removefilebutton").click(function(){
-			if($(this).parent(".upload_pic").children('.expandbutton').html() == '<i class="chevron down icon"></i>'){
-    				$(this).parent(".upload_pic").next().remove();
-    			}
-			$(this).parent(".upload_pic").remove();
-		});
-	}
-	function setexpandpicbutton(){
+	function setpicbutton(){
+		$(".expandbutton").unbind();
 		$(".expandbutton").click(function(){
 			var expandbutton = $(this);
+			for(var i = 0;i < expandbutton.length;i++){
+				console.log(expandbutton[i]);
+			}
 			if($(this).html() == '<i class="chevron down icon"></i>'){
     				$(this).html('<i class="chevron right icon"></i>');
     				$(this).parent(".upload_pic").next().css("display",'none');
@@ -206,8 +236,18 @@ $('.ui.dropdown').dropdown();
     				$(this).parent(".upload_pic").next().css("display",'block');
 		        }
 		});
+		$(".removefilebutton").unbind();
+		$(".removefilebutton").click(function(){
+			console.log($(this).parent(".upload_pic").children('.expandbutton').html() == '<i class="chevron down icon"></i>');
+			console.log($(this).parent(".upload_pic"));
+			if($(this).parent(".upload_pic").children('.expandbutton').html() == '<i class="chevron down icon"></i>'){
+    				$(this).parent(".upload_pic").next().remove();
+    			}
+			$(this).parent(".upload_pic").remove();
+		});
 	}
 	function setaddpicbutton(){
+		$(".addpicbutton").unbind();
 		$(".addpicbutton").click(function(){
 		var x = document.createElement("input");
     	x.setAttribute("type", "file");
@@ -282,7 +322,7 @@ $('.ui.dropdown').dropdown();
 		        }
     		});
     		$(dd).click(function(){
-    			if($(d).children('.expandbutton').data("type") == "expanded"){
+    			if($(d).children('.expandbutton').html() == '<i class="chevron down icon"></i>'){
     				$(d).next().remove();
     			}
     			$(d).remove();
