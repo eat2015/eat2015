@@ -31,7 +31,7 @@ $('.ui.dropdown').dropdown();
 				store.id = $(val).data("id");
 				store.recommendmeal = $("#customlist .filteritem form")[index].elements[0].value;
 				store.description = $("#customlist .filteritem form")[index].elements[1].value;
-				var pics = [];
+				/*var pics = [];
 				console.log(val);
 				console.log($(val).children('.content').children('form').children('.upload_pic'));
 				for(var i = 0;i < $(val).children('.content').children('form').children('.upload_pic').length;i++){
@@ -40,16 +40,37 @@ $('.ui.dropdown').dropdown();
 					pic.description = $(val).children('.content').children('form').children('.preview').children('textarea')[i].value;
 					pics.push(pic);
 				}
-				store.pics = pics;
+				store.pics = pics;*/
 				stores.push(store);
 			});
-			var request = new XMLHttpRequest();
+			var data = {};
+			data.listname = $("#customlistdesription form")[0].elements[0].value;
+			data.taglist = $("#createlistdropdown2").dropdown('get value');
+			data.description = $("#customlistdesription form")[0].elements[3].value;
+			data.customlist = stores;
+			console.log(stores);
+			$.ajax({
+				url : "createlistsubmit",
+				type : "POST",
+				data : {json:JSON.stringify(data)},
+				dataType: "json",
+				success : function(data) {
+					console.log(data);
+				},
+				error : function(xhr,errmsg,err) {
+						console.log(xhr.status + ": " + xhr.responseText);
+				} 
+			});
+			/*var request = new XMLHttpRequest();
 	        var formData = new FormData();
+	        var 
+	        formData.append('stores',$("#customlistdesription form")[0].elements[0].value);
 	        formData.append('listname',$("#customlistdesription form")[0].elements[0].value);
 	        formData.append('taglist',$("#createlistdropdown2").dropdown('get value'));
 	        formData.append('description',$("#customlistdesription form")[0].elements[3].value);
 	        formData.append('customlist',stores);
-	        /*$(document.forms[0].elements[now+2]).parent('.fileitem').after(
+	        formData.append('128',$("input:file")[0].files[0]);
+	        $(document.forms[0].elements[now+2]).parent('.fileitem').after(
 	            '<div class="ui indicating progress active">'+
 	                '<div class="bar"></div>'+
 	                '<div class="label">檔案準備上傳</div>'+
@@ -67,7 +88,7 @@ $('.ui.dropdown').dropdown();
 	            });
 	            $('.progress.success .label').html('檔案上傳已完成');
 	        };*/
-	        request.onreadystatechange = function() {
+	        /*request.onreadystatechange = function() {
 	            if (request.readyState == 4) {
 	                if(request.status == 200){
 	                    if(request.responseText == 'success'){
@@ -96,7 +117,8 @@ $('.ui.dropdown').dropdown();
 	        };
 	        request.open('post','createlistsubmit');
 	        request.setRequestHeader("X-CSRFToken", Cookies.get('csrftoken'));
-	        request.send(formData);
+	        console.log(formData);
+	        request.send(formData);*/
 		};
 	});
 	var formhtml = '<form class="form-horizontal" role="form">'+
