@@ -7387,7 +7387,7 @@ $.fn.dropdown.settings = {
   namespace      : 'dropdown',
 
   message: {
-    addResult     : 'Add <b>{term}</b>',
+    addResult     : '你是否要搜尋店家 <b>{term}</b>',
     count         : '{count} selected',
     maxSelections : 'Max {maxCount} selections',
     noResults     : 'No results found.',

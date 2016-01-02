@@ -119,5 +119,7 @@ class ListDislike(models.Model):
     list = models.ForeignKey(Lists)
     user = models.OneToOneField(Users)
 
-
-
+class ListStorePic(models.Model):
+    pic = models.ImageField(upload_to='pic_folder/')
+    description = models.TextField(null=True,blank=True)
+    liststorecomment = models.ForeignKey(ListsStoreComment)

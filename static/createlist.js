@@ -33,13 +33,11 @@ $('.ui.dropdown').dropdown();
 				store.description = $("#customlist .filteritem form")[index].elements[1].value;
 				stores.push(store);
 			});
-			console.log(stores);
 			var data = {};
 			data.listname = $("#customlistdesription form")[0].elements[0].value;
 			data.taglist = $("#createlistdropdown2").dropdown('get value');
 			data.description = $("#customlistdesription form")[0].elements[3].value;
 			data.customlist = stores;
-			console.log(JSON.stringify(data));
 			$.ajax({
 				url : "createlistsubmit",
 				type : "POST",
@@ -66,6 +64,7 @@ $('.ui.dropdown').dropdown();
 						      '<textarea class="form-control" rows="3" placeholder="對於這家店有甚麼想說的......" name="storedescription"></textarea>'+
 						    '</div>'+
 						  '</div>'+
+						  '<div class="addpicbutton">上傳圖片</div>'+
 						'</form>';
 	function setdraggable(){
 		$( ".filteritem" ).draggable({
@@ -79,8 +78,7 @@ $('.ui.dropdown').dropdown();
 	      	if($(ui.draggable).data("pos") == "customlist"){
 		      	$(ui.draggable).data("pos","stores");
 		      	var content = $(ui.draggable).data("storecontent");
-		      	$(ui.draggable).data("recommendmeal",$(ui.draggable).children(".content").children("form")[0].recommendmeal.value);
-		      	$(ui.draggable).data("storedescription",$(ui.draggable).children(".content").children("form")[0].storedescription.value);
+		      	$(ui.draggable).data("form",$(ui.draggable).children(".content").children("form")[0]);
 		      	$(ui.draggable).children(".content").html(content);
 		    }
 		        var target = $(ui.draggable);
@@ -90,8 +88,6 @@ $('.ui.dropdown').dropdown();
 		    	$(this).append($(ui.draggable));
 		 		$(ui.draggable).css("left","0");
 		 		$(ui.draggable).css("top","0");
-		 		console.log(droptop+" "+dropleft);
-		 		console.log(target.position().top + " " +target.offset().left)
 		 		$(ui.draggable).css("left",dropleft - target.offset().left + 12 + dropwidth/2 - target.width()/2);
 		 		$(ui.draggable).css("top",droptop - target.position().top);
 	 		
@@ -104,14 +100,9 @@ $('.ui.dropdown').dropdown();
 	      hoverClass: "ui-state-active",
 	      drop: function( event, ui ) {
 	      	if($(ui.draggable).data("pos") == "stores"){
-	      		var content = $(ui.draggable).data("anothercontent");
 		      	$(ui.draggable).data("storecontent",$(ui.draggable).children(".content").html());
-		      	$(ui.draggable).children(".content").html(formhtml);
-		      	console.log($(ui.draggable).children(".content").children("form")[0].recommendmeal.value);
-		      	if($(ui.draggable).data("recommendmeal") != null)
-		      		$(ui.draggable).children(".content").children("form")[0].recommendmeal.value = $(ui.draggable).data("recommendmeal");
-		      	if($(ui.draggable).data("storedescription") != null)
-		      		$(ui.draggable).children(".content").children("form")[0].storedescription.value = $(ui.draggable).data("storedescription");
+		      	$(ui.draggable).children(".content").html($(ui.draggable).data('form'));
+		      	$(ui.draggable).children(".content").children('img').remove();
 	      		$(ui.draggable).data("pos","customlist");
 		      	var target = $(ui.draggable);
 		      	var droptop = target.position().top;
@@ -122,6 +113,9 @@ $('.ui.dropdown').dropdown();
 		 		$(ui.draggable).css("top","0");
 		 		$(ui.draggable).css("left",dropleft - target.offset().left + 12 + $("#statusbuttonwrapper").width() + dropwidth/2 - target.width()/2);
 		 		$(ui.draggable).css("top",droptop - target.position().top);
+		 		setexpandpicbutton();
+		 		setremovepicbutton();
+		 		setaddpicbutton();
 	      	}else{
 	      		var target = $(ui.draggable);
 		      	var droptop = target.position().top;
@@ -145,26 +139,11 @@ $('.ui.dropdown').dropdown();
 		data : {taglist:$("#createlistdropdown1").dropdown('get value')},
 		datatype:'json',
 		success : function(data) {
-			console.log(data == "");
 			$("#stores").html("");
 			if(data != ""){
 				$.each(JSON.parse(data), function(key,value) {
 					$("#stores").append(
-						'<div class="ui styled accordion filteritem" data-id="'+value.id+'" data-pos="stores" '+
-									'data-anothercontent=\'<form class="form-horizontal" role="form">'+
-										  '<div class="form-group">'+
-										    '<label class="col-sm-2 control-label">推薦菜色</label>'+
-										    '<div class="col-sm-10">'+
-										     ' <input type="text" class="form-control" id="inputEmail3" placeholder="這家店哪些菜色吸引你？">'+
-										    '</div>'+
-										  '</div>'+
-										  '<div class="form-group">'+
-										    '<label class="col-sm-2 control-label">備註</label>'+
-										    '<div class="col-sm-10">'+
-										      '<textarea class="form-control" rows="3" placeholder="對於這家店有甚麼想說的......"></textarea>'+
-										    '</div>'+
-										  '</div>'+
-										'</form>\'>'+
+						'<div class="ui styled accordion filteritem" data-id="'+value.id+'" data-pos="stores" >'+
 							'<div class="title">'+
 								value.name+
 							'</div>'+
@@ -175,6 +154,7 @@ $('.ui.dropdown').dropdown();
 						'</div>'
 					);
 				});
+				$(".filteritem").data("form",formhtml);
 				$('.ui.accordion').accordion();
 				setdraggable();
 			}else{
@@ -193,4 +173,118 @@ $('.ui.dropdown').dropdown();
 	$("#createlistsearchstore").change(function () { 
 		setstores();
 	});
+	function setremovepicbutton(){
+		$(".removefilebutton").click(function(){
+			if($(this).parent(".upload_pic").children('.expandbutton').html() == '<i class="chevron down icon"></i>'){
+    				$(this).parent(".upload_pic").next().remove();
+    			}
+			$(this).parent(".upload_pic").remove();
+		});
+	}
+	function setexpandpicbutton(){
+		$(".expandbutton").click(function(){
+			var expandbutton = $(this);
+			if($(this).html() == '<i class="chevron down icon"></i>'){
+    				$(this).html('<i class="chevron right icon"></i>');
+    				$(this).parent(".upload_pic").next().remove();
+    			}else{
+    				$(this).html('<i class="chevron down icon"></i>');
+	    			var reader = new FileReader();
+		            reader.onload = function (e) {
+		            	var dd = document.createElement("div");
+		            	$(dd).attr('class','preview');
+		            	var img = document.createElement("img");
+		                $(img).attr('src', e.target.result).attr('class','previewimg');
+		                dd.appendChild(img);
+		                expandbutton.parent(".upload_pic").after(dd);
+		                $(dd).append('<textarea class="form-control" placeholder="添加圖片描述"></textarea>');
+		            };
+		            reader.readAsDataURL($(this).parent('.upload_pic').children('input')[0].files[0]);
+		        }
+		});
+	}
+	function setaddpicbutton(){
+		$(".addpicbutton").click(function(){
+		var x = document.createElement("input");
+    	x.setAttribute("type", "file");
+    	var pos = $(this);
+    	x.onchange = function(e){
+    		console.log(123);
+    		var d = document.createElement("div");
+    		d.setAttribute("class","upload_pic");
+            var dt = document.createElement("div");
+            dt.setAttribute("class","file_icon");
+
+
+            var filename = x.value.split('\\')[x.value.split('\\').length-1];
+            var filetype = filename.split('.')[filename.split('.').length-1];
+            filetype = filetype.toLowerCase();
+            if(filetype == "rar" || filetype == "zip" || filetype == "7z"){
+                dt.innerHTML = '<i class="file archive outline icon"></i>';
+            }else if(filetype == "png" || filetype == "jpg" || filetype == "bmp" || filetype == "jpeg" ){
+                dt.innerHTML = '<i class="file image outline icon"></i>';
+            }else if(filetype == "pdf"){
+                dt.innerHTML = '<i class="file pdf outline icon"></i>';
+            }else if(filetype == "pptx" || filetype == "ppt"){
+                dt.innerHTML = '<i class="file powerpoint outline icon"></i>';
+            }else if(filetype == "docx" || filetype == "doc"){
+                dt.innerHTML = '<i class="file word outline icon"></i>';
+            }else if(filetype == "wmv" || filetype == "mp4" || filetype == "avi" || filetype == "rmvb" || filetype == "mov"){
+                dt.innerHTML = '<i class="file video outline icon"></i>';
+            }else if(filetype == "xlsx" || filetype == "xls"){
+                dt.innerHTML = '<i class="file excel outline icon"></i>';
+            }else if(filetype == "mp3" || filetype == "wma"){
+                dt.innerHTML = '<i class="file audio outline icon"></i>';
+            }else{
+                dt.innerHTML = '<i class="file outline icon"></i>';
+            }
+
+
+    		var dn = document.createElement("div");
+    		dn.setAttribute("class","file_name");
+
+    		dn.innerHTML = filename;
+    		var de = document.createElement("div");
+    		de.setAttribute("class","expandbutton");
+            de.innerHTML = '<i class="chevron right icon"></i>';
+            var dd = document.createElement("div");
+            dd.setAttribute("class","removefilebutton");
+            dd.innerHTML = '<i class="remove circle icon"></i>';
+            d.appendChild(dt);
+    		d.appendChild(dn);
+    		d.appendChild(de);
+    		d.appendChild(dd);
+    		d.appendChild(x);
+    		pos.parent("form").append(d);
+    		$(de).click(function(){
+    			if($(this).data("type") == "expanded"){
+    				$(this).html('<i class="chevron right icon"></i>');
+    				$(this).data("type","fold");
+    				$(d).next().remove();
+    			}else{
+    				$(this).data("type","expanded");
+    				$(this).html('<i class="chevron down icon"></i>');
+	    			var reader = new FileReader();
+		            reader.onload = function (e) {
+		            	var dd = document.createElement("div");
+		            	$(dd).attr('class','preview');
+		            	var img = document.createElement("img");
+		                $(img).attr('src', e.target.result).attr('class','previewimg');
+		                dd.appendChild(img);
+		                $(d).after(dd);
+		                $(dd).append('<textarea class="form-control" placeholder="添加圖片描述"></textarea>');
+		            };
+		            reader.readAsDataURL($(this).parent('.upload_pic').children('input')[0].files[0]);
+		        }
+    		});
+    		$(dd).click(function(){
+    			if($(d).children('.expandbutton').data("type") == "expanded"){
+    				$(d).next().remove();
+    			}
+    			$(d).remove();
+    		});
+    	}
+    	x.click();
+    });
+	}
 });

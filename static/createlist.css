@@ -40,6 +40,9 @@
 #customlist .filteritem .content{
 	padding: .5em 2.5em .1em 1.5em;
 }
+#customlist .filteritem .content form{
+	padding-bottom: 10px;
+}
 textarea{
 	resize:none;
 	overflow: hidden;
@@ -80,4 +83,55 @@ textarea{
 	margin: auto;
     display: block;
     width: 100px;
+}
+.addpicbutton{
+	height: 40px;
+    background-color: #E5E5E5;
+    border-radius: 10px;
+    line-height: 40px;
+    font-size: 18px;
+    font-family: Microsoft JhengHei;
+    font-weight: bold;
+    width: 40%;
+    margin: auto;
+    transition:background-color 0.3s;
+}
+.addpicbutton:hover{
+	background-color: #B5B5B5;
+	cursor:pointer;
+}
+.file_icon{
+	flex:1;
+}
+.file_name{
+	flex:7;
+}
+.upload_pic{
+	display: flex;
+    font-size: 20px;
+    line-height: 30px;
+    position: relative;
+    margin-top: 10px;
+    text-align: center;
+}
+.upload_pic input{
+	display: none;
+}
+.expandbutton:hover{
+	cursor: pointer;
+}
+.removefilebutton:hover{
+	cursor: pointer;
+}
+.preview{
+	max-width: 60%;
+	margin: auto;
+}
+.previewimg{
+	max-width:100%;
+	margin-bottom: 10px;
+}
+.preview textarea{
+	height:50px;
+	min-height: 50px;
 }
