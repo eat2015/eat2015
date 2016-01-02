@@ -44,6 +44,10 @@ class ListDislikeAdmin(admin.ModelAdmin):
     list_filter = ('list__name',)
     search_fields = ('list__name',)
 
+class ListStorePicAdmin(admin.ModelAdmin):
+    list_display = ('liststorecomment','pic','description')
+    list_filter = ('liststorecomment',)
+
 # Register your models here.
 admin.site.register(Users)
 admin.site.register(Tags, TagsAdmin)
@@ -57,5 +61,8 @@ admin.site.register(ListComment)
 admin.site.register(ListsStoreComment, ListsStoreCommentAdmin)
 admin.site.register(ListLike, ListLikeAdmin)
 admin.site.register(ListDislike, ListDislikeAdmin)
+admin.site.register(ListStorePic, ListStorePicAdmin)
+
+
 
 
