@@ -31,6 +31,16 @@ $('.ui.dropdown').dropdown();
 				store.id = $(val).data("id");
 				store.recommendmeal = $("#customlist .filteritem form")[index].elements[0].value;
 				store.description = $("#customlist .filteritem form")[index].elements[1].value;
+				var pics = [];
+				console.log(val);
+				console.log($(val).children('.content').children('form').children('.upload_pic'));
+				for(var i = 0;i < $(val).children('.content').children('form').children('.upload_pic').length;i++){
+					var pic = {};
+					pic.img = $(val).children('.content').children('form').children('.upload_pic').children('input')[i].files[0];
+					pic.description = $(val).children('.content').children('form').children('.preview').children('textarea')[i].value;
+					pics.push(pic);
+				}
+				store.pics = pics;
 				stores.push(store);
 			});
 			var data = {};
@@ -38,6 +48,7 @@ $('.ui.dropdown').dropdown();
 			data.taglist = $("#createlistdropdown2").dropdown('get value');
 			data.description = $("#customlistdesription form")[0].elements[3].value;
 			data.customlist = stores;
+			console.log(stores);
 			$.ajax({
 				url : "createlistsubmit",
 				type : "POST",
@@ -186,20 +197,10 @@ $('.ui.dropdown').dropdown();
 			var expandbutton = $(this);
 			if($(this).html() == '<i class="chevron down icon"></i>'){
     				$(this).html('<i class="chevron right icon"></i>');
-    				$(this).parent(".upload_pic").next().remove();
+    				$(this).parent(".upload_pic").next().css("display",'none');
     			}else{
     				$(this).html('<i class="chevron down icon"></i>');
-	    			var reader = new FileReader();
-		            reader.onload = function (e) {
-		            	var dd = document.createElement("div");
-		            	$(dd).attr('class','preview');
-		            	var img = document.createElement("img");
-		                $(img).attr('src', e.target.result).attr('class','previewimg');
-		                dd.appendChild(img);
-		                expandbutton.parent(".upload_pic").after(dd);
-		                $(dd).append('<textarea class="form-control" placeholder="添加圖片描述"></textarea>');
-		            };
-		            reader.readAsDataURL($(this).parent('.upload_pic').children('input')[0].files[0]);
+    				$(this).parent(".upload_pic").next().css("display",'block');
 		        }
 		});
 	}
@@ -256,25 +257,25 @@ $('.ui.dropdown').dropdown();
     		d.appendChild(dd);
     		d.appendChild(x);
     		pos.parent("form").append(d);
+    		var reader = new FileReader();
+		    reader.onload = function (e) {
+		     	var dd = document.createElement("div");
+		     	$(dd).attr('class','preview');
+		     	var img = document.createElement("img");
+		        $(img).attr('src', e.target.result).attr('class','previewimg');
+		        dd.appendChild(img);
+		        $(d).after(dd);
+		        $(dd).append('<textarea class="form-control" placeholder="添加圖片描述"></textarea>');
+		        $(d).next().css("display",'none');
+		    };
+		    reader.readAsDataURL($(d).children('input')[0].files[0]);
     		$(de).click(function(){
-    			if($(this).data("type") == "expanded"){
+    			if($(this).html() == '<i class="chevron down icon"></i>'){
     				$(this).html('<i class="chevron right icon"></i>');
-    				$(this).data("type","fold");
-    				$(d).next().remove();
+    				$(d).next().css("display",'none');
     			}else{
-    				$(this).data("type","expanded");
     				$(this).html('<i class="chevron down icon"></i>');
-	    			var reader = new FileReader();
-		            reader.onload = function (e) {
-		            	var dd = document.createElement("div");
-		            	$(dd).attr('class','preview');
-		            	var img = document.createElement("img");
-		                $(img).attr('src', e.target.result).attr('class','previewimg');
-		                dd.appendChild(img);
-		                $(d).after(dd);
-		                $(dd).append('<textarea class="form-control" placeholder="添加圖片描述"></textarea>');
-		            };
-		            reader.readAsDataURL($(this).parent('.upload_pic').children('input')[0].files[0]);
+    				$(d).next().css("display",'block');
 		        }
     		});
     		$(dd).click(function(){
