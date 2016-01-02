@@ -137,6 +137,9 @@ $('.ui.dropdown').dropdown();
 		 		$(ui.draggable).css("top","0");
 		 		$(ui.draggable).css("left",dropleft - target.position().left + dropwidth/2 - target.width()/2);
 		 		$(ui.draggable).css("top",droptop - target.position().top);
+		 		setexpandpicbutton();
+		 		setremovepicbutton();
+		 		setaddpicbutton();
 	      	}
 	      }
 	    });
