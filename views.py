@@ -265,7 +265,6 @@ def create_food_list(request):
     if request.method == 'POST':
         request_data = json.loads(dict(request.POST)['json'][0])
 
-        print(request_data)
         user = Users.objects.get(username=request.COOKIES['account'])
         list_name = request_data['listname']
         list_des = request_data['description']
@@ -285,6 +284,7 @@ def create_food_list(request):
                
         stores = request_data['customlist']
         
+        ID = []
         for store in stores:
             # add store onto list
             store_obj = Stores.objects.get(id=store['id'])
@@ -292,10 +292,6 @@ def create_food_list(request):
             new_list_store_recommend = ListsStoreComment.objects.create(list=new_list,
                     store=store_obj, dish=store['recommendmeal'], 
                     description=store['description'])
-            picc = store['pics']
-            for pic in picc:
-                new_list_store_pic = ListStorePic.objects.create(pic=pic['img'],
-                        description = pic['description'],
-                        liststorecomment = new_list_store_recommend)
+            ID.append(new_list_store_recommend.id)
 
-        return HttpResponse('')
+        return HttpResponse(json.dumps(ID))
