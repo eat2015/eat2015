@@ -7,6 +7,10 @@ from django.template.loader import render_to_string
 from mysite.models import *
 from django.template.context_processors import csrf
 import json
+def givestore(request):
+    c={}
+    c.update(csrf(request))
+    return reder_to_response("givestore.html", c)
 
 def createlist(request):
 	c = {}
@@ -264,7 +268,7 @@ def search_list_ajax(request):
 def create_food_list(request):
     if request.method == 'POST':
         request_data = json.loads(dict(request.POST)['json'][0])
-
+        print(request_data)
         user = Users.objects.get(username=request.COOKIES['account'])
         list_name = request_data['listname']
         list_des = request_data['description']
@@ -292,6 +296,14 @@ def create_food_list(request):
             new_list_store_recommend = ListsStoreComment.objects.create(list=new_list,
                     store=store_obj, dish=store['recommendmeal'], 
                     description=store['description'])
-            ID.append(new_list_store_recommend.id)
-
+            pics = store['pics']
+            for pic in pics:
+                new_pic = ListStorePic.objects.create(
+                        liststorecomment=new_list_store_recommend,
+                        description=pic['description'])
+                ID.append(new_pic.id)
         return HttpResponse(json.dumps(ID))
+
+def create_store(request):
+    if  request.method == 'POST':
+        return HttpResponse('')

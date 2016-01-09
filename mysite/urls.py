@@ -35,5 +35,7 @@ urlpatterns = [
     url(r'^createlistsubmit$', create_food_list),
     url(r'^searchlistajax$' , search_list_ajax),
     url(r'^searchajax$' , search_ajax),
+    url(r'^createstore$' , create_store),
+    url(r'^givestore$' , givestore),
 ]
 
