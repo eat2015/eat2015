@@ -24,6 +24,9 @@ $('.ui.dropdown').dropdown();
 		if($("#customlist").children(".filteritem").length == 0){
 			$('#myerrormessagemodal').modal('toggle');
 			$("#errormessagecontent").html("清單內容不可以為空");
+		}else if($("#createlistdropdown2").dropdown('get value') == ''){
+			$('#myerrormessagemodal').modal('toggle');
+			$("#errormessagecontent").html("清單不可以沒有標籤");
 		}else{
 			var stores = [];
 			$("#customlist .filteritem").each(function(index,val){
@@ -31,16 +34,16 @@ $('.ui.dropdown').dropdown();
 				store.id = $(val).data("id");
 				store.recommendmeal = $("#customlist .filteritem form")[index].elements[0].value;
 				store.description = $("#customlist .filteritem form")[index].elements[1].value;
-				/*var pics = [];
+				var pics = [];
 				console.log(val);
 				console.log($(val).children('.content').children('form').children('.upload_pic'));
 				for(var i = 0;i < $(val).children('.content').children('form').children('.upload_pic').length;i++){
 					var pic = {};
-					pic.img = $(val).children('.content').children('form').children('.upload_pic').children('input')[i].files[0];
+					//pic.img = $(val).children('.content').children('form').children('.upload_pic').children('input')[i].files[0];
 					pic.description = $(val).children('.content').children('form').children('.preview').children('textarea')[i].value;
 					pics.push(pic);
 				}
-				store.pics = pics;*/
+				store.pics = pics;
 				stores.push(store);
 			});
 			var data = {};
