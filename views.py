@@ -311,9 +311,11 @@ def create_store(request):
 
 
 def create_pic(request):
+    
     if request.method =='POST':
         request_data = request.POST.get('id')
-
+        print(request_data)
+        print(request.FILES)
         request_data = request_data.split(',')
         for data in request_data:
             request_pic = request.FILES.get(data)
