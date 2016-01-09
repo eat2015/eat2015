@@ -303,12 +303,12 @@ def create_food_list(request):
 
 def create_store(request):
     if  request.method == 'POST':
-            request_data = json.loads(dict(request.POST)['json'][0])
-            
+        request_data = json.loads(dict(request.POST)['json'][0])
         return HttpResponse('')
 
 
 def create_pic(request):
     if request.method =='POST':
-
+        print(request.POST)
+        print(request.FILES)
         return HttpResponse('')

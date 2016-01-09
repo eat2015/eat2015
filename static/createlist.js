@@ -21,6 +21,7 @@ $('.ui.dropdown').dropdown();
 			$("#addlistdescriptionbutton").removeClass("btn-default").addClass("btn-primary");
 	});
 	$("#customlistsubmitbutton").click(function(){
+		var button = $("#customlistsubmitbutton");
 		if($("#customlist").children(".filteritem").length == 0){
 			$('#myerrormessagemodal').modal('toggle');
 			$("#errormessagecontent").html("清單內容不可以為空");
@@ -58,7 +59,17 @@ $('.ui.dropdown').dropdown();
 				data : {json:JSON.stringify(data)},
 				dataType: "json",
 				success : function(data) {
-					console.log(data);
+					var id = data;
+					var request = new XMLHttpRequest();
+					var formData = new FormData();
+					console.log(id);
+					formData.append('id',id);
+					$('.upload_pic').each(function(key,value){
+						formData.append(id[key],$(value).find('input:file')[0].files[0]);
+					});
+					request.open('post','createpic');
+					request.setRequestHeader("X-CSRFToken", Cookies.get('csrftoken'));
+					request.send(formData);
 				},
 				error : function(xhr,errmsg,err) {
 						console.log(xhr.status + ": " + xhr.responseText);
