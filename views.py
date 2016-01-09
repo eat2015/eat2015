@@ -10,7 +10,7 @@ import json
 def givestore(request):
     c={}
     c.update(csrf(request))
-    return reder_to_response("givestore.html", c)
+    return render_to_response("givestore.html", c)
 
 def createlist(request):
 	c = {}
@@ -304,18 +304,10 @@ def create_food_list(request):
         return HttpResponse(json.dumps(ID))
 
 
-def create_store(request):
-    if  request.method == 'POST':
-        request_data = json.loads(dict(request.POST)['json'][0])
-        return HttpResponse('')
-
-
 def create_pic(request):
     
     if request.method =='POST':
         request_data = request.POST.get('id')
-        print(request_data)
-        print(request.FILES)
         request_data = request_data.split(',')
         for data in request_data:
             request_pic = request.FILES.get(data)
@@ -324,3 +316,27 @@ def create_pic(request):
             pic.save()
 
         return HttpResponse('success')
+
+
+def add_new_store(request):
+    if  request.method == 'POST':
+        request_data = json.loads(dict(request.POST)['json'][0])
+        store_name_diff = Stores.objects.filter(name__iexact=request_data['storename'])
+
+        if len(store_name_diff) == 0:
+            store_tags = request_data['storetag'].split(',')
+
+            new_store = Stores.objects.create(name=request_data['storename'], good=0, bad=0,
+                description=request_data['storedescription'], location=request_data['storeaddress'],
+                fan_page=request_data['storefb'])
+
+            for tag_id in store_tags:
+                tag = Tags.objects.get(id=int(tag_id))
+                new_store.tags_set.add(tag)
+            new_store.save()
+
+            return HttpResponse('success')
+        else:
+            return HttpResponse('fail')
+    else:
+        return HttpResponse('fail')
