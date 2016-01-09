@@ -64,6 +64,9 @@
 #registerbutton:hover{
 	cursor: pointer;
 }
+#givestorebutton:hover{
+    cursor: pointer;
+}
 #homebutton:hover{
 	cursor: pointer;
 }
