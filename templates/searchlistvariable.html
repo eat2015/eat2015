@@ -90,6 +90,19 @@
                                   </p>
                                 </div>
                               </div>
+                              {% for pic in storecomment.pics %}
+                              <div class="form-group">
+                                  
+                                  <div style="
+                                    text-align: center;
+                                ">{{ pic.description }}</div>
+                                   <img src="{{ pic.url }}" style="
+                                    max-width: 500px;
+                                    margin: auto;
+                                    display: block;
+                                ">                       
+                                </div>
+                                {% endfor %}
                               <div class="form-group" style="margin-bottom:5px;">
                                 <div class="col-sm-12" style="padding-top:7px">
                                   <a class="storeinformation" href="searchstore?store={{storecomment.store.id}}">店家資訊</a>
