@@ -91,9 +91,6 @@ def checkcookie(request):
 	return JsonResponse(response_data)
 
 
-
-
-
 def alltag(request):
     tags = Tags.objects.all()
     
@@ -268,7 +265,6 @@ def search_list_ajax(request):
 def create_food_list(request):
     if request.method == 'POST':
         request_data = json.loads(dict(request.POST)['json'][0])
-        print(request_data)
         user = Users.objects.get(username=request.COOKIES['account'])
         list_name = request_data['listname']
         list_des = request_data['description']
@@ -304,6 +300,15 @@ def create_food_list(request):
                 ID.append(new_pic.id)
         return HttpResponse(json.dumps(ID))
 
+
 def create_store(request):
     if  request.method == 'POST':
+            request_data = json.loads(dict(request.POST)['json'][0])
+            
+        return HttpResponse('')
+
+
+def create_pic(request):
+    if request.method =='POST':
+
         return HttpResponse('')

@@ -37,5 +37,6 @@ urlpatterns = [
     url(r'^searchajax$' , search_ajax),
     url(r'^createstore$' , create_store),
     url(r'^givestore$' , givestore),
+    url(r'^createpic$' , create_pic),
 ]
 
