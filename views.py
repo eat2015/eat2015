@@ -258,7 +258,10 @@ def search_list_ajax(request):
         comments = raw_list.listcomment_set.all()
         
         storecomments = raw_list.listsstorecomment_set.all()
+        for storecomment in storecomments:
+            storecomment.pics = storecomment.liststorepic_set.all()
         
+
         return render_to_response('searchlistvariable.html', locals())
 
 
@@ -309,6 +312,13 @@ def create_store(request):
 
 def create_pic(request):
     if request.method =='POST':
-        print(request.POST)
-        print(request.FILES)
-        return HttpResponse('')
+        request_data = request.POST.get('id')
+
+        request_data = request_data.split(',')
+        for data in request_data:
+            request_pic = request.FILES.get(data)
+            pic = ListStorePic.objects.get(id=data)
+            pic.pic = request_pic
+            pic.save()
+
+        return HttpResponse('success')
