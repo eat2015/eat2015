@@ -13,12 +13,14 @@
 	<link rel="stylesheet" href="{% static 'bootstrap.min.css' %}">
 	<script src="{% static 'bootstrap.min.js' %}"></script>
   <script src="{% static 'dropdown.min.js' %}"></script>
+  <link rel="stylesheet" href="{% static 'UI-Form-master/form.min.css' %}">
+  <script src="{% static 'UI-Form-master/form.min.js' %}"></script>
 	<script src="{% static 'js.cookie.js' %}"></script>
   <script src="{% static 'index.js' %}"></script>
 </head>
 <body style="background-color:#FFFCF6;height:initial">
   <div class="ui one column grid" style="margin-top:74px;">
-      <div class="column">
+      <div class="column" style="padding-top:0px;padding-bottom:0px">
         <div id="mainscreen">
             <html>
             <head>
@@ -26,7 +28,7 @@
                 <script src="{% static 'searchstore.js' %}"></script>
             </head>
             <body>
-                <div class="ui equal width stackable grid">
+                <div class="ui equal width stackable grid" style="margin-top:10px;">
                     <div class="column">
                         <div class="ui card" style="margin:auto;width:90%">
                           <div class="content">
@@ -89,6 +91,44 @@
                               </div>
                             </div>
                         {% endfor %}
+                        <!-- if user.is_logined  -->
+                        <div class="ui card" style="width:95%;">
+                              <div class="content" style="padding-bottom:0px;">
+                                    <div class="ui comments">
+                                      <div class="comment">
+                                        <div class="content">
+                                          <div class="author" style="text-align:center">回覆</div>
+                                          <div class="text" style="margin: 0.5em 0 0.5em;">
+                                            <div class="ui form">
+                                              <div class="field">
+                                                <textarea style="min-height:60px;height:60px;"></textarea>
+                                              </div>
+                                              <div id="submitreplybutton" class="ui submit button" style="margin: auto;display: block;width: 80px;">送出</div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                </div>
+                              </div>
+                        <!-- else 
+                        <div class="ui card" style="width:95%">
+                              <div class="content">
+                                    <div class="ui comments">
+                                      <div class="comment">
+                                        <div class="content">
+                                          <div class="text" style="margin: 0.5em 0 0.5em;text-align:center">
+                                            訪客無法使用回覆功能，請
+                                            <span id="loginbutton" data-toggle="modal" data-target="#myloginmodal" style="color:blue">登入</span>
+                                            或
+                                            <span id="registerbutton" data-toggle="modal" data-target="#myregistrationmodel"style="color:blue">註冊</span>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                </div>
+                            </div>
+                             endif -->
                     </div>
                 </div>
             </body>
@@ -136,18 +176,18 @@
         	<div class="modal-body" id="loginbody">
          		<form role="form">{% csrf_token %}
             		<div class="form-group">
-            	  		<label for="usrname"><span class="glyphicon glyphicon-user"></span> 帳號</label>
+            	  		<label for="usrname">帳號</label>
             	  		<input type="text" class="form-control" id="loginusrname" placeholder="請輸入帳號">
             		</div>
             		<div class="form-group">
-            	  		<label for="psw"><span class="glyphicon glyphicon-eye-open"></span> 密碼</label>
+            	  		<label for="psw">密碼</label>
             	  		<input type="text" class="form-control" id="loginpsw" placeholder="請輸入密碼">
             		</div>
             		<div class="checkbox">
               			<label><input type="checkbox" value="" checked>請記得我</label>
             		</div>
                 <br>
-              		<div class="btn btn-success btn-block" id="loginsubmitbutton" style="width:150px;margin:auto"><span class="glyphicon glyphicon-off"></span> 登入</div>
+              		<div class="btn btn-success btn-block" id="loginsubmitbutton" style="width:150px;margin:auto"> 登入</div>
           		</form>
         	</div>
       		</div>   
@@ -163,15 +203,15 @@
         	<div class="modal-body" id="registrationbody">
          		<form role="form">
             		<div class="form-group">
-            	  		<label for="usrname"><span class="glyphicon glyphicon-user"></span> 帳號</label>
+            	  		<label for="usrname"> 帳號</label>
             	  		<input type="text" class="form-control" id="registerusrname" placeholder="請輸入帳號">
             		</div>
             		<div class="form-group">
-            	  		<label for="psw"><span class="glyphicon glyphicon-eye-open"></span> 密碼</label>
+            	  		<label for="psw">密碼</label>
             	  		<input type="text" class="form-control" id="registerpsw" placeholder="請輸入密碼">
             		</div>
             		<div class="form-group">
-            	  		<label for="psw"><span class="glyphicon glyphicon-envelope"></span> 電子郵件</label>
+            	  		<label for="psw">電子郵件</label>
             	  		<input type="text" class="form-control" id="registeremail" placeholder="請輸入你的電子郵件">
             		</div>
                 <br>

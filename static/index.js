@@ -26,6 +26,20 @@ $(document).ready(function(){
 	    	});
 	}
 	function setnormalbutton(){
+		$("#givestorebutton").click(function(){
+			$("#mainscreen").html('<div class="ui active centered large inline loader" style="margin-top:200px;"></div>');
+			$.ajax({
+	        	url : "givestore",
+	        	type : "POST",
+	        	data : {},
+	        	success : function(data) {
+	    			$("#mainscreen").html(data);
+	       		},
+	        	error : function(xhr,errmsg,err) {
+	            	console.log(xhr.status + ": " + xhr.responseText);
+	        	}
+	    	});
+		});
 		$("#homebutton").click(function(){
 			$("#mainscreen").html('<div class="ui active centered large inline loader" style="margin-top:200px;"></div>');
 			$.ajax({

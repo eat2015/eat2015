@@ -21,13 +21,35 @@ $('.ui.dropdown').dropdown();
 			$("#addlistdescriptionbutton").removeClass("btn-default").addClass("btn-primary");
 	});
 	$("#customlistsubmitbutton").click(function(){
-		var button = $("#customlistsubmitbutton");
+		var button = $(this);
+		button.html('<div style="" class="ui active small inline loader"></div>');
+		button.attr('disabled','disabled');
+		$("#addlistdescriptionbutton").removeClass('btn-primary');
+		$("#addlistdescriptionbutton").addClass('btn-success');
+		$("#createlistbutton").attr('disabled','disabled');
+		$("#addlistdescriptionbutton").attr('disabled','disabled');
+		$("#leftfinishbutton").removeClass('btn-default');
+		$("#leftfinishbutton").addClass('btn-primary');
 		if($("#customlist").children(".filteritem").length == 0){
 			$('#myerrormessagemodal').modal('toggle');
 			$("#errormessagecontent").html("清單內容不可以為空");
+			button.html('送出');
+			button.removeAttr('disabled');
+			$("#leftfinishbutton").removeClass('btn-primary');
+			$("#createlistbutton").removeAttr('disabled');
+			$("#leftfinishbutton").addClass('btn-default');
+			$("#addlistdescriptionbutton").removeClass('btn-success');
+			$("#addlistdescriptionbutton").addClass('btn-primary');
 		}else if($("#createlistdropdown2").dropdown('get value') == ''){
 			$('#myerrormessagemodal').modal('toggle');
 			$("#errormessagecontent").html("清單不可以沒有標籤");
+			button.html('送出');
+			button.removeAttr('disabled');
+			$("#leftfinishbutton").removeClass('btn-primary');
+			$("#createlistbutton").removeAttr('disabled');
+			$("#leftfinishbutton").addClass('btn-default');
+			$("#addlistdescriptionbutton").removeClass('btn-success');
+			$("#addlistdescriptionbutton").addClass('btn-primary');
 		}else{
 			var stores = [];
 			$("#customlist .filteritem").each(function(index,val){
@@ -59,17 +81,26 @@ $('.ui.dropdown').dropdown();
 				data : {json:JSON.stringify(data)},
 				dataType: "json",
 				success : function(data) {
-					var id = data;
-					var request = new XMLHttpRequest();
-					var formData = new FormData();
-					console.log(id);
-					formData.append('id',id);
-					$('.upload_pic').each(function(key,value){
-						formData.append(id[key],$(value).find('input:file')[0].files[0]);
-					});
-					request.open('post','createpic');
-					request.setRequestHeader("X-CSRFToken", Cookies.get('csrftoken'));
-					request.send(formData);
+					console.log();
+					if(data.length != 0){
+						var id = data;
+						var request = new XMLHttpRequest();
+						var formData = new FormData();
+						console.log(id);
+						formData.append('id',id);
+						$('.upload_pic').each(function(key,value){
+							formData.append(id[key],$(value).find('input:file')[0].files[0]);
+						});
+						request.open('post','createpic');
+						request.setRequestHeader("X-CSRFToken", Cookies.get('csrftoken'));
+						request.send(formData);
+					}else{
+						button.html('完成');
+						button.removeClass('btn-default');
+						button.addClass('btn-success');
+						$("#leftfinishbutton").removeClass('btn-primary');
+						$("#leftfinishbutton").addClass('btn-success');
+					}
 				},
 				error : function(xhr,errmsg,err) {
 						console.log(xhr.status + ": " + xhr.responseText);

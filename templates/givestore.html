@@ -1,0 +1,39 @@
+<script src="static/givestore.js"></script>
+<div style="text-align:center;line-height:60px;font-size:25px;height:60px;font-family:Microsoft JhengHei;">預覽</div>
+<div class="ui card" style="margin:auto;width:50%">
+<div class="content">
+    <a href="" target="_blank"  id="fbaddressoutput" style="display:none"> <i class="facebook icon" style="float:right"></i> </a>
+    <div class="header" style="float:left;width:51%" id="storenameoutput" >店家名稱</div>
+    <div class="meta" style="float:left;width:51%" id="storeaddressoutput">店家地址</div>
+    <div class="description" id="storedescriptionoutput">店家敘述
+    </div>
+  </div>
+</div>
+<form class="ui form" style="width:40%;margin:auto;margin-top:30px;s">
+  <div class="field">
+    <label>店家名稱</label>
+    <input id="storenameinput" type="text" name="storename">
+  </div>
+  <div class="field">
+    <label>店家地址</label>
+    <input id="storeaddressinput" type="text" name="storeaddress">
+  </div>
+  <div class="field">
+    <label>店家標籤</label>
+    <div class="ui fluid multiple search selection dropdown" id="storetagdropdown" data-content="滑鼠移到下方的標籤項目將會顯示該標籤的敘述">
+      <input type="hidden" name="tag">
+       <div class="default text">請輸入你想要搜尋的標籤</div>
+      <div class="menu" id="storetagdropdownmenu">
+      </div>
+     </div>
+  </div>
+  <div class="field">
+    <label>店家敘述</label>
+    <textarea id="storedescriptioninput" style="min-height:60px;height:60px;" name="storedescription"></textarea>
+  </div>
+  <div class="field">
+    <label>FB粉絲專業網址(可選填)</label>
+    <input id="fbaddressinput" type="text" name="fbaddress" placeholder="開頭必須為http://或https://">
+  </div>
+  <button id="storesubmitbutton" class="ui button" type="submit" style="margin:auto;width:80px;display:block">送出</button>
+</form>

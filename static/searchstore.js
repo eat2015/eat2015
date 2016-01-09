@@ -20,4 +20,9 @@ $(document).ready(function(){
 			$(this).get(0).style.color = "";
 		}
 	});
+	$("#submitreplybutton").click(function(){
+		$(this).addClass('loading');
+		$(this).attr('disabled','disabled');
+		console.log($(this).parents('.ui.card'));
+	});
 });
