@@ -42,13 +42,22 @@
                             </div>
                           </div>
                           <div class="extra content">
-                            <div class="likebutton">
+
+                            {% if store.like %} 
+                            <div class="likebutton" style="color:red">
+                              {% else %}
+                              <div class="likebutton" >
+                              {% endif %}
                                 <span class="left floated like">
                                   &#10084;
                                   {{ store.good }} 喜歡
                                 </span>
                             </div>
-                            <div class="dislikebutton">
+                            {% if store.unlike %} 
+                            <div class="dislikebutton" style="color:black">
+                              {% else %}
+                              <div class="dislikebutton" >
+                              {% endif %}
                                 <span class="right floated star">
                                   &#128148;
                                   {{ store.bad }} 不喜歡
@@ -76,13 +85,21 @@
                                     </div>
                                 </div>
                                 <div class="extra content">
-                                    <div class="dislikebutton">
+                                  {% if comment.unlike %} 
+                                    <div class="dislikebutton" style="color:black">
+                                      {% else %}
+                                      <div class="dislikebutton" >
+                                      {% endif %}
                                         <span class="right floated star" style="width:80px;text-align:center">
                                           &#128148;
                                           {{ comment.bad }} 不喜歡
                                         </span>
                                     </div>
-                                    <div class="likebutton">
+                                    {% if comment.like %} 
+                                    <div class="likebutton" style="color:red">
+                                      {% else %}
+                                      <div class="likebutton" >
+                                      {% endif %}
                                         <span class="right floated like">
                                           &#10084;
                                           {{ comment.good }} 喜歡
