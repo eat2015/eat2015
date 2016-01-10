@@ -8,7 +8,49 @@ $(document).ready(function(){
 		}else if($(this).get(0).style.color == "black"){
 			$(this).get(0).style.color = "";
 		}
-		console.log($(this).parent().children(".likebutton")[0].style);
+		if(button.data('type') == "store"){
+			$.ajax({
+				url : "dislikestore",
+				type : "POST",
+				data : {storeid:button.data('storeid')},
+				datatype:'json',
+				success : function(data) {
+					if(data == 0){
+						button.get(0).style.color = 'black';
+						button.find('b').html(parseInt(button.find('b').html())+1);
+					}else if(data == 1){
+						button.get(0).style.color = '';
+						button.find('b').html(parseInt(button.find('b').html())-1);
+					}else{
+
+					}
+				},
+				error : function(xhr,errmsg,err) {
+						console.log(xhr.status + ": " + xhr.responseText);
+					} 
+				});
+		}else if(button.data('type') == "storecomment"){
+			$.ajax({
+				url : "dislikestorecomment",
+				type : "POST",
+				data : {storecommentid:button.data('storecommentid')},
+				datatype:'json',
+				success : function(data) {
+					if(data == 0){
+						button.get(0).style.color = 'black';
+						button.find('b').html(parseInt(button.find('b').html())+1);
+					}else if(data == 1){
+						button.get(0).style.color = '';
+						button.find('b').html(parseInt(button.find('b').html())-1);
+					}else{
+
+					}
+				},
+				error : function(xhr,errmsg,err) {
+						console.log(xhr.status + ": " + xhr.responseText);
+					} 
+				});
+		}
 	});
 	$(".likebutton").click(function(){
 		var button = $(this);
@@ -43,12 +85,11 @@ $(document).ready(function(){
 						console.log(xhr.status + ": " + xhr.responseText);
 					} 
 				});
-			};
 		}else if(button.data('type') == "storecomment"){
 			$.ajax({
 				url : "likestorecomment",
 				type : "POST",
-				data : {storeid:button.data('storeid')},
+				data : {storecommentid:button.data('storecommentid')},
 				datatype:'json',
 				success : function(data) {
 					if(data == 0){
@@ -65,7 +106,6 @@ $(document).ready(function(){
 						console.log(xhr.status + ": " + xhr.responseText);
 					} 
 				});
-			};
 		}
 	});
 	$("#submitreplybutton").click(function(){
