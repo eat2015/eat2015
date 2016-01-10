@@ -108,8 +108,8 @@
                               </div>
                             </div>
                         {% endfor %}
-                        <!-- if user.is_logined  -->
-                        <div class="ui card" style="width:95%;">
+                        {% if user.is_logined  %}
+                        <div class="ui card" style="width:95%;" id="userreply">
                               <div class="content" style="padding-bottom:0px;">
                                     <div class="ui comments">
                                       <div class="comment">
@@ -120,7 +120,7 @@
                                               <div class="field">
                                                 <textarea style="min-height:60px;height:60px;"></textarea>
                                               </div>
-                                              <div id="submitreplybutton" class="ui submit button" style="margin: auto;display: block;width: 80px;">送出</div>
+                                              <div id="submitreplybutton" class="ui submit button" style="margin: auto;display: block;width: 80px;" data-storeid="{{ store.id }}">送出</div>
                                             </div>
                                           </div>
                                         </div>
@@ -128,8 +128,8 @@
                                     </div>
                                 </div>
                               </div>
-                        <!-- else 
-                        <div class="ui card" style="width:95%">
+                        {% else %} 
+                        <div class="ui card" style="width:95%" id="userreply">
                               <div class="content">
                                     <div class="ui comments">
                                       <div class="comment">
@@ -145,7 +145,7 @@
                                     </div>
                                 </div>
                             </div>
-                             endif -->
+                            {% endif %}
                     </div>
                 </div>
             </body>
