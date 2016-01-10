@@ -32,6 +32,12 @@ STATICFILES_DIRS = (
 )
 # Application definition
 
+STATIC_URL = '/static/'
+
+MEDIA_ROOT = ''
+MEDIA_URL = 'localhost/'
+
+
 INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.auth',
@@ -107,7 +113,3 @@ APPEND_SLASH = False
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
-STATIC_URL = '/static/'
-
-MEDIA_ROOT = '/pic_folder/'
-MEDIA_URL = 'http://localhost/'

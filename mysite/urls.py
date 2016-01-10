@@ -37,7 +37,7 @@ urlpatterns = [
     url(r'^createlistsubmit$', create_food_list),
     url(r'^searchlistajax$' , search_list_ajax),
     url(r'^searchajax$' , search_ajax),
-    url(r'^createstore$' , create_store),
+    url(r'^addnewstore$' , add_new_store),
     url(r'^givestore$' , givestore),
     url(r'^createpic$' , create_pic),
-]  + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
