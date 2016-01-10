@@ -491,48 +491,6 @@ $(document).ready(function(){
 	function setreplybutton(){
 		$("#submitreplybutton").click(function(){
 			var button = $(this);
-			var string = '{"author":"123","datetime":"456"}';
-			var data = jQuery.parseJSON(string);
-			//console.log(data.author);
-			//console.log(data.datetime);
-			button.parents('.ui.card').before(
-				'<div class="ui card" style="width:95%;opacity:0">'+
-                   '<div class="content">'+
-                         '<div class="ui comments">'+
-                           '<div class="comment">'+
-                             '<div class="content">'+
-                               '<a class="author">'+data.author+'</a>'+
-                               '<div class="metadata">'+
-                                 '<div class="date">'+data.datetime+'</div>'+
-                               '</div>'+
-                               '<div class="text" style="margin: 0.5em 0 0.5em;">'+
-                                 $(this).parent().find('textarea')[0].value+
-                               '</div>'+
-                             '</div>'+
-                           '</div>'+
-                         '</div>'+
-                     '</div>'+
-                     '<div class="extra content">'+
-                                  
-                           '<div class="dislikebutton">'+
-                                      
-                             '<span class="right floated star" style="width:80px;text-align:center">'+
-                               '💔'+
-                               '<b>0</b> 不喜歡'+
-                             '</span>'+
-                         '</div>'+
-                                    
-                           '<div class="likebutton">'+
-                                      
-                             '<span class="right floated like">'+
-                               '❤'+
-                               '<b>0</b> 喜歡'+
-                             '</span>'+
-                         '</div>'+
-                   '</div>'+
-                 '</div>'
-				);
-			$('.ui.card').animate({opacity:1},700);
 			$.ajax({
 	        	url : "storereply",
 	        	type : "POST",
@@ -577,6 +535,7 @@ $(document).ready(function(){
 		                 '</div>'
 						);
 					$('.ui.card').animate({opacity:1},700);
+					button.parent().find('textarea')[0].value = "";
 	       		},
 	        	error : function(xhr,errmsg,err) {
 	            	console.log(xhr.status + ": " + xhr.responseText);
