@@ -44,7 +44,7 @@
                           <div class="extra content">
 
                             {% if store.like %} 
-                            <div class="likebutton" style="color:red">
+                            <div class="likebutton" style="color:red" data-type="store" data-storeid="{{ store.id }}">
                               {% else %}
                               <div class="likebutton" >
                               {% endif %}
@@ -54,7 +54,7 @@
                                 </span>
                             </div>
                             {% if store.unlike %} 
-                            <div class="dislikebutton" style="color:black">
+                            <div class="dislikebutton" style="color:black" data-type="store" data-storeid="{{ store.id }}">
                               {% else %}
                               <div class="dislikebutton" >
                               {% endif %}
@@ -86,7 +86,7 @@
                                 </div>
                                 <div class="extra content">
                                   {% if comment.unlike %} 
-                                    <div class="dislikebutton" style="color:black">
+                                    <div class="dislikebutton" style="color:black" data-type="storecomment" data-storecommentid="{{ storecomment.id }}">
                                       {% else %}
                                       <div class="dislikebutton" >
                                       {% endif %}
@@ -96,7 +96,7 @@
                                         </span>
                                     </div>
                                     {% if comment.like %} 
-                                    <div class="likebutton" style="color:red">
+                                    <div class="likebutton" style="color:red" data-type="storecomment" data-storecommentid="{{ storecomment.id }}">
                                       {% else %}
                                       <div class="likebutton" >
                                       {% endif %}
