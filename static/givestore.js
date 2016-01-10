@@ -52,9 +52,9 @@ $(document).ready(function(){
 	$("#storesubmitbutton").click(function(){
 		event.preventDefault();
 		var button = $(this);
-		if($("#fbaddressinput")[0].value == "" || ($("#fbaddressinput")[0].value.substr(0,7) != "http://" && $("#fbaddressinput")[0].value.substr(0,8) != "https://")){
-			$('#myerrormessagemodal').modal('toggle');
+		if($("#fbaddressinput")[0].value != "" && $("#fbaddressinput")[0].value.substr(0,7) != "http://" && $("#fbaddressinput")[0].value.substr(0,8) != "https://"){
 			$("#errormessagecontent").html("FB的地址開頭必須為<br>http:// 或 https://");
+			$('#myerrormessagemodal').modal('toggle');
 		}else{
 			$(this).addClass('loading disabled');
 			$(this).unbind();
