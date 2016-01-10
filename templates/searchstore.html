@@ -50,7 +50,7 @@
                               {% endif %}
                                 <span class="left floated like">
                                   &#10084;
-                                  {{ store.good }} 喜歡
+                                  <b>{{ store.good }}</b> 喜歡
                                 </span>
                             </div>
                             {% if store.unlike %} 
@@ -60,7 +60,7 @@
                               {% endif %}
                                 <span class="right floated star">
                                   &#128148;
-                                  {{ store.bad }} 不喜歡
+                                  <b>{{ store.bad }}</b> 不喜歡
                                 </span>
                             </div>
                           </div>
@@ -92,7 +92,7 @@
                                       {% endif %}
                                         <span class="right floated star" style="width:80px;text-align:center">
                                           &#128148;
-                                          {{ comment.bad }} 不喜歡
+                                          <b>{{ comment.bad }}</b> 不喜歡
                                         </span>
                                     </div>
                                     {% if comment.like %} 
@@ -102,7 +102,7 @@
                                       {% endif %}
                                         <span class="right floated like">
                                           &#10084;
-                                          {{ comment.good }} 喜歡
+                                          <b>{{ comment.good }}</b> 喜歡
                                         </span>
                                     </div>
                               </div>
