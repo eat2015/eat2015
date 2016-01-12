@@ -40,4 +40,5 @@ urlpatterns = [
     url(r'^addnewstore$' , add_new_store),
     url(r'^givestore$' , givestore),
     url(r'^createpic$' , create_pic),
+    url(r'^storereply$' , store_reply)
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

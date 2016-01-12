@@ -242,7 +242,6 @@ def search_store(request):
         store = get_store_details(raw_store)
         store['has_fans_page'] = True if store['fans_page'] else False
         comments = raw_store.storecomment_set.all()
-        
         return render_to_response('searchstore.html', locals())
 
 
@@ -340,3 +339,12 @@ def add_new_store(request):
             return HttpResponse('fail')
     else:
         return HttpResponse('fail')
+
+def store_reply(request):
+    if  request.method == 'POST':
+        print(request.POST)
+        request_reply = request.POST.get('reply')
+        
+        user = Users.objects.get(username=request.COOKIES['account'])
+        
+        return HttpResponse('')
