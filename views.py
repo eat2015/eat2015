@@ -237,11 +237,17 @@ def search_ajax(request):
 def search_store(request):
     if request.method == 'GET':
         store_id = request.GET.get('store')
-    
+        user = dict()
+        if 'account' in request.COOKIES:
+            user['is_logined'] = True
+        else:
+            user['is_logined'] = False
+
         raw_store = Stores.objects.get(id=int(store_id))
         store = get_store_details(raw_store)
         store['has_fans_page'] = True if store['fans_page'] else False
         comments = raw_store.storecomment_set.all()
+
         return render_to_response('searchstore.html', locals())
 
 
@@ -342,9 +348,17 @@ def add_new_store(request):
 
 def store_reply(request):
     if  request.method == 'POST':
-        print(request.POST)
         request_reply = request.POST.get('reply')
-        
+        request_storeid = request.POST.get('storeid')
+        store = Stores.objects.get(id = request_storeid)
         user = Users.objects.get(username=request.COOKIES['account'])
-        
-        return HttpResponse('')
+        new_store_comment = StoreComment.objects.create(description=request_reply, good=0, bad=0,
+            store=store, user=user)
+
+        data_detail=dict()
+        data_detail['author'] = user.username
+        data_detail['datetime'] = new_store_comment.create_time.isoformat()
+        data_detail['description'] = new_store_comment.description
+        data=[]
+        data.append(data_detail)
+        return HttpResponse(json.dumps(data))

@@ -501,7 +501,7 @@ $(document).ready(function(){
 	        	type : "POST",
 	        	data : {storeid:$(this).data('storeid'),reply:$(this).parent().find('textarea')[0].value},
 	        	success : function(data) {
-	        		var data = jQuery.parseJSON(data);
+	        		var data = jQuery.parseJSON(data)[0];
 	    			button.parents('.ui.card').before(
 						'<div class="ui card" style="width:95%;opacity:0">'+
 		                   '<div class="content">'+
@@ -513,7 +513,7 @@ $(document).ready(function(){
 		                                 '<div class="date">'+data.datetime+'</div>'+
 		                               '</div>'+
 		                               '<div class="text" style="margin: 0.5em 0 0.5em;">'+
-		                                 $(this).parent().find('textarea')[0].value+
+		                                 data.description+
 		                               '</div>'+
 		                             '</div>'+
 		                           '</div>'+
