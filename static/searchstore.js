@@ -355,6 +355,7 @@ $(document).ready(function(){
 		if(user){
 		logined = true;
 		$("#userreply").html(userreplylogin);
+		$("#userreply").find('#submitreplybutton').data('storeid',$("#userreply").data('storeid'));
 		setreplybutton();
 			$("#loginmenu").html(
 				'<button type="button" class="btn btn-warning" style="font-size:15px;margin:auto">'+
