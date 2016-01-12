@@ -31,7 +31,9 @@ $(document).ready(function(){
                                     '</div>'+
                                 '</div>';
     function setlikebutton(){
+    	$(".dislikebutton").unbind();
 		$(".dislikebutton").click(function(){
+			var button = $(this);
 			if($(this).get(0).style.color == ""){
 				$(this).get(0).style.color = "black";
 				if($(this).parent().children(".likebutton")[0].style.color == "red"){
@@ -84,6 +86,7 @@ $(document).ready(function(){
 					});
 			}
 		});
+		$(".likebutton").unbind();
 		$(".likebutton").click(function(){
 			var button = $(this);
 			if($(this).get(0).style.color == ""){
@@ -489,6 +492,7 @@ $(document).ready(function(){
 			},100);
 		},400);
 	}
+	setlikebutton();
 	function setreplybutton(){
 		$("#submitreplybutton").click(function(){
 			var button = $(this);
@@ -537,6 +541,7 @@ $(document).ready(function(){
 						);
 					$('.ui.card').animate({opacity:1},700);
 					button.parent().find('textarea')[0].value = "";
+					setlikebutton();
 	       		},
 	        	error : function(xhr,errmsg,err) {
 	            	console.log(xhr.status + ": " + xhr.responseText);
