@@ -242,12 +242,10 @@ def search_store(request):
             user['is_logined'] = True
         else:
             user['is_logined'] = False
-
         raw_store = Stores.objects.get(id=int(store_id))
         store = get_store_details(raw_store)
         store['has_fans_page'] = True if store['fans_page'] else False
         comments = raw_store.storecomment_set.all()
-
         return render_to_response('searchstore.html', locals())
 
 
@@ -362,3 +360,57 @@ def store_reply(request):
         data=[]
         data.append(data_detail)
         return HttpResponse(json.dumps(data))
+
+def like_store(request):
+    if  request.method == 'POST':
+        request_storeid = request.POST.get('storeid')
+        if 'account' in request.COOKIES:
+            user = Users.objects.get(username=request.COOKIES['account'])
+            store = Stores.objects.get(id = request_storeid)
+            like = StoreLike.objects.filter(user=user)
+            like.filter(store=store)
+            dislike = StoreDislike.objects.filter(user=user)
+            dislike.filter(store=store)
+            if len(like) ==0:
+                new_like_store = StoreLike.objects.create(user=user, store=store)
+                store.good=store.good+1
+                if len(dislike) !=0:
+                    dislike.delete()
+                    store.bad=store.bad-1
+                store.save()
+                return HttpResponse('1')
+            else:
+                like.delete()
+                store.good=store.good-1
+                store.save()
+                return HttpResponse('0')
+        else:
+            return HttpResponse('2')
+
+
+def dislike_store(request):
+    if  request.method == 'POST':
+        request_storeid = request.POST.get('storeid')
+        if 'account' in request.COOKIES:
+            user = Users.objects.get(username=request.COOKIES['account'])
+            store = Stores.objects.get(id = request_storeid)
+            like = StoreLike.objects.filter(user=user)
+            like.filter(store=store)
+            dislike = StoreDislike.objects.filter(user=user)
+            dislike.filter(store=store)
+            if len(dislike) ==0:
+                new_dislike_store = StoreDislike.objects.create(user=user, store=store)
+                store.bad=store.bad+1
+                if len(like) !=0:
+                    like.delete()
+                    store.good=store.good-1
+                store.save()
+                return HttpResponse('1')
+            else:
+                dislike.delete()
+                store.bad=store.bad-1
+                store.save()
+                return HttpResponse('0')
+        else:
+            return HttpResponse('2')
+
