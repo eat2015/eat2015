@@ -237,14 +237,27 @@ def search_ajax(request):
 def search_store(request):
     if request.method == 'GET':
         store_id = request.GET.get('store')
-        user = dict()
-        if 'account' in request.COOKIES:
-            user['is_logined'] = True
-        else:
-            user['is_logined'] = False
         raw_store = Stores.objects.get(id=int(store_id))
         store = get_store_details(raw_store)
         store['has_fans_page'] = True if store['fans_page'] else False
+        user = dict()
+        if 'account' in request.COOKIES:
+            users = Users.objects.get(username=request.COOKIES['account'])
+            user['is_logined'] = True
+            like = StoreLike.objects.filter(user=users).filter(store=raw_store)
+            dislike = StoreDislike.objects.filter(user=users).filter(store=raw_store)
+            if len(like) != 0:
+                store['like'] = True
+            elif len(dislike) != 0:
+                store['unlike'] = True
+            else:
+                store['like'] = False
+                store['unlike'] = False
+        else:
+            user['is_logined'] = False
+            store['like'] = False
+            store['unlike'] = False
+            
         comments = raw_store.storecomment_set.all()
         return render_to_response('searchstore.html', locals())
 
@@ -378,12 +391,12 @@ def like_store(request):
                     dislike.delete()
                     store.bad=store.bad-1
                 store.save()
-                return HttpResponse('1')
+                return HttpResponse('0')
             else:
                 like.delete()
                 store.good=store.good-1
                 store.save()
-                return HttpResponse('0')
+                return HttpResponse('1')
         else:
             return HttpResponse('2')
 
@@ -405,12 +418,12 @@ def dislike_store(request):
                     like.delete()
                     store.good=store.good-1
                 store.save()
-                return HttpResponse('1')
+                return HttpResponse('0')
             else:
                 dislike.delete()
                 store.bad=store.bad-1
                 store.save()
-                return HttpResponse('0')
+                return HttpResponse('1')
         else:
             return HttpResponse('2')
 
