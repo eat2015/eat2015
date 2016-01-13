@@ -138,13 +138,13 @@ $(document).ready(function(){
 					$(this).parent().children(".dislikebutton")[0].style.color = "";
 					if(button.data('type') == "store"){
 						$.ajax({
-							url : "likestore",
+							url : "dislikestore",
 							type : "POST",
 							data : {storeid:button.data('storeid')},
 							datatype:'json',
 							success : function(data) {
 								if(data == 0){
-									button.get(0).style.color = 'red';
+									button.get(0).style.color = 'black';
 									button.find('b').html(parseInt(button.find('b').html())+1);
 								}else if(data == 1){
 									button.get(0).style.color = '';
@@ -159,13 +159,13 @@ $(document).ready(function(){
 							});
 					}else if(button.data('type') == "storecomment"){
 						$.ajax({
-							url : "likestorecomment",
+							url : "dislikestorecomment",
 							type : "POST",
 							data : {storecommentid:button.data('storecommentid')},
 							datatype:'json',
 							success : function(data) {
 								if(data == 0){
-									button.get(0).style.color = 'red';
+									button.get(0).style.color = 'black';
 									button.find('b').html(parseInt(button.find('b').html())+1);
 								}else if(data == 1){
 									button.get(0).style.color = '';
