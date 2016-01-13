@@ -38,19 +38,20 @@ $(document).ready(function(){
 				$(this).get(0).style.color = "black";
 				if($(this).parent().children(".likebutton")[0].style.color == "red"){
 					$(this).parent().children(".likebutton")[0].style.color = "";
-					if(button.data('type') == "store"){
+					var button2 = $(this).parent().children(".likebutton");
+					if(button2.data('type') == "store"){
 						$.ajax({
 							url : "likestore",
 							type : "POST",
-							data : {storeid:button.data('storeid')},
+							data : {storeid:button2.data('storeid')},
 							datatype:'json',
 							success : function(data) {
 								if(data == 0){
-									button.get(0).style.color = 'red';
-									button.find('b').html(parseInt(button.find('b').html())+1);
+									button2.get(0).style.color = 'red';
+									button2.find('b').html(parseInt(button2.find('b').html())+1);
 								}else if(data == 1){
-									button.get(0).style.color = '';
-									button.find('b').html(parseInt(button.find('b').html())-1);
+									button2.get(0).style.color = '';
+									button2.find('b').html(parseInt(button2.find('b').html())-1);
 								}else{
 
 								}
@@ -59,19 +60,19 @@ $(document).ready(function(){
 									console.log(xhr.status + ": " + xhr.responseText);
 								} 
 							});
-					}else if(button.data('type') == "storecomment"){
+					}else if(button2.data('type') == "storecomment"){
 						$.ajax({
 							url : "likestorecomment",
 							type : "POST",
-							data : {storecommentid:button.data('storecommentid')},
+							data : {storecommentid:button2.data('storecommentid')},
 							datatype:'json',
 							success : function(data) {
 								if(data == 0){
-									button.get(0).style.color = 'red';
-									button.find('b').html(parseInt(button.find('b').html())+1);
+									button2.get(0).style.color = 'red';
+									button2.find('b').html(parseInt(button2.find('b').html())+1);
 								}else if(data == 1){
-									button.get(0).style.color = '';
-									button.find('b').html(parseInt(button.find('b').html())-1);
+									button2.get(0).style.color = '';
+									button2.find('b').html(parseInt(button2.find('b').html())-1);
 								}else{
 
 								}
@@ -136,19 +137,20 @@ $(document).ready(function(){
 				$(this).get(0).style.color = "red";
 				if($(this).parent().children(".dislikebutton")[0].style.color == "black"){
 					$(this).parent().children(".dislikebutton")[0].style.color = "";
-					if(button.data('type') == "store"){
+					var button2 = $(this).parent().children(".dislikebutton");
+					if(button2.data('type') == "store"){
 						$.ajax({
 							url : "dislikestore",
 							type : "POST",
-							data : {storeid:button.data('storeid')},
+							data : {storeid:button2.data('storeid')},
 							datatype:'json',
 							success : function(data) {
 								if(data == 0){
-									button.get(0).style.color = 'black';
-									button.find('b').html(parseInt(button.find('b').html())+1);
+									button2.get(0).style.color = 'black';
+									button2.find('b').html(parseInt(button2.find('b').html())+1);
 								}else if(data == 1){
-									button.get(0).style.color = '';
-									button.find('b').html(parseInt(button.find('b').html())-1);
+									button2.get(0).style.color = '';
+									button2.find('b').html(parseInt(button2.find('b').html())-1);
 								}else{
 
 								}
@@ -157,19 +159,19 @@ $(document).ready(function(){
 									console.log(xhr.status + ": " + xhr.responseText);
 								} 
 							});
-					}else if(button.data('type') == "storecomment"){
+					}else if(button2.data('type') == "storecomment"){
 						$.ajax({
 							url : "dislikestorecomment",
 							type : "POST",
-							data : {storecommentid:button.data('storecommentid')},
+							data : {storecommentid:button2.data('storecommentid')},
 							datatype:'json',
 							success : function(data) {
 								if(data == 0){
-									button.get(0).style.color = 'black';
-									button.find('b').html(parseInt(button.find('b').html())+1);
+									button2.get(0).style.color = 'black';
+									button2.find('b').html(parseInt(button2.find('b').html())+1);
 								}else if(data == 1){
-									button.get(0).style.color = '';
-									button.find('b').html(parseInt(button.find('b').html())-1);
+									button2.get(0).style.color = '';
+									button2.find('b').html(parseInt(button2.find('b').html())-1);
 								}else{
 
 								}
