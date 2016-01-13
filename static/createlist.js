@@ -91,6 +91,21 @@ $('.ui.dropdown').dropdown();
 						$('.upload_pic').each(function(key,value){
 							formData.append(id[key],$(value).find('input:file')[0].files[0]);
 						});
+						request.onreadystatechange = function() {
+				            if (request.readyState == 4) {
+				                if(request.status == 200){
+				                    if(request.responseText == 'success'){
+				                    	button.html('完成');
+										button.removeClass('btn-default');
+										button.addClass('btn-success');
+										$("#leftfinishbutton").removeClass('btn-primary');
+										$("#leftfinishbutton").addClass('btn-success');
+				                    }
+				                }else{
+				                    console.log("Error", request.statusText);  
+				                }
+				            }
+				        };
 						request.open('post','createpic');
 						request.setRequestHeader("X-CSRFToken", Cookies.get('csrftoken'));
 						request.send(formData);

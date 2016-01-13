@@ -122,11 +122,11 @@
                                   <div style="
                                     text-align: center;
                                     ">{{ pic.description }}</div>
-                                  <img src="{{ MEDIA_URL }}{{ pic.pic.url }}" style="
-                                    max-width: 500px;
+                                  <a href="{{ MEDIA_URL }}{{ pic.pic.url }}"><img src="{{ MEDIA_URL }}{{ pic.pic.url }}" style="
+                                    max-width: 300px;
                                     margin: auto;
                                     display: block;
-                                ">                       
+                                "></a>      
                                 </div>
                                 {% endfor %}
                               <div class="form-group" style="margin-bottom:5px;">
@@ -183,7 +183,7 @@
                               </div>
                             </div>
                         {% endfor %}
-                        <div class="ui card" style="width:95%;margin:auto;margin-top:15px;border-radius:20px">
+                        <!--<div class="ui card" style="width:95%;margin:auto;margin-top:15px;border-radius:20px">
                               <div class="content" style="padding-bottom:0px;">
                                     <div class="ui comments"  style="max-width:5000px;">
                                       <div class="comment">
@@ -201,7 +201,7 @@
                                       </div>
                                     </div>
                                 </div>
-                              </div>
+                              </div>-->
                         <!--<div class="ui card" style="width:95%;margin:auto;margin-top:15px;border-radius:20px">
                               <div class="content">
                                     <div class="ui comments" style="max-width:5000px;">

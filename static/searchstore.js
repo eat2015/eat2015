@@ -142,11 +142,7 @@ $(document).ready(function(){
 			}
 		});
 	}
-	$("#submitreplybutton").click(function(){
-		$(this).addClass('loading');
-		$(this).attr('disabled','disabled');
-		console.log($(this).parents('.ui.card'));
-	});
+	setreplybutton();
 	$("#loginsubmitbutton").unbind();
 	function setnormalbutton(){
 		$("#givestorebutton").click(function(){
@@ -493,14 +489,23 @@ $(document).ready(function(){
 		},400);
 	}
 	setlikebutton();
-	function setreplybutton(){
-		$("#submitreplybutton").click(function(){
+	function reply(){
+		$(this).addClass('loading');
+			$(this).attr('disabled','disabled');
+			$(this).unbind();
 			var button = $(this);
+			var data = {};
+			data.storeid = $(this).data('storeid');
+			data.reply = $(this).parent().find('textarea')[0].value;
+			console.log(data);
 			$.ajax({
 	        	url : "storereply",
 	        	type : "POST",
-	        	data : {storeid:$(this).data('storeid'),reply:$(this).parent().find('textarea')[0].value},
+	        	data : data,
 	        	success : function(data) {
+	        		button.removeClass('loading');
+	        		button.removeAttr('disabled');
+	        		button.click(reply);
 	        		var data = jQuery.parseJSON(data)[0];
 	    			button.parents('.ui.card').before(
 						'<div class="ui card" style="width:95%;opacity:0">'+
@@ -547,7 +552,9 @@ $(document).ready(function(){
 	            	console.log(xhr.status + ": " + xhr.responseText);
 	        	}
 	    	});
-		});
+	}
+	function setreplybutton(){
+		$("#submitreplybutton").click(reply);
 	}
 	$("#loginsubmitbutton").click(function(){
 		if($("#loginusrname").val().length == 0){
